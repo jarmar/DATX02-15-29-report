@@ -7,7 +7,7 @@ LV1: 6h
   S: -
   S:
 
-LV2: 16,5h (Still counting)
+LV2: 16,5h 
   M: -
   T: 10h reading. Covered the "An introduction to Core Erlang" and part of the first chapter in "Implementing functional languages: a tutorial".
      Core Erlang seems to be a good choice of target language. The "Implementing functional languages: a tutorial" seems to be worth some reading,
@@ -32,5 +32,21 @@ LV2: 16,5h (Still counting)
 
      2h reading. Started reading the "Core Erlang language specification" paper.
   F: -
+  S: -
+  S: -
+
+LV3: TBD
+  M: 0.5h Summerizing
+
+     2h Reading Core Erlang paper. Conclusions about this paper is that it will be useful when digging deeper into how to compile the defined haskell like syntax
+     to Core Erlang. Some parts of the paper seems to be skipable, in particular the parts that discuss how to evaluate core erlang code. I think it will
+     be good to use this paper as a reference when working with the compiler.
+
+     1h Some .herl example coding. I use the following work flow: Write a haskell like module named *.herl, implement an equivalent erlang module and compile it
+     to core with erlc +to_core {FILENAME} to get the desired .core file the .herl file should compile into.
+  T:
+  O:
+  T:
+  F:
   S:
   S:
