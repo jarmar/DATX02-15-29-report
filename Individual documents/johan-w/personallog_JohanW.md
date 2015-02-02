@@ -44,6 +44,8 @@
 
      1h Some .herl example coding. I use the following work flow: Write a haskell like module named *.herl, implement an equivalent erlang module and compile it
      to core with erlc +to_core {FILENAME} to get the desired .core file the .herl file should compile into.
+
+     1h Reading about Yhc Erlang project. The Yhc core language, or the GHC core language, might be worth to look into.
   * T:
   * O:
   * T:
