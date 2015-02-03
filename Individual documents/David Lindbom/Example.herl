@@ -1,0 +1,49 @@
+module MyModule (start) where 
+
+-- Imports a HaskErl library
+import Maybe 
+
+-- Erlang Function Interface
+efi io.write/1 :: String -> IO ()
+efi erlang.spawn :: (a -> IO ()) -> a -> IO Pid
+efi erlang.send :: Pid -> a -> IO () -- Or infix (!) ?
+efi erlang.self as getSelfPid :: IO Pid
+
+-- Conflicting import with alias
+efi lists.concat/1 :: [[a]] -> [a]
+efi lists.concat/2 as append :: [a] -> [a] -> [a]
+
+-- start/main
+start = spawn loop 3000
+
+-- This is nice because a constructor matches a Erlang tuple with a tag
+--   Add pid 1 2 ⇔ {add, Pid, 1, 2} 
+-- but it will allow same name constructors
+data Message = Add Pid Int Int
+             | Divide Pid Int Int
+             | Answer Pid Int
+             | DivisionByZero
+
+loop :: Int -> IO ()
+loop n 
+  | n < 0     = write "Timeout less than 0ms. Exiting."
+  | otherwise = do 
+    self <- getSelfPid
+    receive
+      -- Messages must be same type!
+      -- Other messages will automatically be discarded.
+      (Add pid a b) -> do 
+        send pid (Answer self (a+b)) 
+        loop (n+1000)
+
+      -- With guard
+      (Divide pid a b) | b /= 0 -> do
+        send pid (Answer self (a `div` b))
+        loop (n-1000)
+
+      (Divide pid _ _) -> do
+        send pid DivisionByZero
+        write "Got division by zero. Exiting."
+
+    after n -> write "Got no messages in a while. Exiting."
+
