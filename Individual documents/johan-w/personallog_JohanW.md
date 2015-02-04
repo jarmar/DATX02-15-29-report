@@ -46,7 +46,8 @@
      to core with erlc +to_core {FILENAME} to get the desired .core file the .herl file should compile into.
 
      1h Reading about Yhc Erlang project. The Yhc core language, or the GHC core language, might be worth to look into.
-  * T:
+
+  * T: 3h Writing for the planning report
   * O:
   * T:
   * F:
