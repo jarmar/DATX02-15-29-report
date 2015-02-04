@@ -1,0 +1,6 @@
+Enter file contents here
+fre: konfererade med David L. om sektion av rapport (syfte & bakgrund) ca 1 tim
+lör-sön: skrev ned designidéer för HaskErl, sammanlagt ca 1-1.5 tim
+ti-on: planerade/skrev 'draft' till syfte/bakgrund, ca 2-3 (?) tim totalt.
+
+Antar möten ej loggas, tider uppskattade retroaktivt.
