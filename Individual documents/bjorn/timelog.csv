@@ -1,12 +1,13 @@
-DATUM	ANTAL	BESKRIVNING
-01-20-15	3	Möte, research
-01-21-15	4	Möte, protokoll, research
-01-22-15	1	Research (projekt, erlang)
-01-23-15	2	Research, teknisk set up
-01-25-15	5	Grupplogg, egen logg, set up, research
-01-26-15	4	Läser Erlang
-01-28-15	2	Möte, läsning
-01-29-15	2	Läsning, protokoll
-01-30-15	2	Planeringsrapport
-01-31-15	5	Research (Core Erlang etc)
-02-01-15	3	Research, project plan report
+date,hours,keywords
+2015-01-20,3,"meeting, research"
+2015-01-21,4,"meeting, research"
+2015-01-22,1,"research"
+2015-01-23,2,"research, project set up"
+2015-01-25,5,"research"
+2015-01-26,4,"research"
+2015-01-28,2,"meeting,research"
+2015-01-29,2,"research"
+2015-01-30,2,"project plan report"
+2015-01-31,5,"research"
+2015-02-01,3,"research, project plan report"
+2015-02-02,5,"project plan report"
