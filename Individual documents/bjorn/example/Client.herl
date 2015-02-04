@@ -1,0 +1,17 @@
+module Client where
+imported
+    Server
+        serverName :: Atom
+        startServer :: IO ()
+exported
+    runClient :: String -> IO ()
+    startServer :: IO ()
+
+runClient :: String -> IO ()
+runClient s = do
+    if isRegistered serverName
+        then do
+            pid <- stringToAtom serverName
+            send (pid, s)
+            return ()
+        else return ()
