@@ -20,4 +20,7 @@ Difficult to get going on the report. Details are fuzzy and at this stage it mos
 Did some more reading.
 Wrote agenda for next meeting.
 
-### 2015-02-04 to
+### 2015-02-04 to 2015-02-06
+Commented progress on the report plan.
+Participated in workshop. Agreed upon a first small program we should be able to compile. Started on the grammar.
+
