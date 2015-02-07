@@ -19,10 +19,17 @@
 16h
 
 ## LV3
-S: Research, Core Erlang, BNFC, Läste slides från någon compilerkurs från Chalmers
-M: -
-T: Planeringsrapport, denna summering
+* S: Research: Core Erlang, BNFC, Läste slides från PLT från Chalmers (4h)
+* M: -
+* T: Planeringsrapport, denna summering (2h)
+* O: Veckomöte (2h) 
+* T: Planeringsrapport feedback, läste designförslag (2h) 
+* F: Bibliotekskurs, workshop, Börja läsa IPL (8h) 
+* L: Öva git, denna summering, läste IPL (2h)
 
+20h
+
+## LV4
 ...
 
 
