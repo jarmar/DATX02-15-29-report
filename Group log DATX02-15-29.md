@@ -116,7 +116,7 @@ Some points from the meetings:
 - Drafts for Planning report will be updated sunday 2015-02-08 latest for assembling and proof reading by Johan WS (with help from Johan L).
 - Group agreed on small program written in our language:
 
-//
+```
 
 module Name ( expr ) where
 
@@ -134,7 +134,7 @@ g = f 1 2
 -- comment  
 {- comment -}
 
-//
+```
 
 
 For more details see meeting/workshop protocols.
