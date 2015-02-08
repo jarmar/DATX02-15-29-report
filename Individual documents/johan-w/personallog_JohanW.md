@@ -48,8 +48,9 @@
      1h Reading about Yhc Erlang project. The Yhc core language, or the GHC core language, might be worth to look into.
 
   * T: 3h Writing for the planning report
-  * O:
-  * T:
-  * F:
+  * O: 2h Meeting and docs working
+  * T: 1h Document feedback
+  * F: 4.5h Language workshop, docs working, git flow guide. It was decided that we define a small portion of our language and write the compiler for it and
+       test how well the created .beams work on the erlang VM. This is regarded as the first iteration, spanning 2 weeks.
   * S:
   * S:
