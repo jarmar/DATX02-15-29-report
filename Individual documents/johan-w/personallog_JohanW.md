@@ -52,5 +52,5 @@
   * T: 1h Document feedback
   * F: 4.5h Language workshop, docs working, git flow guide. It was decided that we define a small portion of our language and write the compiler for it and
        test how well the created .beams work on the erlang VM. This is regarded as the first iteration, spanning 2 weeks.
-  * S:
-  * S:
+  * S: 3h Recapping BNFC and grammar experimentation
+  * S: 1h Writing for the planning report
