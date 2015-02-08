@@ -13,3 +13,7 @@ Group dynamics are working well. I feel I'm a bit after on the reading, others a
 ###Week 2 - sunday.
 
 Nice to have a few more hours of reading. Read Core Erlang stuff and beginning chapters of many of the recommended books to see what I found relevant. Next I need to figure out which chapters are aimed at what we're doing. I feel that I understand the things I'm reading but I'm not quite sure how to apply these things. Will probably suggest some kind of less formal discussion (not weekly meeting) about the project so the group can agree on what we want to do (and I can get a clearer picture of the coming steps).
+
+###Week 3.
+
+Week has been spent mostly working on the planning report and reading. A workshop held friday was very helpful. Discussing the language and writing some stuff down felt like we got a proper start and something to do besides just reading/planning.

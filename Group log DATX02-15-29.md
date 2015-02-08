@@ -100,4 +100,61 @@ Individual tasks be done before next meeting:
 - Write a first draft for your assigned section of the planning report.
 - Write some pieces of code highlighting functionality you'd like to have in "Haskerl".
 
+- - -
+
+##2015-02-08. LP3, week 3.
+Notetaker: Johan Larsson.  
+
+###Meetings
+
+Week 3 had the weekly meeting and a workshop friday february 6th where we discussed and agreed on a small subset of our language to start working with.
+
+Some points from the meetings:
+
+- Chose Haskell as our language for implementing compiler (with help from BNFC initially).
+- We will try booking a time for Fackspråk meeting soon after Planning report deadline.
+- Drafts for Planning report will be updated sunday 2015-02-08 latest for assembling and proof reading by Johan WS (with help from Johan L).
+- Group agreed on small program written in our language:
+
+//
+
+module Name ( expr ) where
+
+
+expr :: String  
+expr = "hello world"
+
+
+f :: Int -> Int -> Int  
+f = \a b -> a+b
+
+g :: Int  
+g = f 1 2
+
+-- comment  
+{- comment -}
+
+//
+
+
+For more details see meeting/workshop protocols.
+
+
+###Work phase
+
+Still mainly individual work although besides reading/planning we have also been writing drafts for parts of the planning report. Friday had the workshop which also started the actual work of writing code and trying to compile programs written in our language.
+
+
+###Problems
+
+The finished drafts for the planning report will be assembled and proof read by Johan WS.
+Git flow guide is added to the project repository by Johan WS to streamline VCS usage by the group. (Found on https://github.com/DavidLindbom/DATX02-15-29)
+
+
+###Weekly Planning
+
+- Update planning report draft according to comments on Git commits.
+- Next weekly meeting is 2015-02-11.
+
+- - -
 
