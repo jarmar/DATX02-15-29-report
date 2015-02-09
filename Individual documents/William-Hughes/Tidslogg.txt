@@ -2,4 +2,5 @@
 fre 30/1: konfererade med David L. om sektion av rapport (syfte & bakgrund) ca 1 tim
 lör-sön 1-2/2: skrev ned designidéer för HaskErl, sammanlagt ca 1-1.5 tim
 ti-on 3-4/2: planerade/skrev 'draft' till syfte/bakgrund, ca 2-3 (?) tim totalt.
-
+fre 7/2: workshop 8 tim? (Jag trodde man inte skulle inkludera gruppaktiviteter, men ser att andra gjort det)
+sön 9/2: Såg på Virdings 'Implementing Languages on the BEAM', ändrade lite i Background. Satt ca. 3-4 tim, åstadkom inte mkt. 
