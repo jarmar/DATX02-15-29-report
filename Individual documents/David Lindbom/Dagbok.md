@@ -30,6 +30,6 @@
 20h
 
 ## LV4
-...
-
+* M: Rapport, IPL (1h)
+* T: BNFC (4h)
 
