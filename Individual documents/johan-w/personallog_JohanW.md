@@ -35,7 +35,7 @@
   * S: -
   * S: -
 
-* LV3: TBD
+* LV3: 20h
   * M: 1.5h Summerizing
 
      2h Reading Core Erlang paper. Conclusions about this paper is that it will be useful when digging deeper into how to compile the defined haskell like syntax
@@ -54,3 +54,12 @@
        test how well the created .beams work on the erlang VM. This is regarded as the first iteration, spanning 2 weeks.
   * S: 3h Recapping BNFC and grammar experimentation
   * S: 1h Writing for the planning report
+
+* LV4: TBD
+  * M: 1h Proofreading
+    T: 3h Recapping BNFC and grammar experimentation
+    O: 
+    T: -
+    F:
+    S:
+    S:
