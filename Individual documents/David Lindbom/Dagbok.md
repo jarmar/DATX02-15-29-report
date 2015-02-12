@@ -32,4 +32,5 @@
 ## LV4
 * M: Rapport, IPL (1h)
 * T: BNFC (4h)
-
+* O: Veckomöte, grammar (5h)
+* T: Buildsystem (4h) 
