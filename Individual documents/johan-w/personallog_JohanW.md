@@ -59,7 +59,7 @@
   * M: 1h Proofreading
     T: 3h Recapping BNFC and grammar experimentation
     O: 2h Meeting, grammar experimentation, document formatting. During the meeting we devided the work of the first iteration. I will work with the code generation.
-    T: -
+    T: 0.5h proofreading
     F:
     S:
     S:
