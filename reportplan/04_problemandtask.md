@@ -35,7 +35,50 @@ Possible later additions:
 
 - Type classes
 
-[ EXAMPLE CODE ]
+Some example code of what Hopper might look like:
+module Server where
+exported
+    startServer :: IO ()
+    serverAtom :: Atom
+
+newType State a = State a
+
+-- Create the initial server state
+initState :: State Int
+initState = State 0
+
+-- Modify server state
+inc :: State Int -> State Int
+inc (State n) = State (n+1)
+
+-- Get Int from state
+get :: State -> Int
+get (State n) = n
+
+serverAtom :: Atom
+serverAtom = stringToAtom "server"
+
+-- Start a new server process and register its pid with the "server" atom
+startServer :: IO ()
+startServer = do
+    pid <- spawn (server initState)
+    register serverAtom pid
+    return ()
+
+-- Server process. Receives messages of the type (PID, String).
+-- If no new message in 1000ms, shut server down.
+server :: State Int -> IO ()
+server s = do
+    receive :: (PID, String)
+        (_, msg) -> putStrLn (show s ++ ": " ++ msg)
+    after
+        1000     -> do 
+            unregister serverAtom
+            return ()
+    server (inc S) -- TCO!
+
+
+
 
 ###Design compiler
 
@@ -43,16 +86,9 @@ Possible later additions:
 
 The compilation process goes through several stages: lexing/parsing, type checking and code generation. We will initially use the BNFC tool to specify our lexer and parser. Later we might implement our own lexer and parser. For the code generation we intend to use an intermediate language called Core Erlang to simplify the generation of BEAM code. We will put emphasis on ease of use by for example having readable error reports.
 
-[ DIAGRAM of compilation steps. lexing/parsing etc ]
-
 ###Implement compiler
 
 *keywords:* modular, documentation, testing, implementation language
 
 The specifics of the implementation depends heavily on the results from the language and compiler design phases. Two important aspects during this phase will be documentation and quality assurance, mainly through testing. The compiler will be written in Haskell.
 
-*REFERENCES (find and insert for):*
-
-BNFC 
-Core Erlang  
-?
