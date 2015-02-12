@@ -36,6 +36,7 @@ Possible later additions:
 - Type classes
 
 Some example code of what Hopper might look like:
+
 module Server where
 exported
     startServer :: IO ()
@@ -76,9 +77,6 @@ server s = do
             unregister serverAtom
             return ()
     server (inc S) -- TCO!
-
-
-
 
 ###Design compiler
 
