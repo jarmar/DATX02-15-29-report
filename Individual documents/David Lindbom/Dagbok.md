@@ -34,3 +34,8 @@
 * T: BNFC (4h)
 * O: Veckomöte, grammar (5h)
 * T: Buildsystem (4h) 
+* F: Workshop (buildsystem, testsystem, diskutera AST), Läste och rättade planeringsrapport (4h) 
+
+16h
+
+## LV5
