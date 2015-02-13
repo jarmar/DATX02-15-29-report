@@ -39,47 +39,44 @@ Purpose
 -------
 
 The overarching idea with the project is to design and implement an
-alternative language to the Erlang language on top of the Erlang Virtual
-Machine. The language will feature a Haskell-like syntax, offer a
-typesystem similar to that of Haskell and expose, in a safe way, the
-powerful features of the Virtual Machine. To utilize the big Erlang
+alternative language, named Hopper, to the Erlang language on top of the
+Erlang Virtual Machine. The language will feature a Haskell-like syntax,
+offer a typesystem similar to that of Haskell and expose, in a safe way,
+the powerful features of the Virtual Machine. To utilize the big Erlang
 ecosystem it will also integrate with current OTP and Erlang libraries.
 
-The purpose of this bachelor project is for us to learn about functional
-programming, compilers and how a typesystem works and is constructed.
+The purpose of this bachelor project is for the group to learn about
+functional programming, compilers and how a typesystem works and is
+constructed.
 
 Problem and Task
 ----------------
 
 ### In general
 
-*keywords:* prototype, documentation, functional, useful
-
 "The goal of this project is to design and develop a prototype compiler
 for this new language".
 
-We want to design and implement a language that utilize the benefits of
-the Erlang VM and the OTP libraries combined with the clean syntax and
-static typing of Haskell.
+The group wants to design and implement a language that utilize the
+benefits of the Erlang VM and the OTP libraries combined with the clean
+syntax and static typing of Haskell.
 
-Additional requirements we pose on our solution are:
+Additional requirements the group pose on the solution are:
 
 -   Practical usage
 -   Real benefits from the type system
 -   Well documented/specified
 
-We are not aiming at a complete and polished product but rather a
+The group is not aiming at a complete and polished product but rather a
 prototype or proof of concept.
 
 ### Design language
 
-*keywords:* interaction with Erlang, grammar, bnf, specification
-
 There are two sides of computer languages. Purely syntactic - the
 structure of the language, and semantic - the meaning of the language.
 The syntax will be given by a grammar and the semantics of our features
-will be defined in terms of Core Erlang. We will design and formalize
-the interaction between haskell code and native erlang code.
+will be defined in terms of Core Erlang. The group will design and
+formalize the interaction between haskell code and native erlang code.
 
 A list of design features desired in the language:
 
@@ -139,19 +136,15 @@ Some example code of what Hopper might look like:
 
 ### Design compiler
 
-*keywords:* lexer, parser, type checking, Core Erlang, bnfc, manual
-
 The compilation process goes through several stages: lexing/parsing,
-type checking and code generation. We will initially use the BNFC tool
-to specify our lexer and parser. Later we might implement our own lexer
-and parser. For the code generation we intend to use an intermediate
-language called Core Erlang to simplify the generation of BEAM code. We
-will put emphasis on ease of use by for example having readable error
-reports.
+type checking and code generation. The group will initially use the BNFC
+tool to specify the lexer and parser. Later the group might implement
+their own lexer and parser. For the code generation the group intends to
+use an intermediate language called Core Erlang to simplify the
+generation of BEAM code. The group will put emphasis on ease of use by
+for example having readable error reports.
 
 ### Implement compiler
-
-*keywords:* modular, documentation, testing, implementation language
 
 The specifics of the implementation depends heavily on the results from
 the language and compiler design phases. Two important aspects during
@@ -161,9 +154,9 @@ testing. The compiler will be written in Haskell.
 Limitations
 -----------
 
-Our main goal is a working prototype with a core set of features. The
+The main goal is a working prototype with a core set of features. The
 focus of the project will be these features. Any additional features
-will be deferred until we have achieved the main goal.
+will be deferred until the group has achieved the main goal.
 
 Method and implementation
 -------------------------
