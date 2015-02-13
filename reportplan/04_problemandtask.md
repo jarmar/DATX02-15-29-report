@@ -33,10 +33,7 @@ Possible later additions:
 
 Some example code of what Hopper might look like:
 
-    module Server where
-    exported
-        startServer :: IO ()
-        serverAtom :: Atom
+    module Server (startServer, serverAtom) where
 
     newType State a = State a
 
@@ -66,13 +63,15 @@ Some example code of what Hopper might look like:
     -- If no new message in 1000ms, shut server down.
     server :: State Int -> IO ()
     server s = do
+        let ss = get s
         receive :: (PID, String)
-            (_, msg) -> putStrLn (show s ++ ": " ++ msg)
+            (_, msg) -> do
+                putStrLn (show ss ++ ": " ++ msg)
+                server (inc s)
         after
             1000     -> do 
                 unregister serverAtom
-                return ()
-        server (inc S) -- TCO!
+                server (inc s)
 
 ###Design compiler
 

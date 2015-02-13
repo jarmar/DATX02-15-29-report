@@ -2,7 +2,7 @@
 
 ###In general
 
-The group will implement an iterative development process. The product, being the combination of the language specification, the typechecker and the compiler, will be designed, implemented, tested and analyzed. The analysis of the test results will then be used for improving the design in the next iteration. This process will be used throughout the project. If the product is considered to be (or be close to) non improvable during the analysis step, additional features will be considered in the design step in the next iteration. The test results and decisions made will also serve as the main source of data for the final report
+The group will implement an iterative development process. The product, being the combination of the language specification, the typechecker and the compiler, will be designed, implemented, tested and analyzed. The analysis of the test results will then be used for improving the design in the next iteration. This process will be used throughout the project. If the product is considered to be (or be close to) non improvable during the analysis step, additional features will be considered in the design step in the next iteration. The test results and decisions made will also serve as the main source of data for the final report.
 
 ###Design
 
