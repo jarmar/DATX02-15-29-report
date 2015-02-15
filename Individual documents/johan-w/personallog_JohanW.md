@@ -14,7 +14,7 @@
      it brings up how to handle algebraic datatypes in a core language (how to represent constructors) and lamba lifting, though I have not read
      this part closely. Will proceed reading the "Implementing functional languages: a tutorial" and will take on the actual Core Erlang paper.
 
-  * O: 1,5h group meeting. We started discussing language features, but did not conclude anything beyond the brainstorming that was done. We distrubuted
+  * W: 1,5h group meeting. We started discussing language features, but did not conclude anything beyond the brainstorming that was done. We distrubuted
      parts of the planning report members should start writing. A first draft of each part should be done before the next meeting, so the next meeting
      can be used for discussing the different drafts. We also decided that the language to be used in oficiall documents is english, so to make it
      accesible for a wider audience if the project becomes interesting enough.
@@ -48,18 +48,28 @@
      1h Reading about Yhc Erlang project. The Yhc core language, or the GHC core language, might be worth to look into.
 
   * T: 3h Writing for the planning report
-  * O: 2h Meeting and docs working
+  * W: 2h Meeting and docs working
   * T: 1h Document feedback
   * F: 4.5h Language workshop, docs working, git flow guide. It was decided that we define a small portion of our language and write the compiler for it and
        test how well the created .beams work on the erlang VM. This is regarded as the first iteration, spanning 2 weeks.
   * S: 3h Recapping BNFC and grammar experimentation
   * S: 1h Writing for the planning report
 
-* LV4: TBD
+* LV4: 9.5h
   * M: 1h Proofreading
     T: 3h Recapping BNFC and grammar experimentation
-    O: 2h Meeting, grammar experimentation, document formatting. During the meeting we devided the work of the first iteration. I will work with the code generation.
+    W: 2h Meeting, grammar experimentation, document formatting. During the meeting we devided the work of the first iteration. I will work with the code generation.
     T: 0.5h proofreading
+    F: 3h Workshop and planning report finalizing. I started implementing the code generator. The basic idea is for it to use the internal syntax tree data structure
+       as input and produce Core Erlang code as Strings.
+    S: -
+    S: -
+
+* LV5: TBD
+  * M:
+    T:
+    W: 
+    T:
     F:
     S:
     S:
