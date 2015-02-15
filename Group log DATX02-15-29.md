@@ -116,25 +116,25 @@ Some points from the meetings:
 - Drafts for Planning report will be updated sunday 2015-02-08 latest for assembling and proof reading by Johan WS (with help from Johan L).
 - Group agreed on small program written in our language:
 
-```
-
-module Name ( expr ) where
 
 
-expr :: String  
-expr = "hello world"
+    module Name ( expr ) where
 
 
-f :: Int -> Int -> Int  
-f = \a b -> a+b
+    expr :: String  
+    expr = "hello world"
 
-g :: Int  
-g = f 1 2
 
--- comment  
-{- comment -}
+    f :: Int -> Int -> Int  
+    f = \a b -> a+b
 
-```
+    g :: Int  
+    g = f 1 2
+
+    -- comment  
+    {- comment -}
+
+
 
 
 For more details see meeting/workshop protocols.
@@ -158,3 +158,60 @@ Git flow guide is added to the project repository by Johan WS to streamline VCS 
 
 - - -
 
+##2015-02-15. LP3, week 4.
+Notetaker: Johan Larsson.  
+
+###Meetings
+
+Week 4 had the weekly meeting wednesday and a workshop friday where group members met up to work and do research as a group. 
+Some points from the meetings:
+
+- Language name chosen: Hopper.
+- Group decides to stay with current administrative roles for second phase.
+- Work on planning report.
+
+
+###Work Phase
+
+The second phase has started with a small overlap with the first phase (which handled the planning report). Group members have been assigned responsibilites for the different tasks that needs to be solved. All group members will eventually work on all compiler steps etc. Initial division of responsibilites:
+
+  - Lexer/parser
+
+      David and Johan L.
+
+  - AST generator / desugaring
+
+      Jakob.
+
+      Fairly easy for parser to produce and nice to work on for code generator.
+
+  - Type checker
+  
+     Björn and Liam. Type checker will not be part of pipeline in first iteration but work will be done to prepare for later phases.
+
+  - Code generator
+
+      Johan WS.
+
+  - Integration (lexer/parser->type checker->code generator)
+
+      Combined with AST gen. and some parts will be handled by group members working on parts of the compiler.
+
+  - Testing
+
+      You're in charge of testing your own part (but take help from the others).
+
+By the end of the week we finished work on the planning report and after assembling/proof reading by Johan WS it was submitted before the deadline.
+
+
+###Problems
+
+Everyone gave feedback on planning report drafts and the drafts were updated accordingly. Johan WS finalized the document. Group has been given new responsibilites and will have to make the new phase work.
+
+
+###Weekly planning
+
+Group members will work on their assigned tasks. Communication between group members encouraged to make sure work flow continues.
+Next weekly meeting is 2015-02-18.
+
+- - - 

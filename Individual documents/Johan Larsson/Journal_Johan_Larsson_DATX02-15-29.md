@@ -17,3 +17,7 @@ Nice to have a few more hours of reading. Read Core Erlang stuff and beginning c
 ###Week 3.
 
 Week has been spent mostly working on the planning report and reading. A workshop held friday was very helpful. Discussing the language and writing some stuff down felt like we got a proper start and something to do besides just reading/planning.
+
+###Week 4.
+
+Working on the planning report went ok and the finalized document looks nice. The second phase has started and it is exciting to be doing some actual writing beside the research. Work on PLT course takes some time when deadline is coming up but even though it takes away from the bachelors work a bit it still feels useful (since the subjects overlap quite a bit).
