@@ -66,7 +66,10 @@
     S: -
 
 * LV5: TBD
-  * M:
+  * M: 3h Code generator implementation. Started to translate the solution to produce data types from the Language.CoreErlang.Syntax package instead of pure
+       Core Erlang strings. Started translating some expressions. Some are straightforward, others (like lambda and app) are harder to get right since the
+       grammar differences. I also have some difficulties understanding the annotated data types in the Language.CoreErlang.Syntax package, I need to dig
+       deeper into this.
     T:
     W: 
     T:
