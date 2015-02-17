@@ -1,0 +1,65 @@
+
+I read a very interesting blog post called 'Scrap your typeclasses' (you should Google it)
+It gave me some ideas about the design of the language and how it could be used
+today, here's an illustration:
+
+No type classes, instead we manually pass typeclass records:
+
+data Num a = Num {_+ :: a -> a -> a, fromInteger :: Integer -> a ...}
+--3 is always Integer, 3.0 is always Double
+--I know _+ is not a valid infix operator, but it could be!
+
+To use it (e.g. Num Int):
+
+let (+) = _+ num'Int in ...
+
+Erlang primitive operators from Prelude:
+
+(+) :: a -> a -> a
+(==) :: a -> b -> Bool
+(>) :: a -> b -> Bool
+show :: a -> String --is term_to_list
+
+In the case of do, we use the (>>=) in the current scope:
+
+(let (>>=) = error "Hi" in do {anything;anything}) == error "Hi"
+
+Using primitive equals, we can compare functions - even partially applied ones!
+
+(+ 1) == (+ 1)
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+NOW FOR THE REALLY COOL STUFF
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+data Any --like in haskell
+data Dynamic = Dyn TypeRep Any
+toDyn x = Dyn (typeOf x) (unsafeCoerce x)
+--typeOf x is determined at compile time.
+--It may be a lot simpler to have just typeOf and no typeclasses,
+--It may not.
+
+newtype Tree a = Tree UntypedTree
+data UntypedTree = Constant Dynamic | UntypedTree :$ UntypedTree
+
+commutePlus :: Tree a -> Maybe (Tree a)
+commutePlus (p@(Constant (Dyn _ f)) :$ x :$ y) 
+	| f == Prelude.(+) = Just (p :$ y :$ x)
+commutePlus _ = Nothing
+
+apply :: Tree (a->b) -> Tree a -> Tree b
+apply (Tree f) (Tree x) = Tree $ f :$ x
+
+constant :: a -> Tree a
+constant = Constant . toDyn
+
+--Type safe syntax trees AND easy manipulation of them! Oh boy!
+
+
+
+
+
+
+
+
