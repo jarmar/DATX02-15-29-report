@@ -70,8 +70,13 @@
        Core Erlang strings. Started translating some expressions. Some are straightforward, others (like lambda and app) are harder to get right since the
        grammar differences. I also have some difficulties understanding the annotated data types in the Language.CoreErlang.Syntax package, I need to dig
        deeper into this.
-    T:
-    W: 
+    T: 6h Code generator implementation. Most of the first step of the Code generator seems to be working. It seems to generate the Language.CoreErlang.Syntax
+       data structure fine, except for the unimplemented expressions lambda, infix and app (infix should be desugerized into an app earlier in the pipe line
+       I think. I discovered that the code generator needs a second step, which is printing out the resulting to a tmp.core file which should then be used
+       as input for erlc. erlc only works for files and not strings. The tmp.core file should also be removed after this, but I think this might an extra step
+       in the pipeline. Following this I implemented a short module beamWriter which takes the result of the CodeGenerator.hs and compiles a .beam file using
+       the erlc program.
+    W:
     T:
     F:
     S:
