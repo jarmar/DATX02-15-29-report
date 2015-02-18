@@ -76,7 +76,9 @@
        as input for erlc. erlc only works for files and not strings. The tmp.core file should also be removed after this, but I think this might an extra step
        in the pipeline. Following this I implemented a short module beamWriter which takes the result of the CodeGenerator.hs and compiles a .beam file using
        the erlc program.
-    W:
+    W: 4h Group meeting and Code generator test implementation. Started to write a test suite for the code generator. I don't know how deep I should go with the
+       black box testing, it feels kind of trivial. The real tests will check that the compilation down to .beam was successful and that the .beam code works
+       as intended. During the meeting we planned iteration 2. I will continue with the code generator, finalizing it and translate it so it uses the desugarized AST.
     T:
     F:
     S:
