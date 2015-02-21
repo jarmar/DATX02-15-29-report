@@ -79,7 +79,7 @@
     W: 4h Group meeting and Code generator test implementation. Started to write a test suite for the code generator. I don't know how deep I should go with the
        black box testing, it feels kind of trivial. The real tests will check that the compilation down to .beam was successful and that the .beam code works
        as intended. During the meeting we planned iteration 2. I will continue with the code generator, finalizing it and translate it so it uses the desugarized AST.
-    T:
-    F:
-    S:
+    T: 4h Code generator coding. Made my local buildchain work and added a test that compiles a prespecified module and makes sure it functions as intended.
+    F: -
+    S: 5h Code generator coding. Translated to the current AST data structure, but have not implemented App yet. Also translated the test suite in the same manner.
     S:
