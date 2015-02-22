@@ -214,4 +214,38 @@ Everyone gave feedback on planning report drafts and the drafts were updated acc
 Group members will work on their assigned tasks. Communication between group members encouraged to make sure work flow continues.
 Next weekly meeting is 2015-02-18.
 
+- - -
+
+##2015-02-22. LP3, week 5.
+Notetaker: Johan Larsson.  
+
+###Meetings
+
+The weekly meeting 2015-02-18 revolved mostly around group members explaining what had been done in the first working iteration post planning report and agreeing on what needed to be done next. See meeting protocol for more information.
+
+###Work Phase
+
+The next work phase, until the next weekly meeting, has roles assigned as such:
+
+- Lexing/Parsing: -
+
+- Type checking: Liam and Björn.
+
+- Code generation: Johan WS.
+
+- Integration (uncurrying): David.
+
+- AST/Desugaring: Jakob and Johan L.
+
+Group members do research and separate work on their parts, pushing the results to branches in the project git repository for possible review and comments by others.
+
+###Problems
+
+Design choices of the AST needed to be agreed on since several steps of the compiler will work with it. A smaller workshop was held Friday 2015-02-20 where Jakob, Johan L, Liam and Björn met to discuss this.
+
+###Weekly planning
+
+A small workshop was held Friday. David is responsible for doing some research on what we need to plan before the first Fackspråk booking. Next weekly meeting is 2015-02-25.
+
 - - - 
+

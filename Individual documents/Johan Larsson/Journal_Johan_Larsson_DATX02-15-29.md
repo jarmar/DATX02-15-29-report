@@ -21,3 +21,7 @@ Week has been spent mostly working on the planning report and reading. A worksho
 ###Week 4.
 
 Working on the planning report went ok and the finalized document looks nice. The second phase has started and it is exciting to be doing some actual writing beside the research. Work on PLT course takes some time when deadline is coming up but even though it takes away from the bachelors work a bit it still feels useful (since the subjects overlap quite a bit).
+
+###Week 5.
+
+For this iteration (one week) I was assigned to working on the AST along with Jakob. Since the design of the AST would affect later steps we decided to have a small workshop Friday together with Björn and Liam who are working on the type checker. The workshop went ok and we agreed on the functionality we wanted from the AST to start (but kept it at a manageable size to get something working). Everybody seems to be good at taking initiatives and adding code to the project which I haven't started doing yet. Since I'm not used to this kind of project I'm a bit slow to start. After more reading and catching up with what everyone has written I will see if I can add something. I sometimes assume I have to see the entire solution in my head before I can start coding. We do after all have the version control system with branches to be able to test stuff out.
