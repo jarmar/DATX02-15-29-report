@@ -65,7 +65,7 @@
     S: -
     S: -
 
-* LV5: TBD
+* LV5: 22h
   * M: 3h Code generator implementation. Started to translate the solution to produce data types from the Language.CoreErlang.Syntax package instead of pure
        Core Erlang strings. Started translating some expressions. Some are straightforward, others (like lambda and app) are harder to get right since the
        grammar differences. I also have some difficulties understanding the annotated data types in the Language.CoreErlang.Syntax package, I need to dig
@@ -82,4 +82,9 @@
     T: 4h Code generator coding. Made my local buildchain work and added a test that compiles a prespecified module and makes sure it functions as intended.
     F: -
     S: 5h Code generator coding. Translated to the current AST data structure, but have not implemented App yet. Also translated the test suite in the same manner.
-    S:
+    S: -
+
+* LV6: TBD
+  * M: 6h Code generator implementation. Worked with different ways of compiling the App expression, managed to finalize an aproach that unfolds a chain of Apps
+       and compiles it down to CoreErlang apps. I realized that we need to think about how to deal with intermodule calls, and how to treat bifs. These two
+       problems are closely related since calls to bifs are esentially intermodule calls using the 'erlang' module.
