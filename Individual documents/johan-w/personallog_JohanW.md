@@ -88,6 +88,10 @@
   * M: 6h Code generator implementation. Worked with different ways of compiling the App expression, managed to finalize an aproach that unfolds a chain of Apps
        and compiles it down to CoreErlang apps. I realized that we need to think about how to deal with intermodule calls, and how to treat bifs. These two
        problems are closely related since calls to bifs are esentially intermodule calls using the 'erlang' module.
-  * T: 4h Code generator implementation. Merged 2 feature branches so they can be merged with develop soon. Tried to verify the functionality of the code
+    T: 4h Code generator implementation. Merged 2 feature branches so they can be merged with develop soon. Tried to verify the functionality of the code
        generator and spotted some bugs with lambdas and function applications. We need to think about how to deal with lambdas, since Erlang requires all
        higher order functions to be stored in a variable before invokation. Also, the grammar needs to be able to specify functions in the type signature.
+    W: 5h Code generator implementation and meeting. I worked on the lambdas and managed to make them better, and I did some cleanup. During the meeting we discussed
+       iteration 3 and decided that some more features should be implemented. We will be adding intermodule calls, parameters to functions, case/if statements and
+       more if there is time. We will also start writing on the report to make sure we have material to work with during the first fackspråk session, and we will
+       prepare material for the half time presentation which David and Jakob will do.
