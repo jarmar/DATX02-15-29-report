@@ -249,3 +249,44 @@ A small workshop was held Friday. David is responsible for doing some research o
 
 - - - 
 
+##2015-03-01. LP3, week 6.
+Notetaker: Johan Larsson.  
+
+###Meetings
+
+Week 6 had the weekly meeting on wednesday and a small type checking workshop on friday. In the meeting we had a follow up on the finished iteration and made plans for the next iteration. Roles for next iteration assigned as such:
+
+- parser/renamer/clean up: David
+
+- renamer/code generator: Jakob
+
+- type checking: Björn, Liam, Johan L
+
+- code generator: Johan WS
+
+The group also decided that Jakob and David will be presenting at the half time presentation + handling the opposition (with help from the rest of the group).
+
+For more info see meeting protocol (2015-02-25).
+
+The type checking workshop discussed what direction to take and what work needed to be done. Hindley Milner seems to be the agreed path to take and we will possibly look at Algorithm W from HM for inspiration for our type checker.
+
+###Work Phase
+
+The work phase is one of continued research and getting things working. Getting the full pipeline to work on our small subset of Hopper feels like it's getting closer. Type checking has yet to see an implementation started.
+
+The group has also started thinking about half time presentation and what kind of preparations needs to be done. Content will need to be added for us to have something proper to present.
+
+###Problems
+
+If a group member is assigned to a compiler phase for an iteration and that work is finished (for what is intended that iteration) there is uncertainty of where that group member should continue working. This has been solved somewhat by group members now starting to be assigned multiple areas for a single iteration.  
+Type checking has yet to see any code which has been addressed by having three group members working on the area. Nick helped by giving us some directions and a workshop was held friday to get the work started.  
+Half time presentation is coming up shortly and the group have not written any report stuff since the planning report was submitted. Work on this has been initiated but instructions were possibly too vague and will lead to little being done.
+
+###Weekly planning
+
+A workshop was held friday.
+Fackspråk lectures feb 26th and mar 3rd.
+Fackspråk meeting booked 19th of march, 14.15-15.15.
+Next weekly meeting 2015-03-04.
+
+- - - 
