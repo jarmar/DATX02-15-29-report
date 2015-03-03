@@ -39,3 +39,23 @@
 16h
 
 ## LV5
+* M: -
+* T: -
+* O: Veckomöte (2h)
+* T: -
+* F: -
+* L: Research integration (6h)
+* S: Integration (6h)
+
+14h
+
+## LV6
+* M: 
+* T: Research (2h)
+* O: Veckomöte, grammar/parser (3h)
+* T: Updated Renamer for new AST (5h)
+* F: Updated Renamer for new AST (6h)
+
+16h
+
+## LV7
