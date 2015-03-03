@@ -84,7 +84,7 @@
     S: 5h Code generator coding. Translated to the current AST data structure, but have not implemented App yet. Also translated the test suite in the same manner.
     S: -
 
-* LV6: TBD
+* LV6: 15h
   * M: 6h Code generator implementation. Worked with different ways of compiling the App expression, managed to finalize an aproach that unfolds a chain of Apps
        and compiles it down to CoreErlang apps. I realized that we need to think about how to deal with intermodule calls, and how to treat bifs. These two
        problems are closely related since calls to bifs are esentially intermodule calls using the 'erlang' module.
@@ -95,3 +95,19 @@
        iteration 3 and decided that some more features should be implemented. We will be adding intermodule calls, parameters to functions, case/if statements and
        more if there is time. We will also start writing on the report to make sure we have material to work with during the first fackspråk session, and we will
        prepare material for the half time presentation which David and Jakob will do.
+    T: -
+    F: -
+    S: -
+    S: -
+
+* LV7: TBD
+  * M: -
+    T: 8h Code generator translaton, experimentation and report reading. The code generator have been translated to the new AST. I have experimented a bit with
+       core erlang and see how it handles multiparameter functions and multidefined functions. It seems to be straight forward, but nestled expressions might
+       get tricky when it comes to keeping track of variable names. I have started reading example reports to get a basic understanding of what is expected
+       in such a report and how it might be structured.
+    W:
+    T:
+    F:
+    S:
+    S:
