@@ -106,7 +106,9 @@
        core erlang and see how it handles multiparameter functions and multidefined functions. It seems to be straight forward, but nestled expressions might
        get tricky when it comes to keeping track of variable names. I have started reading example reports to get a basic understanding of what is expected
        in such a report and how it might be structured.
-    W:
+    W: 5h Code generator implementation, group meeting. I have encountered a problem with lambdas, where our language support tuples in the pattern while core erlang
+       only deal with a list of variables. If a tuple is specified, the generated core erang code should bound the tuple to one argument, and pattern match it in
+       a case clause. In the meeting we discussed briefly how to fix this, we think that the renamer might need to translate lambdas so they only have variables.
     T:
     F:
     S:
