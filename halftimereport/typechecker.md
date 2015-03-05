@@ -4,8 +4,8 @@
 What is it? A semantic analysis where certain tractable properties of the code are verified. For example that addition only is applied to numeric values or that indexing is within bounds. Some properties, like termination, are excluded from type checking because of their intractable nature (the halting problem is undecidable).
 
 ## Type system
-What is it? A formal proof system which allow us to prove certain properties for our code. Different type systems try to capture different properties to verify. Expressiveness.
-Verifying internal consistency of code.
+What is it? A formal proof system which allow us to prove certain properties for our code. Different type systems try to capture different properties to verify.
+Hopper currently uses the Hindley-Milner type system for lambda calculus. It allows for parametric polymorphism. This means, in simple terms, that we can have 
 
 ## Gathering material
 Type theory is a broad field with a plethora of different type systems, of which the description often is very theoretical and carry many subtle points. Sifting through this material has therefore taken a lot of time and has at times been quite overwhelming.
