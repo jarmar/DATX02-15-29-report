@@ -12,13 +12,15 @@ Type theory is a broad field with a plethora of different type systems, of which
 Once we had a grasp on what type system to use we ran in to another problem with the litterature we were studying; lack of concrete implementation details. Type systems are given as inference rules over abstract grammars and the translation from theory to code is not treated in any depth in our sources.
 
 ## Going with algorithm W
-Algorithm W (Damas Hindley Milner). Good stuff about aw, sound, complete, linear on most inputs... expressive enough to type check the basic rules of our grammar.
-Infers the most general type for expressions.
+###Algorithm W (Damas Hindley Milner).
+The Damas Hindley Milner type system is expressive enough to type check the basic rules of our grammar.
+Algorithm W infers the most general type for expressions. Existing soundness and completeness proofs for algorithm W means that for our well formed expressions we will always find a type and that it will be the correct type.
+The algorithm is linear on most inputs.
 
-Inference rules
+###Inference rules
 Given the types of any subexpressions, and a context, as premises we can make conclusions about the types of our (well formed) expressions by a collection of rules.
 
-Specialization relation
+###Specialization relation
 A relation between types stating that one is more general than the other, and the other is more special.
 Ex. forall a . a -> a is more general than Int -> Int
 
@@ -33,6 +35,8 @@ id n : int
 
 ## Enter the AST
 Efforts made to simplify type checking.
+As progress on the type checker moves along the AST representation will possibly be remodeled to fit our needs.
+
 
 ## Starting to implement
 Problems adapting to module level.
