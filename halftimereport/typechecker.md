@@ -32,14 +32,13 @@ id : int -> int, since forall a. a -> a is more general than int -> int
 n : int, given in context
 id n : int
 
-
 ## Enter the AST
 Efforts made to simplify type checking.
 As progress on the type checker moves along the AST representation will possibly be remodeled to fit our needs.
 
-
-## Starting to implement
-Problems adapting to module level.
+## Implementing the type checker
+Considering the lack of reference materials for concrete implementations, work on the type checker has been difficult to get started. Working from the article by Grabmüller has however proven to be quite straight forward. We quickly made progress on the type inferencer for expressions once we got started. Implementing the algorithm also made us realize that certain parts of the AST were redundant and we decided to drop those parts, at least temporarily until we have a more stable solution.
+Currently we are finalizing the work on the abstraction level of expressions and moving on towards working to lift the type checker to the abstraction level of a module, where top level functions can be mutually recursive and therefore have cyclically dependent types.
 
 ## In conclusion
 Ramping up the type checker has been slow, but we are at last near a point where we can type check simple expressions. The next big hurdles are solving module and cross module type checking.
