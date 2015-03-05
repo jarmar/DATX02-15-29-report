@@ -109,7 +109,7 @@
     W: 5h Code generator implementation, group meeting. I have encountered a problem with lambdas, where our language support tuples in the pattern while core erlang
        only deal with a list of variables. If a tuple is specified, the generated core erang code should bound the tuple to one argument, and pattern match it in
        a case clause. In the meeting we discussed briefly how to fix this, we think that the renamer might need to translate lambdas so they only have variables.
-    T:
+    T: 1h Writing material for the half time report.
     F:
     S:
     S:
