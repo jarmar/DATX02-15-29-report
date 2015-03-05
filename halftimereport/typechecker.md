@@ -12,14 +12,15 @@ Type theory is a broad field with a plethora of different type systems, of which
 Once we had a grasp on what type system to use we ran in to another problem with the litterature we were studying; lack of concrete implementation details. Type systems are given as inference rules over abstract grammars and the translation from theory to code is not treated in any depth in our sources.
 
 ## Going with algorithm W
-Found tutorial by Grabmüller.
-Algorithm W (Damas Hindley Milner). Good stuff about aw, sound, complete, linear on most inputs... expressive enough to type check the basic rules of our grammar.
-Infers the most general type for expressions.
+###Algorithm W (Damas Hindley Milner).
+The Damas Hindley Milner type system is expressive enough to type check the basic rules of our grammar.
+Algorithm W infers the most general type for expressions. Existing soundness and completeness proofs for algorithm W means that for our well formed expressions we will always find a type and that it will be the correct type.
+The algorithm is linear on most inputs.
 
-Inference rules
+###Inference rules
 Given the types of any subexpressions, and a context, as premises we can make conclusions about the types of our (well formed) expressions by a collection of rules.
 
-Specialization relation
+###Specialization relation
 A relation between types stating that one is more general than the other, and the other is more special.
 Ex. forall a . a -> a is more general than Int -> Int
 
@@ -34,10 +35,11 @@ id n : int
 
 ## Enter the AST
 Efforts made to simplify type checking.
+As progress on the type checker moves along the AST representation will possibly be remodeled to fit our needs.
 
-## Implementing the type checker
-Considering the lack of reference materials for concrete implementations, work on the type checker has been difficult to get started. Working from the article by Grabmüller has however proven to be quite straight forward. We quickly made progress on the type inferencer for expressions once we got started. Implementing the algorithm also made us realize that certain parts of the AST were redundant and we decided to drop those parts, at least temporarily until we have a more stable solution.
-Currently we are finalizing the work on the abstraction level of expressions and moving on towards working to lift the type checker to the abstraction level of a module, where top level functions can be mutually recursive and therefore have cyclically dependent types.
+
+## Starting to implement
+Problems adapting to module level.
 
 ## In conclusion
 Ramping up the type checker has been slow, but we are at last near a point where we can type check simple expressions. The next big hurdles are solving module and cross module type checking.
