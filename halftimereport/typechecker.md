@@ -1,17 +1,18 @@
 # Type checker results and problems
 
 ## Type checking
-What is it? A semantic analysis where certain tractable properties of the code are verified. For example that addition only is applied to numeric values or that indexing is within bounds. Some properties, like termination, are excluded from type checking because of their intractable nature (the halting problem is undecidable).
+What is it? A semantic analysis where certain tractable properties of the code are verified. For example that addition only is applied to numeric values or that indexing is within bounds. Some properties, like termination or checking that a function is total, are excluded from type checking because of their intractable nature (the halting problem is undecidable).
 
 ## Type system
-What is it? A formal proof system which allow us to prove certain properties for our code. Different type systems try to capture different properties to verify.
-Hopper currently uses the Hindley-Milner type system for lambda calculus. It allows for parametric polymorphism. This means, in simple terms, that we can have 
+What is it? A formal proof system which allow us to prove certain properties for our code. Different type systems try to capture different sets of properties to verify.
+Hopper currently uses the Hindley-Milner type system for lambda calculus. It allows for parametric polymorphism. This means, in simple terms, that we can have functions which are ignorant of the specifics of their argument. For example the identity function would have the type 'A to A', it does not care about the argument, it simply returns it. Or the map function which applies a given function to the elements of a list would have the type 'a function from A to B and a list of A to a list of B'. As long as the types are internally consistent the map expression will evaluate (assuming the applied function is defined for all values in the list and that it terminates).
 
 ## Gathering material
 Type theory is a broad field with a plethora of different type systems, of which the description often is very theoretical and carry many subtle points. Sifting through this material has therefore taken a lot of time and has at times been quite overwhelming.
 Once we had a grasp on what type system to use we ran in to another problem with the litterature we were studying; lack of concrete implementation details. Type systems are given as inference rules over abstract grammars and the translation from theory to code is not treated in any depth in our sources.
 
 ## Going with algorithm W
+Found tutorial by Grabmüller.
 Algorithm W (Damas Hindley Milner). Good stuff about aw, sound, complete, linear on most inputs... expressive enough to type check the basic rules of our grammar.
 Infers the most general type for expressions.
 
@@ -34,9 +35,10 @@ id n : int
 ## Enter the AST
 Efforts made to simplify type checking.
 
-## Starting to implement
-Problems adapting to module level.
+## Implementing the type checker
+Considering the lack of reference materials for concrete implementations, work on the type checker has been difficult to get started. Working from the article by Grabmüller has however proven to be quite straight forward. We quickly made progress on the type inferencer for expressions once we got started. Implementing the algorithm also made us realize that certain parts of the AST were redundant and we decided to drop those parts, at least temporarily until we have a more stable solution.
+Currently we are finalizing the work on the abstraction level of expressions and moving on towards working to lift the type checker to the abstraction level of a module, where top level functions can be mutually recursive and therefore have cyclically dependent types.
 
 ## In conclusion
-Ramping up the type checker has been slow, but we are at last approaching a point where we can type check simple expressions. The next big hurdle is solving module and cross module type checking.
+Ramping up the type checker has been slow, but we are at last near a point where we can type check simple expressions. The next big hurdles are solving module and cross module type checking.
 
