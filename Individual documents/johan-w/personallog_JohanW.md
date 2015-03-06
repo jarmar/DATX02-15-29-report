@@ -110,6 +110,6 @@
        only deal with a list of variables. If a tuple is specified, the generated core erang code should bound the tuple to one argument, and pattern match it in
        a case clause. In the meeting we discussed briefly how to fix this, we think that the renamer might need to translate lambdas so they only have variables.
     T: 1h Writing material for the half time report.
-    F:
+    F: 8h Code generator implementation. Nothing special to report, just fixes corrections and testing.
     S:
     S:
