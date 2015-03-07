@@ -59,3 +59,8 @@
 16h
 
 ## LV7
+* M: -
+* T: Renamer, new grammar, ast, bugs (10h)
+* O: Veckomöte (2h)
+* T: Förberedande för presentationsarbete (1h)
+* F: Presentationsarbete (4h)
