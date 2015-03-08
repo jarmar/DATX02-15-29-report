@@ -311,8 +311,8 @@ A question as to whether iterations are too short have arisen. Group will keep w
 
 ###Weekly planning
 
-Half time presentation 10/3.
-Weekly meeting 11/3.
+Half time presentation 10/3.  
+Weekly meeting 11/3.  
 Individual assessment deadline 13/3. (Hand in to Nick)
 
 
