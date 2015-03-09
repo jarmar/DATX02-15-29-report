@@ -70,46 +70,46 @@
        Core Erlang strings. Started translating some expressions. Some are straightforward, others (like lambda and app) are harder to get right since the
        grammar differences. I also have some difficulties understanding the annotated data types in the Language.CoreErlang.Syntax package, I need to dig
        deeper into this.
-    T: 6h Code generator implementation. Most of the first step of the Code generator seems to be working. It seems to generate the Language.CoreErlang.Syntax
+  * T: 6h Code generator implementation. Most of the first step of the Code generator seems to be working. It seems to generate the Language.CoreErlang.Syntax
        data structure fine, except for the unimplemented expressions lambda, infix and app (infix should be desugerized into an app earlier in the pipe line
        I think. I discovered that the code generator needs a second step, which is printing out the resulting to a tmp.core file which should then be used
        as input for erlc. erlc only works for files and not strings. The tmp.core file should also be removed after this, but I think this might an extra step
        in the pipeline. Following this I implemented a short module beamWriter which takes the result of the CodeGenerator.hs and compiles a .beam file using
        the erlc program.
-    W: 4h Group meeting and Code generator test implementation. Started to write a test suite for the code generator. I don't know how deep I should go with the
+  * W: 4h Group meeting and Code generator test implementation. Started to write a test suite for the code generator. I don't know how deep I should go with the
        black box testing, it feels kind of trivial. The real tests will check that the compilation down to .beam was successful and that the .beam code works
        as intended. During the meeting we planned iteration 2. I will continue with the code generator, finalizing it and translate it so it uses the desugarized AST.
-    T: 4h Code generator coding. Made my local buildchain work and added a test that compiles a prespecified module and makes sure it functions as intended.
-    F: -
-    S: 5h Code generator coding. Translated to the current AST data structure, but have not implemented App yet. Also translated the test suite in the same manner.
-    S: -
+  * T: 4h Code generator coding. Made my local buildchain work and added a test that compiles a prespecified module and makes sure it functions as intended.
+  * F: -
+  * S: 5h Code generator coding. Translated to the current AST data structure, but have not implemented App yet. Also translated the test suite in the same manner.
+  * S: -
 
 * LV6: 15h
   * M: 6h Code generator implementation. Worked with different ways of compiling the App expression, managed to finalize an aproach that unfolds a chain of Apps
        and compiles it down to CoreErlang apps. I realized that we need to think about how to deal with intermodule calls, and how to treat bifs. These two
        problems are closely related since calls to bifs are esentially intermodule calls using the 'erlang' module.
-    T: 4h Code generator implementation. Merged 2 feature branches so they can be merged with develop soon. Tried to verify the functionality of the code
+  * T: 4h Code generator implementation. Merged 2 feature branches so they can be merged with develop soon. Tried to verify the functionality of the code
        generator and spotted some bugs with lambdas and function applications. We need to think about how to deal with lambdas, since Erlang requires all
        higher order functions to be stored in a variable before invokation. Also, the grammar needs to be able to specify functions in the type signature.
-    W: 5h Code generator implementation and meeting. I worked on the lambdas and managed to make them better, and I did some cleanup. During the meeting we discussed
+  * W: 5h Code generator implementation and meeting. I worked on the lambdas and managed to make them better, and I did some cleanup. During the meeting we discussed
        iteration 3 and decided that some more features should be implemented. We will be adding intermodule calls, parameters to functions, case/if statements and
        more if there is time. We will also start writing on the report to make sure we have material to work with during the first fackspråk session, and we will
        prepare material for the half time presentation which David and Jakob will do.
-    T: -
-    F: -
-    S: -
-    S: -
+  * T: -
+  * F: -
+  * S: -
+  * S: -
 
-* LV7: TBD
+* LV7: 28h
   * M: -
-    T: 8h Code generator translaton, experimentation and report reading. The code generator have been translated to the new AST. I have experimented a bit with
+  * T: 8h Code generator translaton, experimentation and report reading. The code generator have been translated to the new AST. I have experimented a bit with
        core erlang and see how it handles multiparameter functions and multidefined functions. It seems to be straight forward, but nestled expressions might
        get tricky when it comes to keeping track of variable names. I have started reading example reports to get a basic understanding of what is expected
        in such a report and how it might be structured.
-    W: 5h Code generator implementation, group meeting. I have encountered a problem with lambdas, where our language support tuples in the pattern while core erlang
+  * W: 5h Code generator implementation, group meeting. I have encountered a problem with lambdas, where our language support tuples in the pattern while core erlang
        only deal with a list of variables. If a tuple is specified, the generated core erang code should bound the tuple to one argument, and pattern match it in
        a case clause. In the meeting we discussed briefly how to fix this, we think that the renamer might need to translate lambdas so they only have variables.
-    T:
-    F:
-    S:
-    S:
+  * T: 1h Writing material for the half time report.
+  * F: 8h Code generator implementation. Nothing special to report, just fixes corrections and testing.
+  * S: -
+  * S: 6h Code generator implementation. Reworked the EApp and ECall implementations. Seems to compile nested function calls correctly now.

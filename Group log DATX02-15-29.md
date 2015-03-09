@@ -290,3 +290,29 @@ Fackspråk meeting booked 19th of march, 14.15-15.15.
 Next weekly meeting 2015-03-04.
 
 - - - 
+
+
+##2015-03-08. LP3, week 7.
+Notetaker: Johan Larsson.  
+
+###Meetings
+
+Week 7 had a weekly meeting as the only full group activity. David and Jakob worked on the half time presentation. During the meeting we discussed iteration results and half time presentation work.
+
+###Work phase
+
+All group members should write material to be used in the half time presentation. The group decided to keep the areas of responsibility from the previous iteration to try and get things working before moving on. Type checking has finally started to see some progress.
+
+###Problems
+
+Assembling material to present at the half time presentation. The group members writes about their work so far and any problems encountered. David and Jakob summarizes our experiences before the talk.
+
+A question as to whether iterations are too short have arisen. Group will keep working as in previous iteration to try and get things working and evaluate iteration length at an upcoming meeting.
+
+###Weekly planning
+
+Half time presentation 10/3.  
+Weekly meeting 11/3.  
+Individual assessment deadline 13/3. (Hand in to Nick)
+
+

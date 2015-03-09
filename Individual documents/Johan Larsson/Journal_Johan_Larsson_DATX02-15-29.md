@@ -29,3 +29,9 @@ For this iteration (one week) I was assigned to working on the AST along with Ja
 ###Week 6.
 
 This iteration I'm assigned to type checking with Liam and Björn. It's a fun topic and will require some reading which for me has an upside and a downside. Doing the research is fun and I know I'm capable but it has me spending more time not implementing anything. I'm determined to work this weekend and after reading up some more to start a branch in the repo for the type checking and start coding. The type checking workshop held friday was good (since I like discussing the ideas thoroughly before starting) but we had some difficulty in finding a good level of abstraction to where we needed to discuss. Me and Björn had some similar ideas in starting from Algorithm W (from Hindley Milner) and see where we could go from adapting that, Liam felt like he had ideas of what needed to be done and would get right to working on an implementation.
+
+###Week 7.
+
+It's been fun working with Björn and producing some code. The type checking feels as if it's moving forward. There is still not a working implementation but we have good ideas of the steps we need to take to get there. Me and Björn also wrote down our thoughts about the type checking part of the project for the half time presentation.
+
+
