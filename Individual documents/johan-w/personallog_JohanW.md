@@ -113,3 +113,6 @@
   * F: 8h Code generator implementation. Nothing special to report, just fixes corrections and testing.
   * S: -
   * S: 6h Code generator implementation. Reworked the EApp and ECall implementations. Seems to compile nested function calls correctly now.
+
+* LV8: TBD
+  * M: 7h Code generator implementation. Added a renaming step just before code gen which reworks EApps and ECalls to a more "compileable" format for the codegen to use.
