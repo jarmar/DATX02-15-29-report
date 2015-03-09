@@ -65,4 +65,10 @@
 * T: Förberedande för presentationsarbete (1h)
 * F: Presentationsarbete (4h)
 * L: -
-* S: `case` och `if .. then .. else` lades till i grammatiken och började jobba på intermodule calls and BIFs (4h)
+* S: `case` och `if .. then .. else` lades till i grammatiken och började jobba på intermodule calls and BIFs, läste på om Hindley-Milner typsystem och algoritm W (6h)
+
+23h
+
+## LV8
+* M: Presentionsarbete (5h)
+* 
