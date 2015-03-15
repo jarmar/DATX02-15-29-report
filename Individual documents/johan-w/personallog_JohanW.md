@@ -117,3 +117,8 @@
 * LV8: TBD
   * M: 7h Code generator implementation. Added a renaming step just before code gen which reworks EApps and ECalls to a more "compileable" format for the codegen to use.
   * T: 2h Attending half time presentation, pre code gen renaming implementation
+  * W: 3h Meeting and discussions
+  * T: -
+  * F: -
+  * S: -
+  * S: 4h Report writing
