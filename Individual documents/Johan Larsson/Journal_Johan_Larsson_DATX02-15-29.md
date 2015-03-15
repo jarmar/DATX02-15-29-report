@@ -34,4 +34,6 @@ This iteration I'm assigned to type checking with Liam and Björn. It's a fun to
 
 It's been fun working with Björn and producing some code. The type checking feels as if it's moving forward. There is still not a working implementation but we have good ideas of the steps we need to take to get there. Me and Björn also wrote down our thoughts about the type checking part of the project for the half time presentation.
 
+###Week 8.
 
+Type checking is a tricky subject and we still have no working implementation. Working on the type checker is equal parts researching and coding but other responsibilites also take time to handle. Exams are getting closer and we need to think about the Fackspråk meeting and what material is needed before that. On monday (March 16th) we are supposed to try and merge the type checking branches but I'm not sure that we're at a place where that is very easy. The work that is put in might be needed though since having one unified (and hopefully working) type checker will help the project.
