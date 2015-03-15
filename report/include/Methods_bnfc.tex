@@ -1,0 +1,17 @@
+\section{Parsing source code} \label{sec:bnfc}
+Similar to a normal language is a programming language built from a grammar. 
+From this grammar a lexer is produced. The lexers job is to match a word in the
+source code to a token in the grammar. For example in english the word train 
+would match a noun token. 
+
+The next step is to combine all these tokens to expressions or sentences. This
+is done with a parser. To make the language as expressive as possible you build
+up bigger expressions out of smaller expressions. This will create a tree
+structure that will be easier to work with instead of raw text. 
+
+To remove a lot of work the lexer and parser can be automatically generated from
+a tool when written grammar in Backus-Naur-form or BNF. This BNF converter, or
+BNFC for short, is developed by Chalmers and used in earlier courses(plt ref here).
+This made it an easy choise with the groups familarity with the tool. 
+
+

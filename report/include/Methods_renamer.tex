@@ -1,0 +1,21 @@
+\section{Renaming and simplify}
+While BNFC is a great tool to create a parse tree from raw text the resulting 
+tree structure is very verbose with a lot of constructors. To simplify this a
+renamer step is introduced in the pipeline. This step converts the parse tree
+to our minimally designed abstract syntax tree or AST for short. 
+
+In this step a few grammar rules could be translated to more general expressions
+to simplify the AST and lessen the cases the typechecker need to cover, see
+table \ref{lst:renamer1}.
+
+% I want these beside each other and a arrow in between
+\begin{lstlisting} \label{lst:renamer1}
+-- Translates an if-expression to a more general case-expression
+
+f = if a                      f = case a of
+      then b        =>              True  -> b
+      else c                        False -> c
+\end{lstlisting}
+
+The other part of the renamer module is to annotate the functions to where they
+where exported from...
