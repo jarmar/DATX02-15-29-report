@@ -315,4 +315,28 @@ Half time presentation 10/3.
 Weekly meeting 11/3.  
 Individual assessment deadline 13/3. (Hand in to Nick)
 
+- - - 
 
+##2015-03-15. LP3, week 8.
+Notetaker: Johan Larsson.  
+
+###Meetings
+
+Week 8 had the weekly meeting and half time presentation.
+During the meeting we discussed the current and upcoming iterations and what work needed to be done. The half time presentation went well.
+
+###Work phase
+
+Type checking will continue as before to make sure we get something working. The remaining group members (David, Johan WS, Jakob) will begin assembling material for the report in preparation for the Fackspråk meeting on the 19th.
+
+###Problems
+
+Still no working type checker. Björn, Liam and Johan L are still working on it, albeit in two different branches, to try and get a functioning version into the pipeline.
+The group we have been paired with for the fackspråk meeting is from the seafaring programme and we are not sure whether this is correct or not. We send the other group an e-mail to see how they feel about commenting on our report (is it too technical?) and how we move forward.
+
+###Weekly planning
+
+Report material should be written, "as much as possible".
+Type checking workshop - March 16th. Intention is to merge the type checking branches.
+Weekly meeting March 18th.
+Fackspråk March 19th.
