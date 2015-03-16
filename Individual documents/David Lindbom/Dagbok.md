@@ -70,5 +70,15 @@
 23h
 
 ## LV8
-* M: Presentionsarbete (5h)
-* 
+* M: Presentationsarbete (6h)
+* T: Presentationsarbete och presentation (4h)
+* O: Veckomöte (1h)
+* T: -
+* F: -
+* L: Rapportskrivande (4h)
+* S: Rapportskrivande (5h)
+
+20h
+
+## TV
+* M: Rapportskrivande (8h)
