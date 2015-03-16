@@ -1,3 +1,15 @@
 % CREATED BY DAVID FRISK, 2014
 \chapter{Inference rules}
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+\begin{center}
+\begin{array}{cl}
+ \displaystyle\frac{x:\sigma \in \Gamma}{\Gamma \vdash x:\sigma}&[\mathtt{Var}]\\ \\
+ \displaystyle\frac{\Gamma \vdash e_0:\tau \rightarrow \tau' \quad\quad \Gamma \vdash e_1 : \tau }{\Gamma \vdash e_0\ e_1 : \tau'}&[\mathtt{App}]\\ \\
+ \displaystyle\frac{\Gamma,\;x:\tau\vdash e:\tau'}{\Gamma \vdash \lambda\ x\ .\ e : \tau \rightarrow \tau'}&[\mathtt{Abs}]\\ \\
+ \displaystyle\frac{\Gamma \vdash e_0:\sigma \quad\quad \Gamma,\,x:\sigma \vdash e_1:\tau}{\Gamma \vdash \mathtt{let}\ x = e_0\ \mathtt{in}\ e_1 : \tau} &[\mathtt{Let}]\\ \\ \\
+ \displaystyle\frac{\Gamma \vdash e:\sigma' \quad \sigma' \sqsubseteq \sigma}{\Gamma \vdash e:\sigma}&[\mathtt{Inst}]\\ \\
+ \displaystyle\frac{\Gamma \vdash e:\sigma \quad \alpha \notin \text{free}(\Gamma)}{\Gamma \vdash e:\forall\ \alpha\ .\ \sigma}&[\mathtt{Gen}]\\ \\
+\end{array}
+\end{center}
+
+Inkludera källa? % http://en.wikipedia.org/wiki/Hindley–Milner_type_system#Typing_rules
