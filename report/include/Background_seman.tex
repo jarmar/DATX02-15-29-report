@@ -1,5 +1,68 @@
 \section{Semantic analysis}
 
+Background
+
+An important design decision to make when implementing a programming language is wether to perform some semantic analyses of the code at compile time and what to include in such case. Semantic analyses can for example contribute error detection and optimized code. The cost is increased complexity of the compiler and for some kinds of analysis prohibitive compilation times.
+
+A common and well studied category of analyses is type inference or type checking. Type systems vary in their expressiveness but essentially allow us to prove desireable properties of our code.
+
+One of the driving motivations for the Hopper project was to bring an expressive Haskell-like type system From the outset one of the  aim of Hopper
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Design & Implementation
+
+  The type system
+    Hopper uses the Damas-Hindley-Milner (HM) type system for the lambda calculus. HM has parametric polymorphism enabling (wording, what do I mean and what does this say???) type inference of type schemes - types with generic, quantified type variables. Further HM has the Algorithm W which not only infers the most general type for expressions but also has existing soundess and completeness proofs. These proofs means that for our well formed expressions we will always find a type and that it will be the correct type.
+
+  Preprocessing
+    Damas-Hindley-Milner is a type system for the lambda calculus and the parsed Hopper code has a different representation. The parsed code is transformed into an AST and the expressions written in Hopper is turned into semantically equivalent expressions in the lambda calculus. Hopper type inference is done on a simple language which is lambda calculus extended with let expressions and the fixpoint combinator. Lambda calculus in itself is Church-Turing complete and could thus represent these added constructs but they simplify ... (add stuff here)
+   
+  The simple language
+    Variables
+      A variable is an expression.
+      Ex. x is a valid expression.
+    Abstraction
+      An abstraction of a variable over some expression. (wording?)
+      Ex. (\\x . x) is a valid expression. 
+    Application
+      An application of an expression to another expression is an expression.
+      Ex. (f x) is a valid expression.
+    Extensions
+      Let
+        A let expression, defining a variable within the scope of an expression, is a expression.
+        Ex. (let x = n in (f x)) is a valid expression. 
+      Fix
+        The fixpoint combinator enables recursive expressions. A fixpoint combinator y satisfies y f = f (y f).
+  
+
+  Type Inference with Algorithm W
+    Generating constraints by inference rules
+
+    Solving constraints by solving rules
+
+
+
+
+
+
+
+
+
+------------------
+
 what
   in general
     a step in the compilation process
@@ -21,7 +84,13 @@ why
 how
   preprocess
     the simple language
+      lambda calc
+        expressiveness etc
+        extensions (let, fix)
     transformations
+      parse -> AST ?
+      AST -> simple language
+      important: keep semantics
   type inference
     generating constraints by inference rules
     solving constraints by solving rules
