@@ -1,4 +1,29 @@
 \section{Code generator}
 
-Bla bla code generator bla
+Generally the last step of a compiler is the code generation step. The code generator
+component should take an AST much like one of the target language and translate it
+to actual code strings of the target language. Additionally, this component may also
+perform some optimizations on the generated code before returning it.
 
+\subsection{Implementation}
+
+The code generator is implemented using the Language.CoreErlang \cite{CoreErlang} package
+from Hackage (maybe also bibliography link, or glossory). This package contains a Core Erlang
+parser, a data structure used for representing Core Erlang AST's and a pretty printer for
+said data structure. The code generator makes use of this package by building Core Erlang
+AST's and then simply invoking the pretty printer on them to  produce Core Erlang.
+
+Due to the differences between Hopper and Core Erlang, and the additional type constraints
+of the Hopper language, the type checker and the code generator require differently
+structured AST's. To deal with this another AST transformation step has been added to the
+compilation time line before the code generation. This step attempts to seperate variables
+and function identifiers from each other, and bind function calls with the tokens that
+should be used as parameters in said function calls.
+
+\subsection{Emulating the erlang compiler}
+
+One downside to the choice of compiling to Core Erlang and then invoking the erlc
+(bibliography link here) is the loss of the additions and optimizations the erlc
+compiler makes when it compiles Erlang to Core Erlang in its pipeline. To deal with this
+the code generator has been given additional functionality to emulate the pre Core Erlang
+behaviour of the erlc compiler. (Proceed to list features here)
