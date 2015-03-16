@@ -32,6 +32,9 @@ The association between variables and types. The typing in the environment gives
 free variable
 A variable free in a context. Opposite of bound variable.
 
+fresh variable
+A new variable constructed free in the environment.
+
 generalization
 Generalization, in the context of polymorphic type inference, is the binding of free type variables in a type. Forall a . a -> a is the generalized version of a -> a. 
 
@@ -70,7 +73,9 @@ judgement
 See inference rule.
 
 lambda calculus
+A mathematical system and model of computation, by function abstraction and application of variables, formulated by Alonzo Church. Church-Turing complete. 
   abstraction
+    Abstraction over some variable is
   application
   fix point
   let
@@ -124,7 +129,7 @@ semantics
 The meaning of formulas. Often expressed in natural language.
 
 (constraint) solver
-
+For a type signature consisting of unique fresh type variables the solver solves a set of constraints to find the most general type.
 
 (logical) soundness
 A property of formal systems. A system is sound if the inference rules only produce valid conclusions from valid premisses.
@@ -140,7 +145,7 @@ A ::= B | C A
 C ::= D | E
 
 system F
-
+A typed lambda calculus with universal quantification over types.
 
 top level (definition)
 Expression that appear globally in a module and can be referred to by any other definition in the module.
