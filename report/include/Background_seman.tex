@@ -1,0 +1,29 @@
+\section{Semantic analysis}
+
+what
+  in general
+    a step in the compilation process
+    examine details of the code which cannot be captured be the grammar itself.
+    example control flow analysis
+  type inference
+    a formal system
+    system F in Haskell
+    we use Hindley-Milner type system to begin with
+
+why
+  in general
+    prove properties
+    show correctness/show absence of errors
+  type inference
+    tractable
+    well established
+
+how
+  preprocess
+    the simple language
+    transformations
+  type inference
+    generating constraints by inference rules
+    solving constraints by solving rules
+  postprocess
+    looking upp the solved types and reporting them

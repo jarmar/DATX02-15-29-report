@@ -7,8 +7,8 @@ perform some optimizations on the generated code before returning it.
 
 \subsection{Implementation}
 
-The code generator is implemented using the Language.CoreErlang (bibliography link here)
-package from Hackage (maybe also bibliography link). This package contains a Core Erlang
+The code generator is implemented using the Language.CoreErlang \cite{CoreErlang} package
+from Hackage (maybe also bibliography link, or glossory). This package contains a Core Erlang
 parser, a data structure used for representing Core Erlang AST's and a pretty printer for
 said data structure. The code generator makes use of this package by building Core Erlang
 AST's and then simply invoking the pretty printer on them to  produce Core Erlang.
