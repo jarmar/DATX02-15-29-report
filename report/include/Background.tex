@@ -1,7 +1,41 @@
 \chapter{Background}
 
-yadda yadda...
+% WHAT IS A COMPILER 
 
+A 
+
+% HOW IS A COMPILER BUILT 
+
+When building a compiler it can be resembled to a pipe where text flows through 
+while transformed into different representations and in the end outputted
+to runnable code to either run on the computer itself or on a virtual machine
+that emulates a computer.
+
+Now is Hopper really a transpiler or a translating compiler. Instead of 
+outputting runnable code it outputs other code that is interpreted and compiled
+by the Erlang compiler, erlc. With this the project could very much be 
+simplified (ref to read more in discussion).
+
+% PIPELINE FIGURE
+
+\begin{figure}[h!]
+\label{fig:pipeline}
+\centering
+  \includegraphics[width=0.6\pdfpagewidth]{figure/pipeline}}
+\end{figure}
+
+% HOW IS HOPPER BUILT
+
+As seen in figure~\ref{fig:pipeline} the Hopper language has five steps in its 
+pipeline before it turns it over to the Erlang compiler. Each step work on the 
+source code representation in a uniqe way. The steps can be summerized as
+follows. The lexer and parser reads in text files and converts them to an 
+abstract representation, the renamer simplify this representation for that 
+typechecker whos job it is to control the types of thefunctions. Second to last 
+there is another simplifying step before the code generator who writes the
+assembly code that is run on the BEAM VM.
+
+% OTHER SECTIONS
 
 \input{include/Background_bnfc}
 \input{include/Background_renamer}
