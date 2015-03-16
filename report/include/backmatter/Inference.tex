@@ -1,6 +1,8 @@
 % CREATED BY DAVID FRISK, 2014
 \chapter{Inference rules}
 
+% TODO: Clean up this code
+\begin{equation}
 \begin{center}
 \begin{array}{cl}
  \displaystyle\frac{x:\sigma \in \Gamma}{\Gamma \vdash x:\sigma}&[\mathtt{Var}]\\ \\
@@ -11,5 +13,6 @@
  \displaystyle\frac{\Gamma \vdash e:\sigma \quad \alpha \notin \text{free}(\Gamma)}{\Gamma \vdash e:\forall\ \alpha\ .\ \sigma}&[\mathtt{Gen}]\\ \\
 \end{array}
 \end{center}
+\end{equation}
 
 Inkludera källa? % http://en.wikipedia.org/wiki/Hindley–Milner_type_system#Typing_rules
