@@ -7,6 +7,9 @@
 % Add notes and show warning in compilation
 \newcommand{\todo}[1]{\textcolor{red}{TODO: #1}\PackageWarning{TODO:}{#1!}}
 
+\makeglossaries
+\input{include/frontmatter/Glossary}
+
 \begin{document} 
 
 % COVER PAGE, TITLE PAGE AND IMPRINT PAGE
@@ -22,9 +25,8 @@
 \input{include/frontmatter/Acknowledgements}
 
 % GLOSSARY
-\newpage
-\input{include/frontmatter/Glossary}
-\makeglossaries
+\printglossary[type=\acronymtype]
+\printglossaries
 
 % TABLE OF CONTENTS
 \newpage
