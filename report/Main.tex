@@ -4,6 +4,9 @@
 \documentclass[12pt,a4paper,twoside,openright]{report}
 \input{include/settings/Settings}
 
+% Add notes and show warning in compilation
+\newcommand{\todo}[1]{\textcolor{red}{TODO: #1}\PackageWarning{TODO:}{#1!}}
+
 \begin{document} 
 
 % COVER PAGE, TITLE PAGE AND IMPRINT PAGE
