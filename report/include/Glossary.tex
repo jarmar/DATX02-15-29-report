@@ -2,39 +2,72 @@
 
 \subsection{Type checking}
 
-algorithm w
+algorithm W
+Algorithm W is an algorithm which infer the type of expressions in the Hindley-Milner type system.
 
 bound variable
+A variable bound in a context. Opposite of free variable. A type variable can be quantified over in a type and thus bound. Ex. Forall a . a -> a has the type variable a bound by the universal quantifier (for all).
 
 (logical) completeness
-
+A property of formal systems. A system is complete if all its formulas can be infered in the system.
+(look up reference, FOL?)
 
 constraint
+A constraint is an equality statement between two types.
+The constraint Int -> Bool = a -> b will, as an example, be resolved into the constraints a = Int and b = Bool.
 
 context
+See environment.
 
 Damas
+Luis Damas. Proved the soundness and completeness of Algorithm W. REF: (http://web.cs.wpi.edu/~cs4536/c12/milner-damas_principal_types.pdf)
 
 environment
-  extend/remove
+The association between variables and types. The typing in the environment gives meaning to the variables. 
+  extend
+    Extend the environment by adding the variable and it's type.
+  remove
+    Remove a variable and it's binding from the environment.
 
 free variable
+A variable free in a context. Opposite of bound variable.
 
 generalization
+Generalization, in the context of polymorphic type inference, is the binding of free type variables in a type. Forall a . a -> a is the generalized version of a -> a. 
+
+(constraint) generator
+The constraint generator traverse an expression and infer constraints on every part of the expression using the inference rules of the type system. The constraints are collected and this equation system of constraints are later solved by the constraint solver.
 
 Hindley
+J. Roger Hindley (1938-). British Logician. First described the the type system for lambda calculus with parametric polymorphism. REF: (http://en.wikipedia.org/wiki/J._Roger_Hindley)
 
-inference
+Hindley-Milner type system
+A type system for the lambda calculus with parametric polymorphism. Also known as Damas-Hindley-Milner.
+
+(type) inference
+The process of finding a type of an expression. 
 
 inference rule
+Rule which state what conclusion we may draw from what premises.
+Example from predicate logic:
+A       B
+--------- Conjunction
+A \land B
+A and B are the premisses, A \land B is the conclusion we can draw using the Conjuction inference rule.
+(reference to FOL?)
+See appendix for a listing of the inference rules used in the type inferencer.
 
 infinite type
+An infinite type occurs when a type variable is constrained in terms of itself. In other words the type variable occurs on both sides of the equals sign.
 
 instantiation
+Instantiation, in the context of polymorphic type inference, allow an expression to have different types in different contexts by substituting all bound variable names with fresh ones. Forall b . b -> b is an instantiated version of Forall a . a -> a.
 
 intractable
+See tractable.
 
 judgement
+See inference rule.
 
 lambda calculus
   abstraction
@@ -44,48 +77,91 @@ lambda calculus
   variable
 
 Milner
+Robin Milner (1934-2010). British Computer Scientist. Developed ML (meta language), the first language with polymorphic type inference and type-safe exception handling. REF: (http://en.wikipedia.org/wiki/Robin\_Milner)
+(maybe better reference material in TaPL)
 
 monomorphism
+Something that has a sole behavior/form. See polymorphism. 
 
-most general type
+most general unifier
+A property of the Hindley-Milner type system is that if there is a unifier between two types, then there is an unique (barring name changes) most general unifier for the same two types. In other words there exist a unique unifier which make the least amount of assumptions about the types.
+Take for example the two types a -> Bool and b -> Bool. One unifier would be
+[a/Int][b/Int] but this would not be a most general unifier. The most general unifier would be [a/b] (or [b/a] but the only difference in the result is the names, which we disregard).
 
 mutual recursion
+A cyclic dependency.
+Example
+f 0 = 0
+f n = g (n-1)
+g 0 = 1
+g n = f (n-1)
+``1 if odd, 0 if even''
 
 normalization
+Normalization, in the context of polymorphic type inference, is a cosmetic operation where bound type variable names are replaced with more readable names.
 
 occurs check
+Occurs checks are performed during constraint solving. A check to see if a variable occurs free in some context.
 
 polymorphism
+  parametric polymorphism: a function or type declared with generic parameters that handles them identically. Ex. the identity function id has type Forall a . a -> a.
 
-reconstruction
+(type) reconstruction
+See inference.
 
 recursion
+Calling or referencing oneself. Ex. a recursive function returning the sum from 1 to n: f(0) = 0, f(n) = n + f(n-1).
+See recursion.
 
 scheme
+A scheme is a type along with a set of the variable names in the type which are bound by a forall quantifier. A scheme can be instantiated.
 
 semantic analysis
+In the context of compiler construction semantic analysis is performed after lexing and parsing and checks for errors which can't be captured by the grammar of the language. For example that variables are defined before their use.
+Type checking is one kind of semantic analysis.
 
 semantics
+The meaning of formulas. Often expressed in natural language.
 
-solver
+(constraint) solver
+
 
 (logical) soundness
+A property of formal systems. A system is sound if the inference rules only produce valid conclusions from valid premisses.
+(look up reference, FOL?)
 
 substitution
+A mapping from type variables v1...vn to types t1...tn, written as [v1/t1,v2/t2,...,vn/tn], representing a substitution of each vi to ti. Applying a substitution to a type A substitutes the type variables in A. The empty substitution [] does not change the type (no type variables are substituted).
 
 syntax
+The structure or form of a formulas. Often given by recursive definitions.
+For example this BNF grammar:
+A ::= B | C A
+C ::= D | E
 
 system F
 
-top level
 
-tractable
+top level (definition)
+Expression that appear globally in a module and can be referred to by any other definition in the module.
+
+tractable (problem)
+A problem in complexity class P meaning that it can be computed in polynomial time in relation to the input size.
 
 type checking
+See inference.
 
 type system
+A type system is a formal system wherein types of expressions can be infered. Infering a type amount to proving the type using the inference rules of the formal system.
+Type systems are used to prove certain tractable properties of the code. For example that arithmetic operators are only applied to numeric values. Properties like termination and total function definitions are often left out of type systems since those problems are undecidable (intractable).
+See also system F and Hindley-Milner type system
 
 type variable
+A variable representing some type. See free/bound variable.
 
 unification
+Two types A, B are unifiable if there exists a substitution S, from type variables to types, such that S(A) = S(B).
+Ex. unifying a type (variable) a with the type Int would yield a substitution S = [a/Int] since S(a) = [a/Int]a = Int = [a/Int]Int = S(Int).
 
+unifier
+A unifier is a substitution S for types A and B which satisfy the criteria S(A) = S(B).
