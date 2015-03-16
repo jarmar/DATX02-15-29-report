@@ -9,6 +9,14 @@ directly on hardware or to a lower level language to make use of their compiler.
 
 % HOW IS A COMPILER BUILT 
 
+% GENERAL PIPELINE FIGURE
+
+\begin{figure}[h!]
+\label{fig:generalpipeline}
+\centering
+  \includegraphics[width=0.6\pdfpagewidth]{figure/general-pipeline}
+\end{figure}
+
 When building a compiler it can be resembled to a pipe where text flows through 
 while transformed into different representations and in the end outputted
 to runnable code to either run on the computer itself or on a virtual machine
@@ -18,14 +26,6 @@ In figure ~\ref{fig:generalpipeline} you can see how the source flows through.
 It should be noted that the typechecker is optional for a language. It can
 fully rely on the grammar to expose errors, this will lead to a more expressive 
 language while it may crash in execution due to type errors.
-
-% GENERAL PIPELINE FIGURE
-
-\begin{figure}[h!]
-\label{fig:generalpipeline}
-\centering
-  \includegraphics[width=0.6\pdfpagewidth]{figure/general-pipeline}}
-\end{figure}
 
 Now is Hopper really a transpiler or a translating compiler. Instead of 
 outputting runnable code it outputs other code that is interpreted and compiled
