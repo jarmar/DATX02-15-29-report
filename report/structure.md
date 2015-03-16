@@ -2,15 +2,22 @@
 * Foreword
 * Abstract
 * Sammanfattning
-* Glossory
-  * AST
-  * CST
+* Glossary
+  * Lexer/parser
+    * AST
+    * CST
+  * Type checker
+    * Type
+    * Inference
+  * Code generator
+    * ...
   * ...
 * Table of contents
 * Introduction
 * Technical background
   * Compiler (What, how)
   * BNFC (What, why we use it)
+  * Types (What, How, Why)
   * Core Erlang / The Erlang compilation process (What, why we use it)
 * Method
   * Group related
@@ -19,10 +26,10 @@
     * Communication
   * Work related
     * Research
-    * Designing
-    * Impementating
-    * Testing
-    * Analyzing
+    * Design
+    * Implementation
+    * Tests
+    * Analysis
 * Design and Implementation
   * Introduction (pipeline)
   * Parser       \
@@ -36,4 +43,5 @@
 * Bibliography
 * Appendix
   * Grammar specification
+  * Inference rules <- very cool, must have.
   * ...
