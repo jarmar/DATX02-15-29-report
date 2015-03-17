@@ -24,13 +24,13 @@
 \newpage
 \input{include/frontmatter/Acknowledgements}
 
-% GLOSSARY
-\glsaddall
-\printglossaries
-
 % TABLE OF CONTENTS
 \newpage
 \tableofcontents
+
+% GLOSSARY
+\glsaddall
+\printglossaries
 
 % OTHER FRONTMATTER
 % List of figures (add to table of contents)
@@ -41,6 +41,7 @@
 
 % START OF MAIN DOCUMENT
 \cleardoublepage
+\setlength{\parindent}{15pt}  
 \setcounter{page}{1}
 \pagenumbering{arabic}			% Arabic numbering starting from 1 (one)
 

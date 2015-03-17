@@ -1,4 +1,37 @@
 \section{Typechecker}
 
-Bla bla type checker bla
+\subsection{The type system}
 
+Hopper uses the Damas-Hindley-Milner (HM) type system for the lambda calculus. HM has parametric polymorphism enabling (wording, what do I mean and what does this say???) type inference of type schemes - types with generic, quantified type variables. Further HM has the Algorithm W which not only infers the most general type for expressions but also has existing soundess and completeness proofs. These proofs means that for our well formed expressions we will always find a type and that it will be the correct type.
+
+\subsection{Preprocessing}
+
+Damas-Hindley-Milner is a type system for the lambda calculus and the parsed Hopper code has a different representation. The parsed code is transformed into an AST and the expressions written in Hopper is turned into semantically equivalent expressions in the lambda calculus. Hopper type inference is done on a simple language which is lambda calculus extended with let expressions and the fixpoint combinator. Lambda calculus in itself is Church-Turing complete and could thus represent these added constructs but they simplify ... (add stuff here)
+\begin{verbatim}
+
+The simple language
+  Variables
+    A variable is an expression.
+    Ex. x is a valid expression.
+  Abstraction
+    An abstraction of a variable over some expression. (wording?)
+    Ex. (\x . x) is a valid expression.
+  Application
+    An application of an expression to another expression is an expression.
+    Ex. (f x) is a valid expression.
+  Extensions
+    Let
+      A let expression, defining a variable within the scope of an expression,
+      is an expression.
+      Ex. (let x = n in (f x)) is a valid expression. 
+    Fix
+      The fixpoint combinator enables recursive expressions. A fixpoint combinator
+      y satisfies y f = f (y f).
+
+\end{verbatim}
+
+\subsection{Type inference with Algorithm W}
+
+Generating constraints by inference rules
+
+Solving constraints by solving rules
