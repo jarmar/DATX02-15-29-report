@@ -1,7 +1,7 @@
 \section{Code generator}
 
 Generally the last step of a compiler is the code generation step. The code generator
-component should take an \acrshort{ast} much like one of the target language and translate it
+component should take an \gls{ast} much like one of the target language and translate it
 to actual code strings of the target language. Additionally, this component may also
 perform some optimizations on the generated code before returning it.
 
@@ -9,14 +9,14 @@ perform some optimizations on the generated code before returning it.
 
 The code generator is implemented using the Language.CoreErlang \cite{CoreErlang} package
 from Hackage (maybe also bibliography link, or glossory). This package contains a Core Erlang
-parser, a data structure used for representing Core Erlang AST's and a pretty printer for
+parser, a data structure used for representing Core Erlang \gls{ast}'s and a pretty printer for
 said data structure. The code generator makes use of this package by building Core Erlang
-AST's and then simply invoking the pretty printer on them to  produce Core Erlang.
+\gls{ast}'s and then simply invoking the pretty printer on them to  produce Core Erlang.
 
 Due to the differences between Hopper and Core Erlang, and the additional type constraints
 of the Hopper language, the type checker and the code generator require differently
-structured AST's. To deal with this another AST transformation step has been added to the
-compilation time line before the code generation. This step attempts to seperate variables
+structured \gls{ast}'s . To deal with this another \gls{ast} transformation step has been added
+to the compilation time line before the code generation. This step attempts to seperate variables
 and function identifiers from each other, and bind function calls with the tokens that
 should be used as parameters in said function calls.
 
