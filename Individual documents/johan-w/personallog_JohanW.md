@@ -114,7 +114,7 @@
   * S: -
   * S: 6h Code generator implementation. Reworked the EApp and ECall implementations. Seems to compile nested function calls correctly now.
 
-* LV8: TBD
+* LV8: 16h
   * M: 7h Code generator implementation. Added a renaming step just before code gen which reworks EApps and ECalls to a more "compileable" format for the codegen to use.
   * T: 2h Attending half time presentation, pre code gen renaming implementation
   * W: 3h Meeting and discussions
@@ -122,3 +122,12 @@
   * F: -
   * S: -
   * S: 4h Report writing
+
+* ExamWeek: TBD
+  * M: 5h Report writing
+  * T: 1h Report writing
+  * W:
+  * T:
+  * F:
+  * S:
+  * S:
