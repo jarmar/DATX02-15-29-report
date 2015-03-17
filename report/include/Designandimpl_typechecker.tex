@@ -1,4 +1,4 @@
-\section{Typechecker}
+\section{Type checker}
 
 \subsection{The type system}
 
@@ -21,12 +21,12 @@ The simple language
     Ex. (f x) is a valid expression.
   Extensions
     Let
-      A let expression, defining a variable within the scope of an expression,
-      is an expression.
+      A let expression, defining a variable within the scope
+      of an expression, is an expression.
       Ex. (let x = n in (f x)) is a valid expression. 
     Fix
-      The fixpoint combinator enables recursive expressions. A fixpoint combinator
-      y satisfies y f = f (y f).
+      The fixpoint combinator enables recursive expressions.
+      A fixpoint combinator y satisfies y f = f (y f).
 
 \end{verbatim}
 
@@ -36,7 +36,7 @@ Where the original Algorithm W uses a top-down approach we have chosen to implem
 
 \begin{description}
   \item[Generating constraints by inference rules] \hfill \\
-
+A first pass generates constraints on the types by a set of inference rules (see appendix). (TODO: FILL OUT)
   \item[Solving constraints by solving rules] \hfill \\
-
+Secondly we solve the inferred types using the accumulated constraints to produce the most general type for each expression. (TODO: FILL OUT)
 \end{description}
