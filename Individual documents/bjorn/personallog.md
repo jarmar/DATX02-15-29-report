@@ -27,3 +27,8 @@ Participated in workshop. Agreed upon a first small program we should be able to
 ### 2015-02-07 to 2015-03-09
 Working hard on the type checker. It has been a slow start, but we are gaining momentum now.
 
+### 2015-03-10 to 2015-03-15
+Intense work on a new type checker organization
+
+### 2015-03-16 to 2015-03-17
+Focus on the halftime report. No coding.
