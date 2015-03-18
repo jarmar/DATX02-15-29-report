@@ -2,8 +2,8 @@
 \chapter{Inference rules}
 
 % TODO: Clean up this code
-\begin{equation}
 \begin{center}
+\begin{equation}
 \begin{array}{cl}
  \displaystyle\frac{x:\sigma \in \Gamma}{\Gamma \vdash x:\sigma}&[\mathtt{Var}]\\ \\
  \displaystyle\frac{\Gamma \vdash e_0:\tau \rightarrow \tau' \quad\quad \Gamma \vdash e_1 : \tau }{\Gamma \vdash e_0\ e_1 : \tau'}&[\mathtt{App}]\\ \\
@@ -12,7 +12,7 @@
  \displaystyle\frac{\Gamma \vdash e:\sigma' \quad \sigma' \sqsubseteq \sigma}{\Gamma \vdash e:\sigma}&[\mathtt{Inst}]\\ \\
  \displaystyle\frac{\Gamma \vdash e:\sigma \quad \alpha \notin \text{free}(\Gamma)}{\Gamma \vdash e:\forall\ \alpha\ .\ \sigma}&[\mathtt{Gen}]\\ \\
 \end{array}
-\end{center}
 \end{equation}
+\end{center}
 
 Inkludera källa? % http://en.wikipedia.org/wiki/Hindley–Milner_type_system#Typing_rules
