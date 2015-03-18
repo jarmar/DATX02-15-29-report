@@ -1,7 +1,0 @@
--- Covers a basic recursive function
-
-module Basic002 where
-
-fact :: Num a => a -> a
-fact 0 = 1
-fact x = x * fact(x-1)

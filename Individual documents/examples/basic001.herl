@@ -1,6 +1,0 @@
--- Covers a basic function
-
-module Basic001 where
-
-timesTwo :: Num a => a -> a
-timesTwo x = x*2

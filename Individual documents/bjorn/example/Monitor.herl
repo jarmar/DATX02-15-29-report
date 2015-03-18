@@ -1,3 +1,0 @@
-module Monitor where
-export
-    monitor :: PID -> 
