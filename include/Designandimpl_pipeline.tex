@@ -11,12 +11,12 @@
 
 % HOW IS HOPPER BUILT
 
-As seen in figure~\ref{fig:pipeline} the Hopper language has five steps in its 
-pipeline before it turns it over to the Erlang compiler. Each step work on the 
+As seen in figure~\ref{fig:pipeline} the Hopper language has five steps in its compiler
+pipeline before it turns over to the Erlang compiler. Each step works on the 
 source code representation in a uniqe way. The steps can be summerized as
 follows. The lexer and parser reads in text files and converts them to an 
-abstract representation, the renamer simplify this representation for that 
-typechecker whos job it is to control the types of the functions. Second to last 
+abstract representation, the renamer then simplifies this representation for the 
+type checker whose job it is to control the types of all the expressions. Lastly 
 there is another simplifying step before the code generator which produces Core
 Erlang code. The Erlang compiler is then invoked, using the produced Core Erlang
 code, and the result is Erlang assembly code that is run on the BEAM VM.
