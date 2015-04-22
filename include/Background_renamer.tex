@@ -1,7 +1,7 @@
 \section{Renaming and simplifying}
-While BNFC is a great tool to create a parse tree from raw text the resulting 
-tree structure is very verbose with a lot of constructors. To simplify this a
-renamer step is introduced in the pipeline. This step converts the parse tree
+While BNFC is a great tool for creating a parse tree from raw text the resulting 
+tree structure is verbose and has a lot of constructors. To simplify this representation 
+a renamer step is introduced in the pipeline. This step converts the parse tree
 to our minimally designed \acrlong{ast} or \acrshort{ast} for short. 
 
 % TODO I want these beside each other and a arrow in between
@@ -16,7 +16,7 @@ f = if a                      f = case a of
 \end{table}
 
 In this step a few grammar rules could be translated to more general expressions
-to simplify the AST and lessen the cases the typechecker need to cover, see
+to simplify the AST and reduce the number of cases the typechecker need to cover, see
 table \ref{lst:renamer1}.
 
 The other part of the renamer module is to annotate the functions to where they
