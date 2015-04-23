@@ -1,7 +1,21 @@
 \section{Parser}
+
 The parser is implemented by a BNF grammar that is converted to a lexer and 
 parser with the BNFC tool. 
 
+\subsection{BNFC - automatic generation}
 
-...
+BNFC, as described in the background, is the Backus Naur Form Converter developed at Chalmers which the group used to automatically generate a lexer and parser. The group had to write a grammar for the Hopper language in Backus Naur Form and feed it to BNFC which then, for Haskell, uses Alex and Happy to produce the lexer and parser.
+
+\subsection{The grammar}
+
+Writing the grammar you, in effect, describe the ways in which programs accepted in the language can be written. Hence it takes great consideration to detail to ensure that the grammar allows everything that the language is supposed to be able to express but disallows everything else.
+
+\todo{Improve choice of words/phrasings} 
+
+\subsection{Planning to use Alex and Happy}
+
+Starting the project there were discussions in the group on whether or not to use BNFC to generate the lexer and parser. Choosing to get an easy start with the generated lexer and parser was accompanied by the notion that the group might want to switch to using Alex and Happy directly at a later stage. This did not come to happen during the project but might still be something to consider for the future. Implementing the groups own lexer and parser would mean greater control over the process.
+
+\todo{does this discussion belong in background instead? fill out}
 
