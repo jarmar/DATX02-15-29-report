@@ -1,5 +1,7 @@
 \section{Type checker}
 
+\todo{Assigned to Liam}
+
 \subsection{The type system}
 
 Hopper uses the Damas-Hindley-Milner (HM) type system for the lambda calculus. HM has parametric polymorphism enabling (wording, what do I mean and what does this say???) type inference of type schemes - types with generic, quantified type variables. Further HM has the Algorithm W which not only infers the most general type for expressions but also has existing soundess and completeness proofs. These proofs means that for our well formed expressions we will always find a type and that it will be the correct type.
@@ -31,6 +33,7 @@ Damas-Hindley-Milner is a type system for the lambda calculus and the parsed Hop
       A fixpoint combinator y satisfies y f = f (y f).
 \end{description}
 \end{description}
+\end{description}
 
 \subsection{Type inference with Algorithm W}
 
@@ -38,7 +41,7 @@ Where the original Algorithm W uses a top-down approach we have chosen to implem
 
 \begin{description}
   \item[Generating constraints by inference rules] \hfill \\
-A first pass generates constraints on the types by a set of inference rules (see appendix). (TODO: FILL OUT)
+A first pass generates constraints on the types by a set of inference rules (see appendix). \todo{FILL OUT}
   \item[Solving constraints by solving rules] \hfill \\
-Secondly we solve the inferred types using the accumulated constraints to produce the most general type for each expression. (TODO: FILL OUT)
+Secondly we solve the inferred types using the accumulated constraints to produce the most general type for each expression. \todo{FILL OUT}
 \end{description}
