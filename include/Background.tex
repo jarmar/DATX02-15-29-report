@@ -2,10 +2,10 @@
 
 % WHAT IS A COMPILER 
 
-To allow for a higher abstraction and higher level of resoning about 
-algorithms new language has been developed. To be able to run these new languages
-compilers has been built to "translate" the code down to machine code to run 
-directly on hardware or to a lower level language to make use of their compiler. 
+New languages are developed to allow for a higher level of abstraction and a higher
+level of reasoning about algorithms. To be able to run these new languages
+compilers are built to convert the high level code down to machine code, to run 
+directly on hardware, or to a lower level language to make use of that language's compiler. 
 
 % GENERAL PIPELINE FIGURE
 
@@ -20,24 +20,26 @@ directly on hardware or to a lower level language to make use of their compiler.
 
 % HOW IS A COMPILER BUILT 
 
-When building a compiler it can be resembled to a pipe where text flows through 
-while transformed into different representations and in the end outputted
-to runnable code to either run on the computer itself or on a virtual machine
+The structure of a compiler can be likened to a pipe where text flows through. 
+The text flowing through the pipe is transformed between different representations and is in
+the end output as runnable code to either run on the computer itself or on a virtual machine
 that emulates a computer. 
 
-In figure ~\ref{fig:generalpipeline} you can see how the source flows through.
-It should be noted that the typechecker is optional for a language. It can
-fully rely on the grammar to expose errors, this will lead to a more expressive 
-language while it may crash in execution due to type errors.
+In figure ~\ref{fig:generalpipeline} you can see the flow handling the source code.
+It should be noted that the type checker is optional for a language, it can
+fully rely on the grammar to expose errors. This will lead to a more expressive, 
+or less restriced, language but increases the risk of runtime crashes due to type errors.
 
-Now is Hopper really a transpiler or a translating compiler. Instead of 
-outputting runnable code it outputs other code that is interpreted and compiled
-by the Erlang compiler, erlc. With this the project could very much be 
-simplified (ref to read more in discussion).
+%Now is Hopper really a transpiler or a translating compiler. Instead of 
+%outputting runnable code it outputs other code that is interpreted and compiled
+%by the Erlang compiler, erlc. With this the project could very much be 
+%simplified (ref to read more in discussion).
 
 \todo{Assigned Johan L}
 
 \todo{Hopper not transpiler}
+
+\todo{Potential glossary words: high/low level, source code, runtime, type error }
 
 % OTHER SECTIONS
 

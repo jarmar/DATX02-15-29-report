@@ -2,10 +2,26 @@
 
 \todo{Assigned Johan L}
 
-This chapter describes the design and implementation of the Hopper language and the design
-and implementation of the compiler and its components.
+This chapter describes the design and implementation of the Hopper language and its compiler with all the compiler components. There will be overviews of each part describing the choices made and the reasoning behind those choices.
 
-\input{include/Designandimpl_hopper}
+%The chapter starts with the design of the language and how it affected the ensuing work on the compiler.
+%The initial design of Hopper included choices affecting the implementation of the compiler. 
+
+\todo{Brief dscription of the grammar, features, maybe misc topics of interest that dont have any immediate section to be written in}
+
+When first designing Hopper there was already an outline of what the language should aim to be. The type safety and clean syntax of Haskell combined with the powerful framework for concurrency and parallelism supplied by the Erlang virtual machine was the key words from which Hopper would be built. Within those confines there were further choices as to what features to include, and not to include, to make the language relevant and useful.
+
+Features.
+
+Discuss the most relevant features here...
+
+Grammar.
+
+\todo{Talk about grammar here or in D&I: Parser?}
+
+\todo{delete D&I: the hopper language}
+
+%\input{include/Designandimpl_hopper}
 \input{include/Designandimpl_pipeline}
 \input{include/Designandimpl_parser}
 \input{include/Designandimpl_renamer}

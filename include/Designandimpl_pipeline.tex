@@ -4,8 +4,6 @@
 
 % PIPELINE FIGURE
 
-\todo{Update figure: Typechecker -> Type checker, dependency checker}
-
 \begin{figure}[h!]
 \centering
   \includegraphics[width=0.6\pdfpagewidth]{figure/pipeline}
@@ -15,12 +13,18 @@
 
 % HOW IS HOPPER BUILT
 
-As seen in figure~\ref{fig:pipeline} the Hopper language has five steps in its compiler
-pipeline before it turns over to the Erlang compiler. Each step works on the 
-source code representation in a uniqe way. The steps can be summerized as
-follows. The lexer and parser reads in text files and converts them to an 
-abstract representation, the renamer then simplifies this representation for the 
-type checker whose job it is to control the types of all the expressions. Lastly 
-there is another simplifying step before the code generator which produces Core
-Erlang code. The Erlang compiler is then invoked, using the produced Core Erlang
-code, and the result is Erlang assembly code that is run on the BEAM VM.
+The core compiler functionality in Hopper is built to work on a single source file at a time.
+In order to support programs consisting of multiple modules the Hopper compiler,
+given a top-level module, is able to generate a compilation order for all modules in that
+program so that they can be compiled one at a time.
+
+As seen in figure~\ref{fig:pipeline}, the Hopper language has five major steps in its compiler
+pipeline before it hands over to the Erlang compiler. Each step works on the 
+source code representation in a certain way.
+
+The steps can be summarized as follows: the lexer and parser read in text files and convert
+them to an abstract representation, the renamer then simplifies this representation for the 
+type checker. The type checker confirms and determines the types of all expressions. Lastly 
+there is another simplifying step before the code generator, which produces Core
+Erlang code. The Erlang compiler is then invoked on the produced Core Erlang
+code, and the result is Erlang assembly which can be run on the BEAM VM.

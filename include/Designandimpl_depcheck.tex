@@ -1,7 +1,12 @@
 \section{Dependency checker}
 
 \todo{Assigned Jakob}
-
+The dependency model of Hopper is rather simple. Modules declare dependency
+on other modules using \texttt{import} statements. Hierarchical module
+names are supported, e.g. \texttt{A.B.C}. Only a single
+source directory is supported, so there is a straight-forward map from module
+names to file paths: the above example maps to \texttt{A/B/C.hpr}. This
+restriction simplifies 
 \todo{interface files}
 
 \todo{topological sort}
