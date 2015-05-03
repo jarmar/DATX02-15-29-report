@@ -2,22 +2,17 @@
 
 \todo{Assigned David}
 
-Similar to a normal language a programming language is built from a grammar. \todo{Is this a correct statement?}
-\todo{mention that programming language grammar is (more) strict and exact}
-The grammar describes ways in which the smaller pieces of the language can be put
-together to form bigger ones, often with more meaning.
-From this grammar a lexer is produced. The lexers job is to match all words in the
-source code to tokens in the grammar. For example in english the word 'train' 
-would match a noun token. 
+Similar to a spoken language is a programming language built from a grammar. But different from a spoken language is a programming language's grammar exact. This come from that a spoken language's grammar is a construction in retrospect and also that it does not always follow the rules. 
+\todo{HELP! Grammar, words} 
+\todo{Is this a correct statement?}
+\todo{mention that programming language grammar is (more) strict and exact} 
+A programming language's grammar needs to be exact for it to be able to not allow syntax that it can't produce output for. 
 
-The next step is to combine all these tokens to expressions or sentences. This
-is done with a parser. To make the language as expressive as possible you build
-up bigger expressions out of smaller expressions. This will create a tree
-structure that will be easier to work with. 
+The grammar describes ways in which the smaller pieces of the language can be put together to form bigger ones, often with more meaning. From this grammar a lexer is produced. The lexers job is to match all words in the source code to tokens in the grammar. For example in english the word 'train' would match a noun token. 
 
-To save a lot of work the lexer and parser can be automatically generated from
-a tool when the grammar is written in Backus-Naur-form or BNF. This BNF converter, or
-BNFC for short \todo{maybe glossary}, is developed at Chalmers and used in earlier courses in earlier courses meaning that the group members was already famililar with the tool (plt ref here).
+The next step is to combine all these tokens to expressions or sentences. This is done with a parser. To make the language as expressive as possible you build up bigger expressions out of smaller expressions. This will create a tree structure that will be easier to work with. 
+
+To save a lot of work the lexer and parser can be automatically generated from a tool when the grammar is written in Backus-Naur-form or BNF. This BNF converter, or BNFC for short \todo{maybe glossary}, is developed at Chalmers and used in earlier courses in earlier courses meaning that the group members was already famililar with the tool (plt ref here).
 
 \todo{Add appendix with example code and its representation}
 

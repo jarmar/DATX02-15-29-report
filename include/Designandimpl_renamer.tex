@@ -2,10 +2,21 @@
 
 \todo{Assigned David}
 
-The renamer is implemented by traverse the parse tree obtained from the parser.
-I this travel the renamer builds a new tree of Constructors from Hoppers 
-internal AST data type.
+The renamer is implemented by traverse the parse tree obtained from the parser. In this traverse the renamer builds up a new tree of constructors for the languge minimally designed \acrshort{ast}. 
 
-...
+In this traverse the renamer have plenty of things to do other than a pure translation to a new data type. Some of the things are:
 
+\begin{enumerate}
+  \item Merge function definitions with same name.
+  \item Merge type with its function definition.
+  \item Convert a \acrshort{adt} defintion to a abstract function type.
+  \item Check if a function application is a \acrshort{bif}.
+  \item Do a few simplifications (see figure \ref{lst:renamer1}).
+\end{enumerate}
+\todo{Rewrite in text?}
 
+While implementing the renamer much consideration was done of what later stages of the compilation needed. For example, while Erlang allows pattern matching function Core Erlang does not. This is the reason for merging function definitions to a single definition with a case expression and each previous function as a clause. For the same reason was the type data type changed to fit better with the type checker. 
+
+\Acrlong{adt}s was a big milestone for the project. It was considered one of the big things needed to work to make a functional product. Still is the functionality behind them is very simple. When the renamer encounter an ADT definition it just converts each constructor to a function with just a type, no real definition. With this the type checker can verify it's used correctly and leaving it fully to the code generation to implement it without any dependencies. \todo{Remove? Forward ref to codegen adt?}
+
+\todo{Remove the word "definition" a few times maybe?}
