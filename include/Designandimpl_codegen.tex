@@ -22,8 +22,31 @@ to the compilation time line before the code generation. This step attempts to s
 and function identifiers from each other, and bind function calls with the tokens that
 should be used as parameters in said function calls.
 
-\todo{Subsection about constructor to atom translations}
+\subsection{Algebraic data types and constructors}
 
+One area where Haskell and Erlang differs is Haskell's heavy use of \gls{adt}'s. \gls{adt}'s are types 
+composed by other types, and the their values are analyzed using pattern matching. Values of
+\gls{adt}'s are created using constructors, a function like entity which may or may not take a number
+of parameters for creating the value and then returns it. When pattern matching over \gls{adt}'s, their
+constructors are typically used for identifying and handling specific instances of the data types.
+
+\gls{adt}'s do not exist in Erlang in the same way as they do in Haskell, i.e. with their heavy reliance
+on constructors. When using pattern matching in Erlang, an entity called atom is instead used for
+handling specific cases. An atom is a literal constant with a name. Variables can hold atoms, and said
+variables can be pattern matched over different atoms for identifying different cases.
+
+In Hopper, \gls{adt}'s are implemented and translated to Core Erlang in two specific cases: when an
+\gls{adt} is processed, and when an \gls{adt} is declared. Like in Haskell, variables in Erlang can
+hold any value, so the only problem to solve was how the values \gls{adt}'s should be represented in
+Erlang. The solution drew inspiration from \todo{reference to paper about functional core language},
+which describes an approach to this problem where the values of \gls{adt}'s are translated to tuples,
+holding the constructors (represented by unique integer values) as a tag, and their correlated values.
+\gls{adt}'s in Hopper are translated in the same manner, but translates the constructors to atoms instead,
+to mimic the conventional structure of messages in Erlang. \todo{insert example of adt and translation}.
+Declared constructors are simply translated to functions, that takes a number of parameters (if any), and
+returns the value as a tuple representation as described above.
+
+\subsection{Function applications}
 \todo{Subsection about function applications and the built in curry function}
 
 \subsection{Emulating the erlang compiler}
@@ -32,4 +55,4 @@ One downside to the choice of compiling to Core Erlang and then invoking the erl
 (bibliography link here) is the loss of the additions and optimizations the erlc
 compiler makes when it compiles Erlang to Core Erlang in its pipeline. To deal with this
 the code generator has been given additional functionality to emulate the pre Core Erlang
-behaviour of the erlc compiler. (Proceed to list features here)
+behaviour of the erlc compiler. \todo{Keep anyway? Mention the non matching case exception}
