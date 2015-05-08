@@ -1,33 +1,29 @@
 \chapter{Introduction}
 
+% Purpose: what is the difficult stuff, list problems we will face etc. (What will we need to do? short "trailer" of what will be talked about in design & impl etc) frågeställning
+
+% Problemformuleringen visar området inom vilket man tänker gräva, medan  problemavgränsningen  visar vilken specifik del av området man tänker gräva ut. Syftet däremot visar hur djupt man tänker gräva (mer om "djupet" kommer nedan), i betydelsen vad man vill åstadkomma,men också vem som ska kunna använda utredningen och till vad. 
+
+problem statement
+% area of research. languages/compilers?
+
+scope
+% prototype
+
+purpose - http://en.wikipedia.org/wiki/Porpoise
+% what is the difficult stuff, list problems we will face etc.
+% who will use the results of the thesis? for what will they use it?
+
+% design language, implement compiler
+% what will be talked about in design & impl
+
+
+
+
 \todo{Assigned to: Björn}
 \todo{Comments from fackspråk}
-\todo{Move some stuff to background, clearer purpose, get to the core earlier}
-
-The Erlang virtual machine is appreciated for its excellent support for
-concurrency, distribution and error handling, allowing soft-real-time systems
-with high uptimes - famously demonstrated by the 99.9999999\% uptime of
-Ericsson’s AXD301 telecom switch from 1998. The features of the BEAM (Erlang’s
-main virtual machine implementation) aren't tied to Erlang itself: one can
-enjoy the benefits of the runtime with a different syntax and semantics.
-Previous efforts in this field include: Elixir, a language with Ruby-like
-syntax; Javascript flavoured Erlang, Lisp flavoured Erlang and a YHC Haskell
-to Erlang transpiler that preserves laziness.
-
-Attempts to port Erlang features to Haskell have also been made, illustrating
-the demand for a combination of the languages’ features. Cloud Haskell is
-‘Erlang in a library’, but differences in the Erlang and Haskell runtime
-system make shipping expressions between nodes far more verbose than in Erlang.
-
-Haskell is known for its terse and elegant syntax, in addition to a powerful
-type system that prevents many programming errors and makes it easier to
-reason about code. Erlang developers already use code analysis tools to write
-typed code, but they don’t interact well with message passing where the type
-received can be hard to predict. Combining the compile-time features of Haskell
-with the run-time benefits of Erlang into a language interoperable with the
-latter would be a great boon for Erlang developers.
+\todo{clearer purpose, get to the core earlier}
 
 To take advantage of both BEAM's great concurrency model with the safety of 
 Haskell's typesystem this project is intended to design and implement a new 
 language named Hopper.  
-

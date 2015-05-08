@@ -1,18 +1,7 @@
-\section{Erlang/Haskell}
+\section{Core Erlang and BEAM}
 
 \todo{JohanWS}
 
-\todo{Material exists from presentation}
+Core Erlang \cite{CoreErlangIntro} is a core language for Erlang. It was initially created as a core language for Erlang \todo{is it clear that core erlang is a core language for erlang? ;)} , intended to be used when operating on Erlang source code. Such operations can be parsing, compiling, debugging and others. Some of the main purposes of Core Erlang are to be as regular as possible, provide clear and simple semantics, among others. The language is since release 8 an official part of the OTP/Open Source Erlang Distribution. 
 
-Erlang is a concurrent functional programming language developed by Ericsson, with the aim of improving
-development of telephony applications. It has since grown popular in other fields, and is mostly used
-for its ability to provide a high uptime to the applications that are implemented using the language.
-\todo{More Erlang characteristics, most important the differences between Haskell and Erlang}
-
-\subsection{Core Erlang}
-Core Erlang \cite{CoreErlangIntro} is a core language for Erlang.
-\begin{itemize}
-  \item \todo{write about the erlang/core erlang differences/}
-  \item \todo{notable core erlang characteristics}
-  \item \todo{dont forget brief history}
-\end{itemize}
+BEAM is the name of the Erlang virtual machine. Erlang and Core Erlang source code may be compiled to .beam files, which contain instructions from the BEAM instruction set. These instructions are interpreted by the virtual machine at run time.

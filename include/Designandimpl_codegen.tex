@@ -1,6 +1,15 @@
 \section{Code generator}
 
-\todo{Assignee JohanWS/Liam}
+\todo{Assignee Liam}
+
+Codegen 
+We chose to represent fully applied constructors as tuples with the constructor name in the first position, a common pattern in Erlang used to simulate ADTs.  While not always optimal from a performance perspective (e.g. lists would be more efficiently represented using Erlang’s primitive list data types, Just x  {x} is more efficient than Just x  {just,x}), it makes the compiler simpler; the returned values easier to read, and the code more interoperable with idiomatic Erlang.
+Functions: 
+In erlang every function has an arity, the number of arguments it takes. Applying a different number of arguments to it will result in a runtime exception. Hopper’s functions are modelled after Haskell’s, in that they are all of arity 1. Haskell’s (and therefore Hopper’s) clever use of whitespace to indicate function application makes partial application of functions much less verbose than in Erlang, where an anonymous function needs to be created to simulate partial application. 
+Example: the result of multiplying every element in a list by 3 in Hopper versus in Erlang
+•	Hopper: map (mul 3) list,
+•	Erlang:  lists:map(fun(X)-> X + 1 end,List)
+(... continued explanation about why arities of functions can't be predicted and therefore why currying all functions isn't as expensive as it seems (because it has to be done in higher order functions like map anyway)
 
 Generally the last step of a compiler is the code generation step. The code generator
 component should take an \gls{ast} much like one of the target language and translate it
@@ -15,39 +24,68 @@ parser, a data structure used for representing Core Erlang \gls{ast}s and a pret
 said data structure. The code generator makes use of this package by building Core Erlang
 \gls{ast}s and then simply invoking the pretty printer on them to  produce Core Erlang.
 
-Due to the differences between Hopper and Core Erlang, and the additional type constraints
-of the Hopper language, the type checker and the code generator require differently
-structured \gls{ast}s. To deal with this another \gls{ast} transformation step has been added
-to the compilation time line before the code generation. This step attempts to seperate variables
-and function identifiers from each other, and bind function calls with the tokens that
-should be used as parameters in said function calls.
+\subsection{Function applications}
+\todo{Include nice example figure! Liam knows what kind of function will be a good example}
+%Good example: map (add 1) xs
+
+A substantial difference between Haskell and Erlang is how functions are applied to arguments. In Haskell, all multi parameter functions may be fully or partially applied. When a function is fully applied, it is given its maximum number of arguments, and it returns a value of a single type. However, when a function is partially applied, i.e. it is given any number of arguments from 1 to (but not including) its maximum number of arguments, it instead returns a function of the types that were excluded from the partial application.
+
+In Erlang, a function is identified by its name and its arity, and can only be applied to a number of arguments that is exactly that of its arity. However, the types of the parameters passed are not significant when the function is called (though they may be of significance when the function body is evaluated), and function names can be shared by different functions if they have different arities.
+
+Hopper attempts to preserve Haskell's support for partial application. This, in combination with the fact that the Erlang compiler requires all function definitions to have a determined arity at compile time, results in the translation of functions being one of the non-trivial tasks of the code generator.
+
+\todo{Present and explain the curry solution}
 
 \subsection{Algebraic data types and constructors}
 
-One area where Haskell and Erlang differs is Haskell's heavy use of \gls{adt}'s. \gls{adt}'s are types 
-composed by other types, and the their values are analyzed using pattern matching. Values of
-\gls{adt}'s are created using constructors, a function like entity which may or may not take a number
+Another area where Haskell and Erlang differ is the use of \gls{adt}'s. \gls{adt}'s are types 
+composed by other types, and their values are analyzed using pattern matching. The values of are created using constructors, a construct which may or may not take a number
 of parameters for creating the value and then returns it. When pattern matching over \gls{adt}'s, their
 constructors are typically used for identifying and handling specific instances of the data types.
 
-\gls{adt}'s do not exist in Erlang in the same way as they do in Haskell, i.e. with their heavy reliance
+These kind of data types do not exist in Erlang in the same way as they do in Haskell, i.e. with their heavy reliance
 on constructors. When using pattern matching in Erlang, an entity called atom is instead used for
 handling specific cases. An atom is a literal constant with a name. Variables can hold atoms, and said
 variables can be pattern matched over different atoms for identifying different cases.
 
 In Hopper, \gls{adt}'s are implemented and translated to Core Erlang in two specific cases: when an
-\gls{adt} is processed, and when an \gls{adt} is declared. Like in Haskell, variables in Erlang can
-hold any value, so the only problem to solve was how the values \gls{adt}'s should be represented in
-Erlang. The solution drew inspiration from \todo{reference to paper about functional core language},
-which describes an approach to this problem where the values of \gls{adt}'s are translated to tuples,
+they are processed, and when they are declared. Like in Haskell, variables in Erlang can
+hold any value, so the only problem to solve was how the values of \gls{adt}'s should be represented in
+Erlang. The solution drew inspiration from the book \textit{Implementing functional languages: a tutorial} \cite{FunTutorial},
+which (among other things) describes an approach to this problem where the values of \gls{adt}'s are translated to tuples,
 holding the constructors (represented by unique integer values) as a tag, and their correlated values.
 \gls{adt}'s in Hopper are translated in the same manner, but translates the constructors to atoms instead,
-to mimic the conventional structure of messages in Erlang. \todo{insert example of adt and translation}.
+to mimic the conventional structure of messages in Erlang.
 Declared constructors are simply translated to functions, that takes a number of parameters (if any), and
 returns the value as a tuple representation as described above.
 
-\subsection{Function applications}
-\todo{Subsection about function applications and the built in curry function}
+
+\begin{figure}[!htb]
+\centering
+\begin{lstlisting} 
+data Tree = Tree Int Tree Tree | Empty
+
+Tree 5 (Tree 3 (Tree 1 Empty Empty) 
+               (Tree 4 Empty Empty)) 
+       (Tree 7 Empty Empty)
+\end{lstlisting}
+\caption{Hopper ADT with example value}
+\label{lst:hopperAdt}
+\end{figure}
+
+\begin{figure}[!htb]
+\centering
+\begin{lstlisting} 
+{'Tree', 5, {'Tree', 3, {'Tree', 1, 'Empty', 'Empty'},
+                        {'Tree', 4, 'Empty', 'Empty'}},
+            {'Tree', 7, 'Empty', 'Empty'}}
+\end{lstlisting}
+\caption[Core Erlang translation of constructor and example value]
+ {Core Erlang translation of the Hopper constructor and example value seen in figure \ref{lst:hopperAdt}}
+\label{lst:coreAdt}
+\end{figure}
+
+\todo{Include example figure of constructors. Caption should tie in with fun app sub section}
 
 \subsection{Emulating the erlang compiler}
 

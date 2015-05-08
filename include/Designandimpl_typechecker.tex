@@ -3,7 +3,11 @@
 \todo{Assigned to Liam}
 
 \subsection{The type system}
-
+<Det jag skrev om TC idag>
+2.4 (Rename to Type Inference)
+Hopper’s type system is intended to be a less powerful version of Haskell’s.  That means that any program that typechecks in Hopper should typecheck in Haskell, but not necessarily vice versa (there is not yet any support for type classes, for example).  We have chosen to use the Hindley-Milner type system as described in Simon Peyton-Jones’ ‘The Implementation of Functional Programming Languages’. It allows for parametric polymorphism (e.g. id :: a -> a; id x = x), higher order functions (e.g. map \_ Nil = Nil; map f (Cons x xs) = Cons (f x) (map f xs) and datatypes with type arguments, e.g. data List a = Cons a (List a) | Nil. Currently the type checker is making types too general, so some things that shouldn’t compile do
+(Det jag skrev om TC idag)
+\\
 Hopper uses the Damas-Hindley-Milner (HM) type system for the lambda calculus. HM has parametric polymorphism enabling (wording, what do I mean and what does this say???) type inference of type schemes - types with generic, quantified type variables. Further HM has the Algorithm W which not only infers the most general type for expressions but also has existing soundess and completeness proofs. These proofs means that for our well formed expressions we will always find a type and that it will be the correct type.
 
 \subsection{Preprocessing}
@@ -18,7 +22,7 @@ Damas-Hindley-Milner is a type system for the lambda calculus and the parsed Hop
     Ex. x is a valid expression.
    \item[Abstraction] \hfill \\
     An abstraction of a variable over some expression. (wording?)\\
-    Ex. (\\x . x) is a valid expression.
+    Ex. (\textbackslash x . x) is a valid expression.
    \item[Application] \hfill \\
     An application of an expression to another expression is an expression.\\
     Ex. (f x) is a valid expression.

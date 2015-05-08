@@ -2,9 +2,8 @@
 
 \todo{Assigned to David}
 
-\todo{Reduce the number of subsections}
-\todo{Write more about grammar, have grammar in appendix}
-
+%\todo{Reduce the number of subsections}
+%\todo{Write more about grammar, have grammar in appendix}
 
 The parser is implemented by a BNF grammar that is converted to a lexer and 
 parser with the BNFC tool. 
@@ -16,29 +15,30 @@ BNFC, as described in the background, is the Backus Naur Form Converter develope
 Starting the project there were discussions in the group on whether or not to use BNFC to generate the lexer and parser. Choosing to get an easy start with the generated lexer and parser was accompanied by the notion that the group might want to switch to using Alex and Happy directly at a later stage. This did not come to happen during the project but might still be something to consider for the future. Implementing the groups own lexer and parser would mean greater control over the process.
 \todo{does this discussion belong in background (or dicussion) instead? fill out}
 
+\todo{talk about layout, inserting of \{ and ; }
+
 \subsection{The grammar}
 
-Writing the grammar you, in effect, describe the ways in which programs accepted in the language can be written. Hence it takes great consideration to detail to ensure that the grammar allows everything that the language is supposed to be able to express but disallows everything else.
+Writing the grammar one, in effect, describe the ways in which programs accepted in the language can be written. Hence it takes great consideration to detail to ensure that the grammar allows everything that the language is supposed to be able to express but disallows everything else. This doesn't include expressions that are semantically wrong. For this, semantic analysis of the \acrshort{ast} has to be done with a, for example, type checker. 
 
-The grammar was produced incrementally in steps that allowed more and more syntax. This made it possible to have new functionallity implemented though the whole pipeline before new syntax was added. 
+The grammar was produced incrementally in steps that allowed more and more syntax to be added. This made it possible to have new functionallity implemented through the whole pipeline before new syntax was added. 
 
-A full rewrite of the grammar was done half way through the project. The reson for this was that some grammatical rules was intertwined. The new grammar solved this and also making the futher extensions simpler. 
-\todo{discussion?}
+A full rewrite of the grammar was done half way through the project. The reson for this was that some grammatical rules was intertwined and understanding had been improved how a grammar should be defined more correct. The new grammar was more modular which also made the futher extensions simpler.
 
-The final grammar for the language supports most of the necessary syntax for a functional programming language. A few features are:
+The final grammar for the language supports most of the necessary syntax for a pure functional programming language. The main features are:
 
 \begin{itemize}
-  \item Function and type definitions
+  \item Function definitions and type signatures
   \item Abstract data types
-  \item Case expressions
+  \item Lambda and case expressions
   \item Patter matching
-  \item Module defintions and imports
+  \item Module definitions with imports and exports
 \end{itemize}
 
-Some syntactic sugar was planned but didn't made it to the final release. For example sugar for lists.%and something more?
 
+Some syntactic sugar for \texttt{if-then-else} exists and more was planned but didn't made it to the final release. For example sugar for lists.%and something more?
 
 \todo{Improve choice of words/phrasings} 
 
-
+\todo{Add refs}
 

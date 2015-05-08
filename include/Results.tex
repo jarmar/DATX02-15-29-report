@@ -2,14 +2,71 @@
 
 \todo{Assigned Johan L temporarily}
 
-\todo{WILL NEED HELP SUMMARIZING RESULTS, have a hard time formulating both our initial vision and final state}
 
 \todo{perspective: what we aimed for - what we achieved/didn't achieve, why in discussion}
 
 \todo{Talk about the results, how well we think we fulfilled the initial task, and what we didnt fulfill}
 
 \todo{what the compiler is capable of}
+* Imports
+* Exports
+* Curried functions
+* ADTs
+* BIFs (which will give us send ect but not receive)
+
+% Could be used as the pure part in an application. For example using Hopper to implement an difficult algorithm but using Erlang as the glue to the rest of the system. 
 
 \todo{expressiveness of grammar}
+* Indent sensitive
+* Type signatures 
+  * Parameterized types
+* ADTs
+* Pattern matching
+  * Tuples
+  * Constructors
+  * Variables
+  * Primitives
+  * Wildcard/ignore
+* Case expressions
+* Lambda expressions
+* If expresssions
+* infix Operators
+* primitives
+* Tuples
+* Qualified functions and constructors
 
 \todo{different output from compiler}
+* Debugging info: parse tree, ast, typed ast, core
+
+\todo{STATE results objectively, leave what the results mean to discussion}
+
+\todo{Results: state results objectively, Discussion: what do results mean, what could have been done different, what could be a continuation etc. Conclusion: did we answer the problem formulation? what is the answer?}
+
+%From what I remember, the initial task was to create a Haskell like language and a compiler from said language to .beam, using Core Erlang. Regarding features, we never decided on what the language should be capable of doing by the end of the project. Instead we said that we would start with an extremely simple version of the language; parameterless functions returning constants. Then we would expand the language feature by feature and sort of see how far we could take it in the given time. I think that we can just briefly list the features that were implemented, and features that we had talked about but never got around to implement (type classes, receive clauses, do notation (i.e. sequencing), let expressions, where expressions are the ones I can think of, expand this list here if I missed something?). Then we can have a followup of this in the Conclusions chapter (go there to read what I mean) // Johan WS
+
+% I've been staring at this for quite some time and I might have an idea of what should be done. Since Results should present the results objectively and not add any new information or have an opinion regarding the results I think the results will be somewhat short. But I think that might be ok. Our result is a "product" and what we can state as results are "these things are in and these things are not in" so more or less a list of features. This would work if we clearly connect it to the discussion where the actual analysis of the results will take place and there we can actually say whether we think the results are good or not etc. For the conclusion I think that that part also will be quite short, focusing on whether we have answered the problem and what that answer is (is Hopper a good idea?). I e-mailed Nick and asked if he thought this would work (the short results section), maybe we should add it as a question for Fackspråk 2 as well? / JL
+
+
+The result of the project is the Hopper language and its compiler. Included in the language is...
+
+\section{The Grammar}
+
+\subsection{Implemented}
+% Basic functional programming language wiht ADTs, Pattern matching
+% + lambdas, ADTs are polymorphic
+\subsection{Designed but not implemented}
+% List sugar, do notation, receive, operator definition, 
+% tuples, infix operator definition, type classes,
+% receive syntax, modules (will we fix?)
+\section{The Compiler}
+
+\subsection{Implemented}
+
+\subsection{Designed but not implemented}
+
+
+
+
+
+
+... and a smooth transition to Discussion where we actually talk about the results, what the results imply, what could have been done differently, what are potential futures for Hopper etc.

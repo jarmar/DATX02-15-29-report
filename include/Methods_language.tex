@@ -1,20 +1,15 @@
 \section{Programming language}
 
 \todo{Mention that we use Haskell, mention why}
-\todo{Clean up use of subsections}
+
+\todo{restrict use of "the group" in the text?}
 
 \todo{Assigned Jakob}
-
-\subsection{Choosing Haskell/Erlang}
 
 Early on the group had to decide on what programming language to use when implementing the Hopper compiler as this would greatly affect the rest of the work. Choosing a language meant choosing any features and limitations therein and for the project the group saw two obvious candidates they could use. Since Hopper was going to be Haskell-like and run on the Erlang VM the group considered the potential benefits of either using Haskell - being syntactically closer to what we wanted Hopper to be and good for describing high level abstractions, but lazy or using Erlang which is closer to what we would send to Erlang VM and strict but less intuitive for the group members to use when designing the compiler.
 
 \todo{Improve pros/cons of Haskell and Erlang}
 
-\subsection{Glorious Haskell}
-
 After some consideration the group chose to implement the compiler in Haskell. One major factor was the groups familiarity with the language, some group members even having written compilers in Haskell, and it's high level abstractions made it easy to work with when designing a language. Added benefits from tools like BNFC was another plus.
-
-\subsection{Plans for self-hosting Hopper compiler}
 
 Sketching out the project there were plans of possibly moving from a Hopper compiler written in Haskell to a Hopper compiler written in Hopper. This is sometimes called a self-hosting compiler since it would then compile itself. As the project moved along it became clear that we would not have time to implement all the desired features and this was one of the earliest additions being cut.
