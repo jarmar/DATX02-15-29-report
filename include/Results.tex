@@ -17,26 +17,26 @@
 % Could be used as the pure part in an application. For example using Hopper to implement an difficult algorithm but using Erlang as the glue to the rest of the system. 
 
 \todo{expressiveness of grammar}
-* Indent sensitive
-* Type signatures 
-  * Parameterized types
-* ADTs
-* Pattern matching
-  * Tuples
-  * Constructors
-  * Variables
-  * Primitives
-  * Wildcard/ignore
-* Case expressions
-* Lambda expressions
-* If expresssions
-* infix Operators
-* primitives
-* Tuples
-* Qualified functions and constructors
+% * Indent sensitive
+% * Type signatures 
+%   * Parameterized types
+% * ADTs
+% * Pattern matching
+%   * Tuples
+%   * Constructors
+%   * Variables
+%   * Primitives
+%   * Wildcard/ignore
+% * Case expressions
+% * Lambda expressions
+% * If expresssions
+% * infix Operators
+% * primitives
+% * Tuples
+% * Qualified functions and constructors
 
 \todo{different output from compiler}
-* Debugging info: parse tree, ast, typed ast, core
+% * Debugging info: parse tree, ast, typed ast, core
 
 \todo{STATE results objectively, leave what the results mean to discussion}
 
@@ -50,23 +50,28 @@
 The result of the project is the Hopper language and its compiler. Included in the language is...
 
 \section{The Grammar}
+The resulting grammar from the project is a clean basic functional programming language with indentation sensitive syntax featuring polymorphic \Acrshort{adt}s, pattern matching and lambdas.
 
-\subsection{Implemented}
+Additional grammatical features % other word for feature
+was planned and designed but not implemented. Most of these features was syntactic sugar  for lists and tuples but also syntax for simplifying repetive tasks like \texttt{IO} sequencing also known in Haskell as \texttt{do}-notation. 
+
+%\subsection{Implemented}
+
 % Basic functional programming language wiht ADTs, Pattern matching
 % + lambdas, ADTs are polymorphic
-\subsection{Designed but not implemented}
+
+%\subsection{Designed but not implemented}
+
 % List sugar, do notation, receive, operator definition, 
 % tuples, infix operator definition, type classes,
 % receive syntax, modules (will we fix?)
-\section{The Compiler}
 
+\section{The Compiler}
+% Would this list features that was planned but not implemented at all? Not for example syntax specific features but more like type classes and receive, features that impact the whole compiler?
 \subsection{Implemented}
+The compiler is capable of producing runnable Erlang Code on the same level as the expressiveness of the grammar. It can compile simple functions and \Acrshort{adt}'s, lambda expressions, control constructs like if and case expressions, pattern matching over arguments, and the use of tuples. The fact that the Hopper compiler generates BEAM modules also allows for a degree of interoperability; Hopper modules may be integrated with modules written in Erlang, and vice versa.
+
+%Mention the compilers flags and their results
 
 \subsection{Designed but not implemented}
-
-
-
-
-
-
-... and a smooth transition to Discussion where we actually talk about the results, what the results imply, what could have been done differently, what are potential futures for Hopper etc.
+Some features that were discussed and planned but not implemented in the compiler were a generic solution for accessing Erlangs built in functions (BIF's), receive clauses and sequencing. However, some of these features, like accessing BIF's and emulating the receive clauses, are already provided by the compiler in some sense, but the idea was to build wrapping solutions for them in order to make Hopper as user friendly as possible.

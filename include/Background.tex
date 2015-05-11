@@ -32,11 +32,14 @@ New languages are often developed to allow for a higher level of abstraction and
 
 % GENERAL PIPELINE FIGURE
 
-\todo{Update figure: Typechecker -> Type checker}
+\todo{PLEASE COMMENT ON NEW FIGURE, IS ADDED "source code" AND "runnable code" A GOOD ADDITION?}
+\todo{remove old pdf if new one is ok}
+
+% To make it more general, we could change "type checker" to somthing like "semantic analysis". Then we include other things you do to code to make sure it's correct.
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=0.6\pdfpagewidth]{figure/general-pipeline}
+  \includegraphics[width=0.6\pdfpagewidth]{figure/generalpipeline2}
   \caption{A general compiler pipeline}
   \label{fig:generalpipeline}
 \end{figure}
@@ -64,7 +67,6 @@ We start by describing the first step of a compiler, the lexer and parser.
 % OTHER SECTIONS
 
 \input{include/Background_bnfc}
-\input{include/Background_renamer}
 \input{include/Background_depcheck}
 \input{include/Background_seman}
 \input{include/Background_erlang}

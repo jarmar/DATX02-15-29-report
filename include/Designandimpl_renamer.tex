@@ -2,8 +2,6 @@
 
 \todo{Assigned David}
 
-%\todo{Move background Renamer, put small thingy in main background}
-
 While BNFC is a great tool for creating a parse tree from raw text the resulting tree structure is verbose and has a lot of constructors. To simplify this representation a renamer step is introduced in the pipeline. This step converts the parse tree to the language's minimally designed \acrshort{ast}. 
 
 The renamer is implemented as a traversal over the parse tree obtained from the parser. In this traversal the renamer builds up a new tree of constructors for the \acrshort{ast}. A few grammar rules are translated to more general expressions to simplify the AST and reduce the number of cases the type checker and code generator need to cover, see figure \ref{lst:renamer1}.
@@ -43,5 +41,6 @@ The Renamer has a few more task to take care of. First it transforms the \acrsho
 
 While implementing the renamer much consideration was take to what later stages of the compilation needed. For example, while Erlang allows pattern matching function Core Erlang does not. This is the reason for merging function definitions to a single definition with a case expression and each previous function as a clause. For the same reason the type data type was changed to fit better with the type checker. 
 
-\todo{MOVE TO DISCUSSION?}
-\Acrlong{adt}s was a big milestone for the project. It was considered one of the big things needed to work to make a functional product. Still, the functionality behind them is very simple. When the renamer encounter an ADT definition it just converts each constructor to a function with just a type. With this the type checker can verify it's used correctly and leaving it fully to the code generation to implement it without any dependencies. \todo{Remove? Forward ref to codegen adt?}
+\todo{MOVE TO DISCUSSION?} % I think so? /David
+\Acrlong{adt}s was a big milestone for the project. It was considered one of the big things needed to work to make a functional product. Still, the functionality behind them is very simple. When the renamer encounter an ADT definition it just converts each constructor to a function with just a type. With this the type checker can verify it's used correctly and leaving it fully to the code generation to implement it without any dependencies. 
+% Forward ref to codegen adt?

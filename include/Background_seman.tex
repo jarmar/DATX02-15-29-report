@@ -1,17 +1,24 @@
-\section{Semantic analysis}
+\section{Type checking}
 
-\todo{POSSIBLY RENAME TO TYPE CHECKING, but mention that it is a kind of semantic analysis}
+\todo{POSSIBLY RENAME TO TYPE CHECKING, but mention that it is a kind of semantic analysis. Don't worry I will!//Liam}
 \todo{Assigned Liam}
 
-An important design decision to make when implementing a programming language is whether to perform some semantic analyses of the code at compile time and what to include in such case. Semantic analyses can for example contribute error detection and optimized code. The cost is increased complexity of the compiler and for some kinds of analysis prohibitive compilation times.
+Programmers inevitably make mistakes. No person can be vigilant towards every possible slip-up all the time. While there are many tasks computers excel at, understanding the programmer’s intent and detecting differences between it and the behaviour of the programs they write (i.e. bugs) is not one of them. To aid in the automatic detection of bugs, so called type systems have been devised.
 
-A common and well studied category of analyses is type inference or type checking. Type systems vary in their expressiveness but essentially allow us to prove desireable properties of our code.
+Type systems are rules governing what is and is not a valid program; they group values in the programming language into types, and specify rules about what is or is not a valid interaction between them. For example, in most if not all languages it is not acceptable to apply a number to a value as if it were a function. The difference between dynamically and statically typed programming languages is whether the erroneous application is discovered at run time or compile time.
+
+Type systems automatically detect nonsensical code at compile time – (such as the program treating a Boolean as a list of Booleans) which reveals many bugs shortly after they are written, allowing the programmer to diagnose bugs when the code they’ve written is fresh in their mind. Types also allow programmers to communicate properties of their program to others in a concise way. For example: in Haskell a program which has some arbitrary interaction with the outside world and returns a Boolean to the caller when it’s done can be distinguished by its type (IO Bool) from one which simply calculates the truth value of a pure mathematical proposition (which would be of type Bool).
+
+Hopper uses a type system similar to Haskell's to provide compile-time guarantees about program behaviour on Erlang's BEAM virtual machine. BEAM is focused on supporting concurrent processes and message passing of dynamically typed data between them (a side effect-rich environment with ample opportunities for type errors). In section 4.5, we will demonstrate the advantages of using types to describe concurrent programs.
+
+
+%An important design decision to make when implementing a programming language is whether to perform some semantic analyses of the code at compile time and what to include in such case. Semantic analyses can for example contribute error detection and optimized code. The cost is increased complexity of the compiler and for some kinds of analysis prohibitive compilation times.
+
+%A common and well studied category of analyses is type inference or type checking. Type systems vary in their expressiveness but essentially allow us to prove desireable properties of our code.
 
 \todo{Motivation of Hopper is to bring type checking to erlang}
 
 \todo{What we want from the type system}
-
-\subsection{Type inference}
 
 \todo{move 2.4.1 Type inference to design and impl}
 

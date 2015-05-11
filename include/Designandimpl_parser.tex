@@ -2,20 +2,14 @@
 
 \todo{Assigned to David}
 
-%\todo{Reduce the number of subsections}
-%\todo{Write more about grammar, have grammar in appendix}
-
-The parser is implemented by a BNF grammar that is converted to a lexer and 
+The parser is implemented by a \acrlong{bnf} grammar that is converted to a lexer and 
 parser with the BNFC tool. 
 
-%\subsection{BNFC - automatic generation}
-
-BNFC, as described in the background, is the Backus Naur Form Converter developed at Chalmers which the group used to automatically generate a lexer and parser. The group had to write a grammar for the Hopper language in Backus Naur Form and feed it to BNFC which then, for Haskell, uses Alex and Happy to produce the lexer and parser.
+BNFC, as described in the background, is the \Gls{bnfc} developed at Chalmers which the group used to automatically generate a lexer and parser. The group had to write a grammar for the Hopper language and feed it to BNFC which then, for Haskell, uses Alex\cite{alex} and Happy\cite{happy} to produce the lexer and parser.
 
 Starting the project there were discussions in the group on whether or not to use BNFC to generate the lexer and parser. Choosing to get an easy start with the generated lexer and parser was accompanied by the notion that the group might want to switch to using Alex and Happy directly at a later stage. This did not come to happen during the project but might still be something to consider for the future. Implementing the groups own lexer and parser would mean greater control over the process.
-\todo{does this discussion belong in background (or dicussion) instead? fill out}
 
-\todo{talk about layout, inserting of \{ and ; }
+To have as clean syntax as Haskell, the grammar should then be indentation sensitive instead of depending on braces and semicolons as in C-like languages. Parsing code with braces and semicolons are easier beacause one don't need to keep track in which indentation context it is in. For this BNFC can help converting a indentation sensitive language to a brace dependent one. It does this in the lexer and inserting tokens around expressions making it easy to match against these in the parser.
 
 \subsection{The grammar}
 
@@ -36,9 +30,8 @@ The final grammar for the language supports most of the necessary syntax for a p
 \end{itemize}
 
 
-Some syntactic sugar for \texttt{if-then-else} exists and more was planned but didn't made it to the final release. For example sugar for lists.%and something more?
+Some syntactic sugar for \texttt{if-then-else} exists and more was planned but didn't made it to the final release. For example sugar for lists and tuples.
 
 \todo{Improve choice of words/phrasings} 
 
-\todo{Add refs}
-
+\todo{"röd tråd"}

@@ -16,7 +16,7 @@
 The core compiler functionality in Hopper is built to work on a single source file at a time.
 In order to support programs consisting of multiple modules the Hopper compiler,
 given a top-level module, is able to generate a compilation order for all modules in that
-program so that they can be compiled one at a time.
+program so that they can be compiled one at a time (see section~\ref{sec:dai_depcheck}).
 
 As seen in figure~\ref{fig:pipeline}, the Hopper language has five major steps in its compiler
 pipeline before it hands over to the Erlang compiler. Each step works on the 

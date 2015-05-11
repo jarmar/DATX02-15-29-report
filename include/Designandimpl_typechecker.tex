@@ -3,10 +3,25 @@
 \todo{Assigned to Liam}
 
 \subsection{The type system}
-<Det jag skrev om TC idag>
-2.4 (Rename to Type Inference)
-Hopper’s type system is intended to be a less powerful version of Haskell’s.  That means that any program that typechecks in Hopper should typecheck in Haskell, but not necessarily vice versa (there is not yet any support for type classes, for example).  We have chosen to use the Hindley-Milner type system as described in Simon Peyton-Jones’ ‘The Implementation of Functional Programming Languages’. It allows for parametric polymorphism (e.g. id :: a -> a; id x = x), higher order functions (e.g. map \_ Nil = Nil; map f (Cons x xs) = Cons (f x) (map f xs) and datatypes with type arguments, e.g. data List a = Cons a (List a) | Nil. Currently the type checker is making types too general, so some things that shouldn’t compile do
-(Det jag skrev om TC idag)
+Rough draft:
+\
+
+What do we do in TC/Convert?\
+
+•	Implement constructors (thus allowing codegen to have no knowledge of types)
+•	Give some functions implicit type arguments : abused syntax to achieve this. In some ways more powerful than Haskell’s class system (because it is done at runtime in normal Hopper), but more boilerplatey and performance intensive. Allowing values to vary based on the their type (i.e. ad-hoc-polymorphism, where polymorphic values are more than just a black box, see Theorems for Free [reference?]) is essential for implementing typesafe message passing, because type information must be sent in messages at runtime to distinguish between values with same runtime representation but different types (e.g. an empty list of Booleans and an empty list of numbers).
+•	Implemented receive: abused syntax using case receive of ... -> ...
+•	A module that Converts to/from AST.AST. This is bad and is purely technical debt. Why it was created and maintained (two different ASTs, inertia, poor coordination) can be elaborated on in Discussion.
+•	Prim.apply\
+
+What can we do with the type system?\
+
+•	Higher order functions, a lot of that Haskelly goodness.
+•	IO, other types which describe processes and the connections between them. Because the BEAM is a high level VM designed for a dynamic programming language, coercing between types in Hopper does not have the same catastrophic consequences as in Haskell (which compiles to native machine code: coercing something on the heap can lead to a fatal crash e.g. because you treat a number as a pointer). That means it is rather comfortable to treat the same value as several different types in Hopper: for example a Number may be both a Natural and a Prime. We do not yet know where that leads, but it seems exciting. 
+\
+(Here ends the draft I added tonight)
+\
+
 \\
 Hopper uses the Damas-Hindley-Milner (HM) type system for the lambda calculus. HM has parametric polymorphism enabling (wording, what do I mean and what does this say???) type inference of type schemes - types with generic, quantified type variables. Further HM has the Algorithm W which not only infers the most general type for expressions but also has existing soundess and completeness proofs. These proofs means that for our well formed expressions we will always find a type and that it will be the correct type.
 

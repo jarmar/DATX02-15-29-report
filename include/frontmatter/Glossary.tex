@@ -12,12 +12,14 @@
 %
 % \newacronym{<label>}{<abbrv>}{<full>}
 
-\todo{Assigned to everyone}
-\todo{Screen useful entries}
+%\todo{Assigned to everyone}
+%\todo{Screen useful entries}
 
 \newacronym{ast}{AST}{Abstract Syntax Tree}
 \newacronym{adt}{ADT}{algebraic data type}
 \newacronym{bif}{BIF}{built in function}
+\newacronym{bnf}{BNF}{Backus-Naur-form}
+\newacronym{dag}{DAG}{directed acyclic graph}
 
 % Type inference category
 
@@ -31,6 +33,8 @@
 {A variable bound in a context. Opposite of free variable. A type variable can be quantified over in a type and thus bound.
 
 Example $\forall a . a \to a$ has the type variable a bound by the universal quantifier.}
+
+\longnewglossaryentry{bnfc}{ name={BNF Converter}}{A program developed at Chalmers for converting BNF grammar to a lexer and parser. See reference \cite{bnfc}}
 
 \newglossaryentry{completeness}
 { name={completeness},
