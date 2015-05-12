@@ -2,9 +2,9 @@
 
 \todo{Assigned David}
 
-While BNFC is a great tool for creating a parse tree from raw text the resulting tree structure is verbose and has a lot of constructors. To simplify this representation a renamer step is introduced in the pipeline. This step converts the parse tree to the language's minimally designed \acrshort{ast}. 
+While BNFC is a great tool for creating a parse tree from raw text the resulting tree structure is verbose and has a lot of constructors. To simplify this representation a renamer step is introduced in the pipeline. This step converts the parse tree to the language's minimally designed \gls{ast}. 
 
-The renamer is implemented as a traversal over the parse tree obtained from the parser. In this traversal the renamer builds up a new tree of constructors for the \acrshort{ast}. A few grammar rules are translated to more general expressions to simplify the AST and reduce the number of cases the type checker and code generator need to cover, see figure \ref{lst:renamer1}.
+The renamer is implemented as a traversal over the parse tree obtained from the parser. In this traversal the renamer builds up a new tree of constructors for the \gls{ast}. A few grammar rules are translated to more general expressions to simplify the \gls{ast} and reduce the number of cases the type checker and code generator need to cover, see figure \ref{lst:renamer1}.
 
 \begin{figure}[ht]
 \centering
@@ -37,10 +37,8 @@ f = case a of
 \label{lst:renamer1}
 \end{figure}
 
-The Renamer has a few more task to take care of. First it transforms the \acrshort{adt}s and gathers functions defined with pattern matching and merge them. Second it annotates all the identifiers, except variables bound in a pattern matching scope, with the module name. This removes the ambiguity between functions that has the same name but are defined in different modules. Lastly it checks a list of \acrlong{bif}s (\acrshort{bif}s) to switch them out for calls to the virtual machine instead of regular user defined function calls.
+The Renamer has a few more task to take care of. First it transforms the \glspl{adt} and gathers functions defined with pattern matching and merge them. Second it annotates all the identifiers, except variables bound in a pattern matching scope, with the module name. This removes the ambiguity between functions that has the same name but are defined in different modules. Lastly it checks a list of \glspl{bif} to switch them out for calls to the virtual machine instead of regular user defined function calls.
 
-While implementing the renamer much consideration was take to what later stages of the compilation needed. For example, while Erlang allows pattern matching function Core Erlang does not. This is the reason for merging function definitions to a single definition with a case expression and each previous function as a clause. For the same reason the type data type was changed to fit better with the type checker. 
+While implementing the renamer much consideration was take to what later stages of the compilation needed. For example, while Erlang allows pattern matching function Core Erlang does not. This is the reason for merging function definitions to a single definition with a case expression and each previous function as a clause. For the same reason the type data type was changed to fit better with the type checker.
 
-\todo{MOVE TO DISCUSSION?} % I think so? /David
-\Acrlong{adt}s was a big milestone for the project. It was considered one of the big things needed to work to make a functional product. Still, the functionality behind them is very simple. When the renamer encounter an ADT definition it just converts each constructor to a function with just a type. With this the type checker can verify it's used correctly and leaving it fully to the code generation to implement it without any dependencies. 
-% Forward ref to codegen adt?
+The renamer also processes the internal representations of \glspl{adt}. When the renamer encounters an \gls{adt} definition it just converts each constructor to a function with just a type. With this the type checker can verify it's used correctly and leaving it fully to the code generation to implement it without any dependencies. 
