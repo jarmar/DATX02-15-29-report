@@ -11,7 +11,7 @@ restriction simplifies the work of the dependency checker, by removing the conce
 
 The import statements are used to build a \gls{dag}. Verifying that the graph actually is acyclic ensures that no cyclical dependencies occur. Topologically sorting the nodes of the \gls{dag} gives a compilation order where the dependencies of each module are compiled before that module. This design ensures that type information for a module's dependencies is available at compile time, so that the compiler only has to consider a single module at a time.
 
-In order to propagate type information for a given module's exports into the modules that depend on it, the concept of interface files (similar in concept to those of Haskell's\todo{reference here}) is used. They contain type information (which might have been given explicitly, or inferred by the type checker) for everything that is exported from a given module. The actual implementation of the interface files simply uses derived \texttt{Show} and \texttt{Read} instances for the data types representing Hopper types.
+In order to propagate type information for a given module's exports into the modules that depend on it, the concept of interface files (similar in concept to those of Haskell's\cite{interfacefiles}, but much more basic) is used. They contain type information (which might have been given explicitly, or inferred by the type checker) for everything that is exported from a given module. The actual implementation of the interface files simply uses derived \texttt{Show} and \texttt{Read} instances for the data types representing Hopper types.
 
 \todo{further explain why this is a good organisation}
 

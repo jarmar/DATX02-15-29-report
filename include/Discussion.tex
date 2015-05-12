@@ -14,19 +14,17 @@ Discuss what was stated in the results!
 Discuss why the stuff that didn't make it in didn't.
 Summarize results in conclusion!}
 
+\todo{Add chapter summary}
 
 \todo{(FOR ALL COMPONENTS) Talk about features, which are good, which are not so good? Tradeoffs (Consequences of design choices, what was gained, what was "lost")}
 
-\section{Parser}
+\section{Grammar}
+
+\todo{Skriv om tidspressen. Vad mer?}
+
+\subsection{Parser}
 % Layout
 In BNFC the layout functionallity isn't very much explained. What we had to do to understand this was to look at examples and the BNFC source code and generated source code for our parser. This was difficult and we still don't have full understanding of when the layout rule is activated but we suppose it is similar how other layout parsers does it. % This is just fill out text that doesn't mean much
-
-\section{Renamer}
-% How it's doing everything at the same time, could maybe abstract out thing a bit and do in multiple stages
-As an outsider looking at the source for the renamer module it can be hard do grab all of what it does. It would be a nice improvment to abstract out the traversal of the tree and split up the different responsibilities the renamer has. This would help with making less bug prone code and also allow others to add functionality and fix bugs not just the responible person for that module. 
-
-% Everything follows that same pattern is good. 
-% Testing was simplified by the BNFC module TestHopper
 
 \section{Dependency check}
 
@@ -67,7 +65,7 @@ Plans for a thorough test suite were fulfilled and kept for a while but with the
 \todo{better name?}
 
 %% Something like: Furthermore, a compiler should be user friendly in the sense of giving descriptive error messages for faulty code, give warnings about inconvenient code, etc. 
-
+    
 
 \section{Methods discussion}
 

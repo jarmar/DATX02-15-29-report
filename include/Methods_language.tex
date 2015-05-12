@@ -6,10 +6,12 @@
 
 \todo{Assigned Jakob}
 
-Early on the group had to decide on what programming language to use when implementing the Hopper compiler as this would greatly affect the rest of the work. Choosing a language meant choosing any features and limitations therein and for the project the group saw two obvious candidates they could use. Since Hopper was going to be Haskell-like and run on the Erlang VM the group considered the potential benefits of either using Haskell - being syntactically closer to what we wanted Hopper to be and good for describing high level abstractions, but lazy or using Erlang which is closer to what we would send to Erlang VM and strict but less intuitive for the group members to use when designing the compiler.
+For implementing the compiler, Haskell was selected as the main programming language. There were several reasons for this choice. Since the aim of the project was to implement a Haskell-like language on the BEAM VM, Haskell and Erlang were prime candidates, as those choices would allow us to make use of their similarities to Hopper. 
+
+Haskell, while lazy\todo{is strict vs lazy introduced?}, has the advantage of being syntactically closer to what we wanted Hopper to be and being good for describing high level abstractions. Erlang, on the other hand, is closer to what would be sent to the Erlang VM, but less intuitive for the group members to use when designing the compiler.
 
 \todo{Improve pros/cons of Haskell and Erlang}
 
-After some consideration the group chose to implement the compiler in Haskell. One major factor was the groups familiarity with the language, some group members even having written compilers in Haskell, and it's high level abstractions made it easy to work with when designing a language. Added benefits from tools like BNFC was another plus.
+After some consideration the group chose to implement the compiler in Haskell. One major factor was the groups familiarity with the language, some group members even having written compilers in Haskell, and its high level abstractions make it easy to work with when designing a language. Access to tools like BNFC was another plus.
 
-Sketching out the project there were plans of possibly moving from a Hopper compiler written in Haskell to a Hopper compiler written in Hopper. This is sometimes called a self-hosting compiler since it would then compile itself. As the project moved along it became clear that we would not have time to implement all the desired features and this was one of the earliest additions being cut.
+Sketching out the project there were plans of possibly moving from a Hopper compiler written in Haskell to a Hopper compiler written in Hopper. This is sometimes called a self-hosting compiler since it would then compile itself. However, this was quickly considered to be out of scope for the project. \todo{remove the following sentence?} As the project moved along it became clear that we would not have time to implement all the desired features and this was one of the earliest additions being cut.

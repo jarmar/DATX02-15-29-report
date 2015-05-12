@@ -6,10 +6,13 @@
 Rough draft:
 \
 
+\todo{please fix layout in generated pdf, the pdf is barely readable right now}
+\todo{remove any old type checker stuff that is not used! if anything is kept it should be worked on to fit with the rest}
+
 What do we do in TC/Convert?\
 
 •	Implement constructors (thus allowing codegen to have no knowledge of types)
-•	Give some functions implicit type arguments : abused syntax to achieve this. In some ways more powerful than Haskell’s class system (because it is done at runtime in normal Hopper), but more boilerplatey and performance intensive. Allowing values to vary based on the their type (i.e. ad-hoc-polymorphism, where polymorphic values are more than just a black box, see Theorems for Free [reference?]) is essential for implementing typesafe message passing, because type information must be sent in messages at runtime to distinguish between values with same runtime representation but different types (e.g. an empty list of Booleans and an empty list of numbers).
+•	Give some functions implicit type arguments : abused syntax to achieve this. In some ways more powerful than Haskell’s class system (because it is done at runtime in normal Hopper), but more boilerplatey and performance intensive. Allowing values to vary based on their type (i.e. ad-hoc-polymorphism, where polymorphic values are more than just a black box, see Theorems for Free [reference?]) is essential for implementing typesafe message passing, because type information must be sent in messages at runtime to distinguish between values with same runtime representation but different types (e.g. an empty list of Booleans and an empty list of numbers).
 •	Implemented receive: abused syntax using case receive of ... -> ...
 •	A module that Converts to/from AST.AST. This is bad and is purely technical debt. Why it was created and maintained (two different ASTs, inertia, poor coordination) can be elaborated on in Discussion.
 •	Prim.apply\

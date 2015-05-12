@@ -73,12 +73,17 @@
 
 % APPENDICES
 \cleardoublepage
-\appendix
+\begin{appendices}
 \setcounter{page}{1}
 \pagenumbering{Roman}			% Capitalized roman numbering starting from I (one)
 
+% Make appendix titles "Appendix A" instead of "A"
+\titleformat{\chapter}[display]
+  {\Huge\bfseries\filcenter}
+  {{\fontsize{50pt}{1em}\vspace{-4.2ex}\selectfont \textnormal{\chaptertitlename\ \thechapter}}}{1ex}{}[]
+
 \input{include/backmatter/Grammar}
 \input{include/backmatter/Inference}
-
+\end{appendices}
 
 \end{document}

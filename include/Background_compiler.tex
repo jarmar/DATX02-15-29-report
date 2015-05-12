@@ -1,0 +1,22 @@
+\section{General compiler}
+% möjlig ref till drakboken
+New languages are often developed to allow for a higher level of abstraction and a higher level of reasoning about algorithms. To be able to run these new languages compilers are built to convert the high level code down to machine code, to run directly on hardware, or to a lower level language to make use of that language's compiler. 
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.6\pdfpagewidth]{figure/generalpipeline2}
+  \caption{A general compiler pipeline}
+  \label{fig:generalpipeline}
+\end{figure}
+
+The structure of a compiler can be likened to a pipe where text flows through. 
+The text flowing through the pipe is transformed between different representations and is in
+the end output as runnable code to either run on the computer itself or on a virtual machine
+that emulates a computer. 
+
+In figure ~\ref{fig:generalpipeline} you can see the flow handling the source code.
+It should be noted that the type checker is optional for a language, it can
+fully rely on the grammar to expose errors. This will lead to a more expressive, 
+or less restricted, language but increases the risk of runtime crashes due to type errors.
+
+We start by describing the first step of a compiler, the lexer and parser.

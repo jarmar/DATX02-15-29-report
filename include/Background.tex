@@ -1,71 +1,16 @@
-\chapter{Background}
+\chapter{Technical background}
 
 \todo{Assigned Johan L}
 
-% WHAT IS A COMPILER 
+\todo{Read through and check content matches new title}
 
-The Erlang virtual machine is appreciated for its excellent support for
-concurrency, distribution and error handling, allowing soft-real-time systems
-with high uptimes - famously demonstrated by the 99.9999999\% uptime of
-Ericsson’s AXD301 telecom switch from 1998. The features of the BEAM (Erlang’s
-main virtual machine implementation) aren't tied to Erlang itself: one can
-enjoy the benefits of the runtime with a different syntax and semantics.
-Previous efforts in this field include: Elixir, a language with Ruby-like
-syntax; Javascript flavoured Erlang, Lisp flavoured Erlang and a YHC Haskell
-to Erlang transpiler that preserves laziness.
-
-Attempts to port Erlang features to Haskell have also been made, illustrating
-the demand for a combination of the languages’ features. Cloud Haskell is
-‘Erlang in a library’, but differences in the Erlang and Haskell runtime
-system make shipping expressions between nodes far more verbose than in Erlang.
-
-Haskell is known for its terse and elegant syntax, in addition to a powerful
-type system that prevents many programming errors and makes it easier to
-reason about code. Erlang developers already use code analysis tools to write
-typed code, but these tools don’t interact well with message passing where the type received can be hard to predict. Combining the compile-time features of Haskell with the run-time benefits of Erlang into a language interoperable with the latter would be a great boon for Erlang developers.
-
-%To take advantage of both BEAM's great concurrency model with the safety of 
-%Haskell's typesystem this project is intended to design and implement a new 
-%language named Hopper.  
-
-New languages are often developed to allow for a higher level of abstraction and a higher level of reasoning about algorithms. To be able to run these new languages compilers are built to convert the high level code down to machine code, to run directly on hardware, or to a lower level language to make use of that language's compiler. 
-
-% GENERAL PIPELINE FIGURE
-
-\todo{PLEASE COMMENT ON NEW FIGURE, IS ADDED "source code" AND "runnable code" A GOOD ADDITION?}
-\todo{remove old pdf if new one is ok}
-
-% To make it more general, we could change "type checker" to somthing like "semantic analysis". Then we include other things you do to code to make sure it's correct.
-
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=0.6\pdfpagewidth]{figure/generalpipeline2}
-  \caption{A general compiler pipeline}
-  \label{fig:generalpipeline}
-\end{figure}
-
-% HOW IS A COMPILER BUILT 
-
-The structure of a compiler can be likened to a pipe where text flows through. 
-The text flowing through the pipe is transformed between different representations and is in
-the end output as runnable code to either run on the computer itself or on a virtual machine
-that emulates a computer. 
-
-In figure ~\ref{fig:generalpipeline} you can see the flow handling the source code.
-It should be noted that the type checker is optional for a language, it can
-fully rely on the grammar to expose errors. This will lead to a more expressive, 
-or less restricted, language but increases the risk of runtime crashes due to type errors.
-
-We start by describing the first step of a compiler, the lexer and parser.
-
-%Now is Hopper really a transpiler or a translating compiler. Instead of 
-%outputting runnable code it outputs other code that is interpreted and compiled
-%by the Erlang compiler, erlc. With this the project could very much be 
-%simplified (ref to read more in discussion).
-
+% WHAT IS A COMPILER
+This chapter gives a brief history of Haskell and Erlang, and a technical background to some topics covered in the report.
 
 % OTHER SECTIONS
 
+\input{include/Background_history}
+\input{include/Background_compiler}
 \input{include/Background_bnfc}
 \input{include/Background_depcheck}
 \input{include/Background_seman}

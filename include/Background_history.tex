@@ -1,0 +1,25 @@
+\section{History}
+
+The Erlang virtual machine is appreciated for its excellent support for
+concurrency, distribution and error handling, allowing soft real-time systems
+with high uptimes --- famously demonstrated by the 99.9999999\% uptime of
+Ericsson’s AXD301 telecom switch from 1998\cite{ninenines}. The features of the BEAM (Erlang’s
+main virtual machine implementation) aren't tied to Erlang itself: one can
+enjoy the benefits of the runtime with a different syntax and semantics.
+Previous efforts in this field include: Elixir, a language with Ruby-like
+syntax; Javascript flavoured Erlang, Lisp flavoured Erlang and a YHC Haskell
+to Erlang transpiler that preserves laziness.
+
+Attempts to port Erlang features to Haskell have also been made, illustrating
+the demand for a combination of the languages’ features. Cloud Haskell is
+‘Erlang in a library’, but differences in the Erlang and Haskell runtime
+system make shipping expressions between nodes far more verbose than in Erlang.
+
+Haskell is known for its terse and elegant syntax, in addition to a powerful
+type system that prevents many programming errors and makes it easier to
+reason about code. Erlang developers already use code analysis tools to write
+typed code, but these tools don’t interact well with message passing where the type received can be hard to predict. Combining the compile-time features of Haskell with the run-time benefits of Erlang into a language interoperable with the latter would be a great boon for Erlang developers.
+
+%To take advantage of both BEAM's great concurrency model with the safety of 
+%Haskell's typesystem this project is intended to design and implement a new 
+%language named Hopper.
