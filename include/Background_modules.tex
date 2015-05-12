@@ -1,0 +1,7 @@
+\section{Module systems}
+
+\todo{Assigned Jakob}
+
+As computer programs increase in complexity, a need for separation of concerns arises. Programming languages typically solve this problem by having a concept of \emph{modules} (sometimes also known as \emph{packages} or \emph{components}), cohesive units of code. Besides the organizational benefits, there are technical merits to modular software as well. If a single module is changed, the entire project doesn't necessarily have to be recompiled -- only the parts which \emph{depend} on the module that was changed.
+
+The concept of \emph{dependency} is central in module systems. Many\todo{sources?} languages allow the programmer to define the interfaces between modules (i.e. by marking certain functions as \texttt{public}, or giving a list of functions to export), while others automatically make all declarations available to other modules. Similarily, some languages require dependencies between modules to be explicitly declared (e.g. with \texttt{import} statements or similar), while others do not. Further, there are other details which differ between different languages' module systems. For example, some languages allow cyclical intermodule dependencies while others forbid it. \todo{fill out, how is it done in other languages?}

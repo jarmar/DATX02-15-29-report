@@ -20,43 +20,24 @@ said data structure. The code generator makes use of this package by building Co
 %Good example: map (add 1) xs
 
 A substantial difference between Haskell and Erlang is how functions are applied to arguments. 
-In Haskell, all functions are of arity 1, and when functions are applied to several arguments, they are curried during runtime. This means that functions can be partially applied.%, in which case they return a function rather than a literal value. a) Literaler är inte alla icke-funktionsvärden, utan är en syntaktisk grej: ung. ett minimalt anonymt uttryck som är ett värde. T.ex. 3, "woot", '\t'
-This is useful for (among other things)
-the ability of composing new functions from already defined ones in a terse manner.
+In Haskell, all functions are of arity 1, and when functions are applied to several arguments, they are curried during runtime. This means that functions can be partially applied, in which case they return a function. This is useful for (among other things) the ability of composing new functions from already defined ones in a terse manner.
 
-In Erlang, a function is identified by its name and its arity, and can only be applied to a number of arguments that is exactly that of its arity. %Nja, finns anonyma funktioner med
-However, the types of the parameters passed are not significant when the function is called %DVS Erlang är dynamiskt. Har redan sagts, och erlang har inga egentliga types
-(though they may be of significance when the function body is evaluated), and function names can be shared by different functions if they have different arities.
+In Erlang, a function is identified by its name and its arity, and can only be applied to a number of arguments that is exactly that of its arity. %Anonyma funktioner har fortfarande fixed aritet
+However, the types of the parameters passed are not significant when the function is called (though they may be of significance when the function body is evaluated), and function names can be shared by different functions if they have different arities.
 
-Hopper attempts to preserve Haskell's support for partial application. This, in combination with the fact that the Erlang compiler requires all function definitions to have a determined arity at compile time, results in the translation of functions being one of the non-trivial tasks of the code generator.%Vi bör inte göra subjektiv bedömning av hur svårt det är. 
+Hopper attempts to preserve Haskell's support for partial application. This, in combination with the fact that the Erlang compiler requires all function definitions to have a determined arity at compile time, results in the translation of functions being one of the non-trivial tasks of the code generator.%Inte en subjektiv bedömning
 
-We solve this by defining and calling an Erlang function curry, which turns all expressions either into functions of arity one or non-function values. %För trött nu, jag skriver bättre förklaring senare. Ser de kommentarerna förresten?
-The solution Hopper provides is a small Erlang function which adds the ability to curry function during runtime. \todo{explain the curry solution in more detail, add curry.erl fil i appendix}
+We solve this by defining and calling an Erlang function curry, which turns all expressions either into functions of arity one or non-function values. The solution Hopper provides is a small Erlang function which adds the ability to curry function during runtime. \todo{explain the curry solution in more detail, add curry.erl fil i appendix}
 
 \subsection{Algebraic data types and constructors}
 
-\todo{Breakout adt background to own background section}
-
-Another area where Haskell and Erlang differ is the use of \glspl{adt}. \glspl{adt} are types 
-composed by other types, and their values are analyzed using pattern matching. %Eh, pattern matching är inte en central del av vad en ADT är. Det är två olika saker
-The values of are created using constructors, a value which takes 0 or more arguments and then returns a record containing them. When pattern matching over \glspl{adt}, their
-constructors are typically used for identifying and handling specific instances of the data types. %???
-
-These kind of data types do not exist in Erlang in the same way as they do in Haskell, i.e. with their heavy reliance
+Another area where Haskell and Erlang differ is the use of \glspl{adt}. These kind of data types do not exist in Erlang in the same way as they do in Haskell, i.e. with their heavy reliance
 on constructors. When using pattern matching in Erlang, an entity called atom is instead used for
-handling specific cases. An atom is a literal constant with a name. Variables can hold atoms, and said
-variables can be pattern matched over different atoms for identifying different cases.%Jag är för trött för att ändra mkt. nu, men det här bhvr omformuleras. Hädanefter markerar jag stycken som behöver det med %*
+handling specific cases. An atom is a literal constant with a name. Variables can hold atoms, and said variables can be pattern matched over different atoms for identifying different cases. %Håller int med om behövd omformulering
 
-In Hopper, \glspl{adt} are implemented and translated to Core Erlang in two specific cases: when an
-they are processed, and when they are declared. Like in Haskell, variables in Erlang can
-hold any value, so the only problem to solve was how the values of \glspl{adt} should be represented in
-Erlang. The solution drew inspiration from the book \textit{Implementing functional languages: a tutorial} \cite{FunTutorial},
-which (among other things) describes an approach to this problem where the values of \glspl{adt} are translated to tuples,
-holding the constructors (represented by unique integer values) as a tag, and their correlated values.%* correlated är fel, +vi borde inte referera till SPJ här tror jag. Anledningen vi adoptera det var för att det är ett vanligt erlang-pattern.
-\glspl{adt} in Hopper are translated in the same manner, but translates the constructors to atoms instead,
-to mimic the conventional structure of messages in Erlang.%Inte bara meddelanden, Erlang-"ADT":er generellt
-Declared constructors are simply translated to functions, that takes a number of parameters (if any), and
-returns the value as a tuple representation as described above.%Redan sagt innan
+In Hopper, \glspl{adt} are implemented and translated to Core Erlang in two specific cases: when they are processed, and when they are declared. Like in Haskell, variables in Erlang can
+hold any value, so the only problem to solve was how the values of \glspl{adt} should be represented in Erlang. The solution drew inspiration from the book \textit{Implementing functional languages: a tutorial} \cite{FunTutorial}, which (among other things) describes an approach to this problem where the values of \glspl{adt} are translated to tuples, holding the constructors (represented by unique integer values) as a tag, and their additional values. %SPJ referensen är bra, det pekar på att vi har observerat en redan etablerad teknik (dessutom etablerad av en såpass erkänd individ), och tagit inspiration av den. Framförallt ska vi inte utelämna att vi har blivit inspirerade, det skulle kunna se ut som vi påstår att vi kommit på det själva då, vilket vi inte har
+\Glspl{adt} in Hopper are translated in the same manner, but translates the constructors to atoms instead, to mimic the conventional structure of data in Erlang. Declared constructors are simply translated to functions, that takes a number of parameters (if any), and returns the value as a tuple representation as described above. %Värt att nämnas igen, första gången beskriver hur det funkar generellt, här poängterar vi att vi gör "likadant"
 
 
 \begin{figure}[!htb]
