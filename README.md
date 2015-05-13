@@ -1,6 +1,12 @@
 # DATX02-15-29-report
 Final report for the Haskerl bachelors thesis
 
+## Things to do this afternoon
+ - Go through glossare
+ - isn't -> is not...
+ - Language review
+ 
+
 ## Build instructions
 TODO: work in progress
 

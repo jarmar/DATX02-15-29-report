@@ -1,7 +1,5 @@
 \section{Parser}
 
-\todo{Assigned to David}
-
 The parser is implemented by a \gls{bnf} grammar that is converted to a lexer and 
 parser with the BNFC tool. 
 
@@ -9,14 +7,14 @@ BNFC, as described in the background, is the \Gls{bnfc} developed at Chalmers wh
 
 Starting the project there were discussions in the group on whether or not to use BNFC to generate the lexer and parser. Choosing to get an easy start with the generated lexer and parser was accompanied by the notion that the group might want to switch to using Alex and Happy directly at a later stage. This did not come to happen during the project but might still be something to consider for the future. Implementing the groups own lexer and parser would mean greater control over the process.
 
-To have as clean syntax as Haskell, the grammar should then be indentation sensitive instead of depending on braces and semicolons as in C-like languages. Parsing code with braces and semicolons are easier beacause one don't need to keep track in which indentation context it is in. For this BNFC can help converting a indentation sensitive language to a brace dependent one. It does this in the lexer and inserting tokens around expressions making it easy to match against these in the parser.
+To have as clean syntax as Haskell, the grammar should then be indentation sensitive instead of depending on braces and semicolons as in C-like languages. Parsing code with braces and semicolons is easier beacause one does not need to keep track of which indentation context the code is in. BNFC can help with this, converting an indentation sensitive language to a brace dependent one. It does this in the lexer by inserting tokens around expressions making it easy to match against these in the parser.
 
 \subsection{The grammar}
 
-Writing the grammar one, in effect, describe the ways in which programs accepted in the language can be written. Hence it takes great consideration to detail to ensure that the grammar allows everything that the language is supposed to be able to express but disallows everything else. This doesn't include expressions that are semantically wrong. For this, semantic analysis of the \gls{ast} has to be done with a, for example, type checker. 
+Writing the grammar one, in effect, describe the ways in which programs accepted in the language can be written. Hence it takes great consideration to detail to ensure that the grammar allows everything that the language is supposed to be able to express but disallows everything else. This does not include expressions that are semantically wrong. For this, semantic analysis of the \gls{ast} has to be done with a, for example, type checker. 
 
-The grammar was produced incrementally in steps that allowed more and more syntax to be added. This made it possible to have new functionallity implemented through the whole pipeline before new syntax was added. 
+The grammar in the project was produced in incremental steps that allowed more and more syntax to be added. This made it possible to have new functionallity implemented through the whole pipeline before new syntax was added. 
 
-A full rewrite of the grammar was done half way through the project. The reson for this was that some grammatical rules was intertwined and understanding had been improved how a grammar should be defined more correct. The new grammar was more modular which also made the futher extensions simpler.
+A full rewrite of the grammar was done half way through the project. The reson for this was that some grammatical rules was intertwined and that the understanding of how a correct grammar should be defined had been improved. The new grammar was more modular which also made further extensions easier.
 
-Some syntactic sugar for \texttt{if-then-else} exists and more was planned but didn't made it to the final release. For example, sugar for lists and tuples.
+Some syntactic sugar for \texttt{if-then-else} exists and more was planned but did not make it to the final release. For example, sugar for lists and tuples.

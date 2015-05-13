@@ -2,6 +2,8 @@
 
 \todo{Assignee Liam}
 
+\todo{consider use of commas and parentheses in this section}
+
 Generally the last step of a compiler is the code generation step. The code generator
 component should take an \gls{ast} much like one of the target language and translate it
 to actual code strings of the target language. Additionally, this component may also
@@ -10,7 +12,7 @@ perform some optimizations on the generated code before returning it.
 \subsection{Implementation}
 
 The code generator is implemented using the Language.CoreErlang \cite{CoreErlang} package
-from Hackage (maybe also bibliography link, or glossory). This package contains a Core Erlang
+from Hackage (maybe also bibliography link, or glossary). This package contains a Core Erlang
 parser, a data structure used for representing Core Erlang \gls{ast}s and a pretty printer for
 said data structure. The code generator makes use of this package by building Core Erlang
 \gls{ast}s and then simply invoking the pretty printer on them to  produce Core Erlang.
@@ -24,7 +26,7 @@ In Erlang, functions (except for anonymous functions) are identified by its name
 
 Hopper attempts to preserve Haskell's support for partial application. This, in combination with the fact that the Erlang compiler requires all function definitions to have a determined arity at compile time, results in the translation of functions being one of the non-trivial tasks of the code generator.
 
-We solve this by defining and calling an Erlang function curry, which turns all expressions either into functions of arity one or non-function values. The solution Hopper provides is a small Erlang function which adds the ability to curry function during runtime. \todo{explain the curry solution in more detail, add curry.erl fil i appendix}
+We solve this by defining and calling an Erlang function curry, which turns all expressions either into functions of arity one or non-function values. The solution Hopper provides is a small Erlang function which adds the ability to curry functions during runtime. \todo{explain the curry solution in more detail, add curry.erl fil i appendix}
 
 In figure \ref{lst:hopperFun} and figure \ref{lst:coreFun} a simple Hopper function and the resulting Core Erlang code are shown respectively.
 
@@ -74,17 +76,18 @@ bool 1 = "True"
 
 \subsection{Algebraic data types and constructors}
 
-Another area where Haskell and Erlang differ is the use of \glspl{adt}. These kind of data types do not exist in Erlang in the same way as they do in Haskell, i.e. with their heavy reliance
+Another area where Haskell and Erlang differ is the use of \glspl{adt}. These kind  % these kinds or this kind?
+of data types do not exist in Erlang in the same way as they do in Haskell, i.e. with their heavy reliance
 on constructors. When using pattern matching in Erlang, an entity called atom is instead used for
 handling specific cases. An atom is a literal constant with a name. Variables may hold atoms, and said variables can be pattern matched over different atoms for identifying different cases.
 
 In Hopper, \glspl{adt} are implemented and translated to Core Erlang in two specific cases: when they are processed, and when they are declared. Like in Haskell, variables in Erlang can
-hold any value, so the only problem to solve was how the values of \glspl{adt} should be represented in Erlang. The solution drew inspiration from the book \textit{Implementing functional languages: a tutorial} \cite{FunTutorial}, which (among other things) describes an approach to this problem where the values of \glspl{adt} are translated to tuples, holding the constructors (represented by unique integer values) as a tag, and their additional values. \Glspl{adt} in Hopper are translated in the same manner, but translates the constructors to atoms instead, to mimic the conventional structure of data in Erlang. Declared constructors are simply translated to functions, that takes a number of parameters (if any), and returns the value as a tuple representation as described above. Figures \ref{lst:hopperAdt}, \ref{coreAdt} and \ref{coreCon} displays how \glspl{adt} values and constructors 
+hold any value, so the only problem to solve was how the values of \glspl{adt} should be represented in Erlang. The solution drew inspiration from the book \textit{Implementing functional languages: a tutorial} \cite{FunTutorial}, which (among other things) describes an approach to this problem where the values of \glspl{adt} are translated to tuples, holding the constructors (represented by unique integer values) as a tag, and their additional values. \Glspl{adt} in Hopper are translated in the same manner, but translates the constructors to atoms instead, to mimic the conventional structure of data in Erlang. Declared constructors are simply translated to functions, that takes a number of parameters (if any), and returns the value as a tuple representation as described above. Figures \ref{lst:hopperAdt}, \ref{coreAdt} and \ref{coreCon} displays how \glspl{adt} values and constructors are translated from Hopper to Core Erlang.
 
 \begin{figure}[!htb]
 \centering
 \begin{lstlisting} 
-data Tree = Tree Int Tree Tree | Empty
+data Tree = Tree Number Tree Tree | Empty
 
 Tree 5 (Tree 3 (Tree 1 Empty Empty) 
                (Tree 4 Empty Empty)) 

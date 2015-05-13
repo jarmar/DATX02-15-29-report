@@ -1,7 +1,13 @@
 \section{Type checker}
 \todo{Assigned to Liam}
 
-A major difference between programming on the BEAM VM using Hopper compared to Erlang is the type system. Like Haskell, Hopper possesses a can-do attitude that'll be sure to put a smile on your face. Also polymorphic data types 
+A major difference between programming on the BEAM VM using Hopper compared to Erlang is the type system. Like Haskell, Hopper posssesses polymorphic data types and functions. It also has a weaker form of ad-hoc polymorphism which allows values to inspect their own type when given a monomorphic one. 
+The type checker takes the modules output by the renamer and converts them to a representation unique to the type checker stage of the pipeline. When it has typechecked and transformed the module, it converts it back to the representation used by the rest of the pipeline. This is purely technical debt; there is no design justification for it. However, the existence of a separate module representation enabled the last-minute addition of ad-hoc polymorphism as an experimental feature. The travails involved in implementing the type checker proper and all surrounding features are detailed below.
+
+\subsection{Da Hindley Milner Type System}
+
+It's got polymorphism \& specialization. It's got proofs of correctness and most generality (but we don't know whether that applies to our code). It's checked by doing (program in TypeChecker.hs), a variation of Algorithm W.
+Divide into SCCs, t
 
 %What do we do in TC/Convert?\
 

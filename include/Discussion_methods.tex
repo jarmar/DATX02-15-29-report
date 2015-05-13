@@ -25,6 +25,10 @@ There were times during the project when the number of branches rose a bit high.
 
 The type checking took two different directions early on which led to two separate branches. They were in some ways similar in concept but different in their approach to the subject. This led to time lost both through other compiler phases waiting for a functioning type checker and through one of the branches in the end being discarded in favor of the other, working, branch. The type checker development was in many ways not suited for the incremental growth that the project started with. Beginning from a smaller grammar and expanding it felt natural but there was no easy way of beginning with a small type checker. Since the type checking was also a heavy theoretical subject there were many sprint cycles before any useful code was added to the type checker in the compiler pipeline. 
 
+\subsection{Lack of mocking}
+
+The different parts of the compiler are strongly dependent on each other being present and functioning. As mentioned above, there were many sprint cycles before the type checker was functional. The effect of this on the development of the rest of the compiler could have been reduced by implementing a ``mock'' type checker which assumes all programs are fully and correctly typed, and does nothing. This would have allowed developing the other parts of the compiler independent of the progress on the type checker.
+
 \subsection{Responsibility rotation}
 
 The initial idea for the project was to have all group members work on every part of the project. This would not only support the learning goals of the project but would also ensure that each member of the team wrote code in each of the modules. This could have made it easier for team members to make their own modifications to any module when needed, thus avoiding large latencies and deadlocks caused by the need for alteration to some other compiler phase. 

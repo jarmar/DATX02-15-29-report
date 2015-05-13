@@ -1,7 +1,5 @@
 \section{Renamer}
 
-\todo{Assigned David}
-
 While BNFC is a great tool for creating a parse tree from raw text the resulting tree structure is verbose and has a lot of constructors. To simplify this representation a renamer step is introduced in the pipeline. This step converts the parse tree to the language's minimally designed \gls{ast}. 
 
 The renamer is implemented as a traversal over the parse tree obtained from the parser. In this traversal the renamer builds up a new tree of constructors for the \gls{ast}. A few grammar rules are translated to more general expressions to simplify the \gls{ast} and reduce the number of cases the type checker and code generator need to cover, see figure \ref{lst:renamer1}.
@@ -9,7 +7,7 @@ The renamer is implemented as a traversal over the parse tree obtained from the 
 \begin{figure}[ht]
 \centering
 \lstset{mathescape=true,literate={=>}{$\Rightarrow{}$}{1}}%,frame=lrtb}
-\begin{minipage}[b]{0.30\linewidth}
+\begin{minipage}[t]{0.30\linewidth}
     \centering
     \begin{lstlisting}
 f = if a
@@ -17,15 +15,14 @@ f = if a
       else c
     \end{lstlisting}
 \end{minipage}
-\begin{minipage}[b]{0.09\linewidth}
+\begin{minipage}[t]{0.09\linewidth}
     \centering
     \begin{lstlisting}
-    
+
 =>
- 
     \end{lstlisting}
 \end{minipage}
-\begin{minipage}[b]{0.30\linewidth}
+\begin{minipage}[t]{0.30\linewidth}
     \centering
     \begin{lstlisting}
 f = case a of
@@ -37,8 +34,10 @@ f = case a of
 \label{lst:renamer1}
 \end{figure}
 
-The Renamer has a few more task to take care of. First it transforms the \glspl{adt} and gathers functions defined with pattern matching and merge them. Second it annotates all the identifiers, except variables bound in a pattern matching scope, with the module name. This removes the ambiguity between functions that has the same name but are defined in different modules. Lastly it checks a list of \glspl{bif} to switch them out for calls to the virtual machine instead of regular user defined function calls.
+The Renamer has a few more tasks to take care of. First it transforms the \glspl{adt} and gathers functions defined with pattern matching and merges them. Second it annotates all the identifiers, except variables bound in a pattern matching scope, with the module name. This removes the ambiguity between functions that has the same name but are defined in different modules. Lastly it checks a list of \glspl{bif} to switch them out for calls to the virtual machine instead of regular user defined function calls.
 
 While implementing the renamer much consideration was take to what later stages of the compilation needed. For example, while Erlang allows pattern matching function Core Erlang does not. This is the reason for merging function definitions to a single definition with a case expression and each previous function as a clause. For the same reason the type data type was changed to fit better with the type checker.
 
-The renamer also processes the internal representations of \glspl{adt}. When the renamer encounters an \gls{adt} definition it just converts each constructor to a function with just a type. With this the type checker can verify it's used correctly and leaving it fully to the code generation to implement it without any dependencies. 
+The renamer also processes the internal representations of \glspl{adt}. When the renamer encounters an \gls{adt} definition it just converts each constructor to a function with just a type. With this the type checker can verify that it is used correctly and leaving it fully to the code generation to implement it without any dependencies. 
+
+\todo{final sentence uses "this", "it", "it", "it" but is referencing different stuff in some of them, make sure that it is always clear what "it" is (might not need to change all of them)}
