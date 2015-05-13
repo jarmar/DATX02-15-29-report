@@ -1,0 +1,52 @@
+\chapter{Hopper example} \label{app:hopperEx}
+
+Simple binary search tree implementation in Hopper.
+
+\lstset{basicstyle=\ttfamily\scriptsize}
+
+
+\begin{figure}[!htb]
+\centering
+\begin{lstlisting} 
+
+module BST (empty, insert, delete) where                                                           
+
+data Tree = Tree Number Tree Tree | Empty  
+data Bool = True | False                                                                            
+
+empty :: Tree                                                                                        
+empty = Empty                                                                                       
+
+isEmpty :: Tree -> Bool                                                                             
+isEmpty Empty = True                                                                             
+isEmpty _     = False                                                                               
+
+insert :: Tree -> Number -> Tree                                                                    
+insert Empty x = Tree x Empty Empty                                                                 
+insert (Tree v t1 t2) x =                                                                           
+  case x == v of                                                                                    
+     True  -> Tree v t1 t2                                                                          
+     False -> if x < v                                                                              
+                 then (Tree v t1 (insert t2 x))                                                     
+                 else (Tree v (insert t1 x) t2)                                                     
+
+delete :: Tree -> Number -> Tree                                                                    
+delete Empty _ = Empty                                                                              
+delete (Tree v t1 t2) x =                                                                           
+  case x == v of                                                                                    
+    True  -> deleteRoot (Tree v t1 t2)                                                              
+    False -> if x < v                                                                            
+                then (Tree v (delete t1 x) t2)                                                   
+                else (Tree v t1 (delete t2 x))                                                   
+
+deleteRoot :: Tree -> Tree                                                                           
+deleteRoot (Tree v Empty t2) = t2                                                                    
+deleteRoot (Tree v t1 Empty) = t1                                                                    
+deleteRoot (Tree v t1 t2) = Tree (leftmostElement t2) t1 (delete t2 (leftmostElement t2))       
+
+leftmostElement :: Tree -> Number                                                                    
+leftmostElement (Tree v Empty _) = v                                                                 
+leftmostElement (Tree v t1 _) = leftmostElement t1
+
+\end{lstlisting}
+\end{figure}

@@ -1,0 +1,240 @@
+\chapter{Core Erlang example} \label{app:coreEx}
+
+Core Erlang translation of Hopper code as seen in Appendix~\ref{app:hopperEx}.
+
+\lstset{basicstyle=\ttfamily\scriptsize}
+
+\begin{lstlisting} 
+
+module 'BST' ['__delete'/0, '__empty'/0, '__insert'/0, 'delete'/2,
+               'empty'/0, 'insert'/2, 'module_info'/0]
+  attributes []
+'False'/0 =
+  fun() ->
+    case {} of
+      {} when 'true' ->
+        'false'
+      ({_cor1} when 'true' ->
+         primop 'match_fail'({'case_clause', _cor1})
+       -| ['compiler_generated'])
+    end
+'__False'/0 =
+  fun() ->
+    apply call 'erlang':'make_fun' ('Prim', 'curry', 1)('False'/0)
+'Empty'/0 =
+  fun() ->
+    case {} of
+      {} when 'true' ->
+        'empty'
+      ({_cor1} when 'true' ->
+         primop 'match_fail'({'case_clause', _cor1})
+       -| ['compiler_generated'])
+    end
+'__Empty'/0 =
+  fun() ->
+    apply call 'erlang':'make_fun' ('Prim', 'curry', 1)('Empty'/0)
+'Tree'/3 =
+  fun(X@1, X@2, X@3) ->
+    case {X@1, X@2, X@3} of
+      {Px1, Px2, Px3} when 'true' ->
+        {'tree', Px1, Px2, Px3}
+      ({_cor1} when 'true' ->
+         primop 'match_fail'({'case_clause', _cor1})
+       -| ['compiler_generated'])
+    end
+'__Tree'/0 =
+  fun() ->
+    apply call 'erlang':'make_fun' ('Prim', 'curry', 1)('Tree'/3)
+'True'/0 =
+  fun() ->
+    case {} of
+      {} when 'true' ->
+        'true'
+      ({_cor1} when 'true' ->
+         primop 'match_fail'({'case_clause', _cor1})
+       -| ['compiler_generated'])
+    end
+'__True'/0 =
+  fun() ->
+    apply call 'erlang':'make_fun' ('Prim', 'curry', 1)('True'/0)
+'delete'/2 =
+  fun(X@1, X@2) ->
+    case {X@1, X@2} of
+      {P_arg1, P_arg2} when 'true' ->
+        case {P_arg1, P_arg2} of
+          {'empty', _} when 'true' ->
+            apply '__Empty'/0()
+          {{'tree', Pv, Pt1, Pt2}, Px} when 'true' ->
+            case
+            apply apply apply apply apply apply call 'erlang':'make_fun'
+                                                ('Prim', '__apply',
+                                                 0)()("erlang")("=:=")(2)(Px)(Pv)
+            of  'true' when 'true' ->
+                  apply apply '__deleteRoot'/0()
+                              (apply apply apply apply '__Tree'/0()
+                                                       (Pv)(Pt1)(Pt2))
+              'false' when 'true' ->
+                case
+                apply apply apply apply apply apply call 'erlang':'make_fun'
+                                                    ('Prim', '__apply',
+                                                     0)()("erlang")("<")(2)(Px)(Pv)
+                of  'true' when 'true' ->
+                    apply apply apply apply '__Tree'/0()
+                                            (Pv)(apply apply apply '__delete'/0()
+                                                                   (Pt1)(Px))(Pt2)
+                  'false' when 'true' ->
+                    apply apply apply apply '__Tree'/0()
+                                            (Pv)(Pt1)(apply apply apply '__delete'/0()
+                                                                        (Pt2)(Px))
+                  ({_cor1} when 'true' ->
+                     primop 'match_fail'({'case_clause', _cor1})
+                   -| ['compiler_generated'])
+                end
+              ({_cor1} when 'true' ->
+                 primop 'match_fail'({'case_clause', _cor1})
+               -| ['compiler_generated'])
+            end
+          ({_cor1} when 'true' ->
+             primop 'match_fail'({'case_clause', _cor1})
+           -| ['compiler_generated'])
+        end
+      ({_cor1} when 'true' ->
+         primop 'match_fail'({'case_clause', _cor1})
+       -| ['compiler_generated'])
+    end
+'__delete'/0 =
+  fun() ->
+    apply call 'erlang':'make_fun' ('Prim', 'curry', 1)('delete'/2)
+'deleteRoot'/1 =
+  fun(X@1) ->
+    case {X@1} of
+      {P_arg1} when 'true' ->
+        case {P_arg1} of
+          {{'tree', Pv, 'empty', Pt2}} when 'true' ->
+            Pt2
+          {{'tree', Pv, Pt1, 'empty'}} when 'true' ->
+            Pt1
+          {{'tree', Pv, Pt1, Pt2}} when 'true' ->
+            apply apply apply apply '__Tree'/0()
+                                    (apply apply'__leftmostElement'/0()(Pt2))
+                                    (Pt1)
+                                    (apply apply apply '__delete'/0()
+                                                      (Pt2)
+                                                      (apply apply '__leftmostElement'/0()
+                                                                   (Pt2)))
+          ({_cor1} when 'true' ->
+             primop 'match_fail'({'case_clause', _cor1})
+           -| ['compiler_generated'])
+        end
+      ({_cor1} when 'true' ->
+         primop 'match_fail'({'case_clause', _cor1})
+       -| ['compiler_generated'])
+    end
+'__deleteRoot'/0 =
+  fun() ->
+    apply call 'erlang':'make_fun' ('Prim', 'curry', 1)('deleteRoot'/1)
+'empty'/0 =
+  fun() ->
+    case {} of
+      {} when 'true' ->
+        apply '__Empty'/0()
+      ({_cor1} when 'true' ->
+         primop 'match_fail'({'case_clause', _cor1})
+       -| ['compiler_generated'])
+    end
+'__empty'/0 =
+  fun() ->
+    apply call 'erlang':'make_fun' ('Prim', 'curry', 1)('empty'/0)
+'insert'/2 =
+  fun(X@1, X@2) ->
+    case {X@1, X@2} of
+      {P_arg1, P_arg2} when 'true' ->
+        case {P_arg1, P_arg2} of
+          {'empty', Px} when 'true' ->
+            apply apply apply apply '__Tree'/0()(Px)(apply '__Empty'/0())(apply '__Empty'/0())
+          {{'tree', Pv, Pt1, Pt2}, Px} when 'true' ->
+            case
+            apply apply apply apply apply apply call 'erlang':'make_fun'
+                                                ('Prim', '__apply',
+                                                 0)()("erlang")("=:=")(2)(Px)(Pv)
+            of  'true' when 'true' ->
+                  apply apply apply apply '__Tree'/0()(Pv)(Pt1)(Pt2)
+              'false' when 'true' ->
+                case
+                apply apply apply apply apply apply call 'erlang':'make_fun'
+                                                    ('Prim', '__apply',
+                                                     0)()("erlang")("<")(2)(Px)(Pv)
+                of  'true' when 'true' ->
+                    apply apply apply apply '__Tree'/0()
+                          (Pv)(Pt1)(apply apply apply '__insert'/0()(Pt2)(Px))
+                  'false' when 'true' ->
+                    apply apply apply apply '__Tree'/0()
+                          (Pv)(apply apply apply '__insert'/0()(Pt1)(Px))(Pt2)
+                  ({_cor1} when 'true' ->
+                     primop 'match_fail'({'case_clause', _cor1})
+                   -| ['compiler_generated'])
+                end
+              ({_cor1} when 'true' ->
+                 primop 'match_fail'({'case_clause', _cor1})
+               -| ['compiler_generated'])
+            end
+          ({_cor1} when 'true' ->
+             primop 'match_fail'({'case_clause', _cor1})
+           -| ['compiler_generated'])
+        end
+      ({_cor1} when 'true' ->
+         primop 'match_fail'({'case_clause', _cor1})
+       -| ['compiler_generated'])
+    end
+'__insert'/0 =
+  fun() ->
+    apply call 'erlang':'make_fun' ('Prim', 'curry', 1)('insert'/2)
+'isEmpty'/1 =
+  fun(X@1) ->
+    case {X@1} of
+      {P_arg1} when 'true' ->
+        case {P_arg1} of
+          {'empty'} when 'true' ->
+            apply call 'erlang':'make_fun' ('', '__True', 0)()
+          {_} when 'true' ->
+            apply call 'erlang':'make_fun' ('', '__False', 0)()
+          ({_cor1} when 'true' ->
+             primop 'match_fail'({'case_clause', _cor1})
+           -| ['compiler_generated'])
+        end
+      ({_cor1} when 'true' ->
+         primop 'match_fail'({'case_clause', _cor1})
+       -| ['compiler_generated'])
+    end
+'__isEmpty'/0 =
+  fun() ->
+    apply call 'erlang':'make_fun' ('Prim', 'curry', 1)('isEmpty'/1)
+'leftmostElement'/1 =
+  fun(X@1) ->
+    case {X@1} of
+      {P_arg1} when 'true' ->
+        case {P_arg1} of
+          {{'tree', Pv, 'empty', _}} when 'true' ->
+            Pv
+          {{'tree', Pv, Pt1, _}} when 'true' ->
+            apply apply '__leftmostElement'/0()(Pt1)
+          ({_cor1} when 'true' ->
+             primop 'match_fail'({'case_clause', _cor1})
+           -| ['compiler_generated'])
+        end
+      ({_cor1} when 'true' ->
+         primop 'match_fail'({'case_clause', _cor1})
+       -| ['compiler_generated'])
+    end
+'__leftmostElement'/0 =
+  fun() ->
+    apply call 'erlang':'make_fun'
+        ('Prim', 'curry', 1)('leftmostElement'/1)
+'module_info'/0 =
+  fun() -> call 'erlang':'get_module_info' ('BST')
+'module_info'/1 =
+  fun(_cor0) -> call 'erlang':'get_module_info' ('BST', _cor0)
+end
+
+
+\end{lstlisting}
