@@ -1,0 +1,31 @@
+\section{Methods discussion}
+
+\subsection{Agile development - sprint length}
+
+Sprint lengths were initially short and had small incremental goals. This worked well for parts of the compiler where the structure was relatively flat and new content could be added without affecting old content to a greater extent. One notable exception was the type checker where implementing a small subset proved to be a big challenge. Longer sprints would probably have seen the same difficulties though since they were due to differences between compiler parts more than the sprint lengths.
+
+\subsection{Lack of daily communication}
+
+Not having continuous follow-ups might have prolonged the difficulties in getting the full pipeline working. The weekly meetings had the long term plans running but not much insights into the detailed problems discovered in each part. Workshops were held to emphasize group work and communication channels were set up to have group members help each other but some problems were discovered a bit later than might have been with more frequent face to face meetings.
+
+\subsection{Lack of project leader}
+
+No one person had the responsibility to catch on to potential problems and make sure they were handled. Each group member worked independently or with other group members assigned to the same compiler phase but were only incentivized to ask for help when it was needed. Further, appointing a technical lead responsible for specifying the interfaces between components (i.e. the datatypes representing the program and the type signatures of exported functions) could have made it easier for members to use code they hadn’t themselves written.
+
+\subsection{Lack of hard specification}
+
+Starting the project the group agreed on potential features that could be added to the language. A list of such features was compiled to use as a general direction in which to take development. The incremental development approach that then followed, beginning with a small subset of the language, quickly lost track of these inital goals. This meant that group members mostly made their own decisions about what steps to take in the development of their areas of responsibility. For the most part this worked fine but in some cases it led to too much freedom and decisions that should possibly have been made as a group were made by fewer members.
+
+\subsection{Revision control system}
+
+The use of Git as our revision control system was successful. The ease of branching, working locally and merging was a good fit for the group dynamic employed. 
+There were times during the project when the number of branches rose a bit high. With six group members there should often not be a need for eight or nine simultaneous versions of the code. Efforts were made to merge branches and keep the number low with one working branch and specific branches for new features being developed.
+
+\subsection{Type checker branches}
+
+The type checking took two different directions early on which led to two separate branches. They were in some ways similar in concept but different in their approach to the subject. This led to time lost both through other compiler phases waiting for a functioning type checker and through one of the branches in the end being discarded in favor of the other, working, branch. The type checker development was in many ways not suited for the incremental growth that the project started with. Beginning from a smaller grammar and expanding it felt natural but there was no easy way of beginning with a small type checker. Since the type checking was also a heavy theoretical subject there were many sprint cycles before any useful code was added to the type checker in the compiler pipeline. 
+
+\subsection{Responsibility rotation}
+
+The initial idea for the project was to have all group members work on every part of the project. This would not only support the learning goals of the project but would also ensure that each member of the team wrote code in each of the modules. This could have made it easier for team members to make their own modifications to any module when needed, thus avoiding large latencies and deadlocks caused by the need for alteration to some other compiler phase. 
+Beginning with the small subset of Hopper there was a division into groups which, given the problems with the type checker, unfortunately became static.

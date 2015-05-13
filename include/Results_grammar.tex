@@ -2,7 +2,35 @@
 
 \todo{expressiveness of grammar}
 
-The resulting grammar from the project is a clean basic functional programming language with indentation sensitive syntax featuring polymorphic \glspl{adt}, pattern matching and lambdas.
+The final grammar for the language supports most of the necessary syntax for a pure functional programming language.  The full grammar is in appedix \ref{app:grammar}, but the main features are:
+
+% * Indent sensitive
+% * Type signatures 
+%   * Parameterized types
+% * ADTs
+% * Pattern matching
+%   * Tuples
+%   * Constructors
+%   * Variables
+%   * Primitives
+%   * Wildcard/ignore
+% * Case expressions
+% * Lambda expressions
+% * If expresssions
+% * infix Operators
+% * primitives
+% * Tuples
+% * Qualified functions and constructors
+\begin{itemize}
+  \item Indent sensitive
+  \item Function definitions and type signatures
+  \item Polymorphic abstract data types
+  \item Lambda and case expressions
+  \item Operators
+  \item Patter matching of primitives, tuples, constructors and variables
+  \item Module definitions with imports and exports
+  \item Qualification of functions, constructions and type constructors
+\end{itemize}
 
 Additional grammatical features % other word for feature
-were planned and designed but not implemented. Most of those features were syntactic sugar (e.g. for lists and tuples), but also syntax for simplifying repetive tasks such as \texttt{IO} sequencing, also known in Haskell as \texttt{do}-notation. 
+were planned and designed but not implemented. Most of those features were syntactic sugar (e.g. for lists and tuples), but also syntax for simplifying repetitive tasks such as \texttt{IO} sequencing, also known in Haskell as \texttt{do}-notation. 

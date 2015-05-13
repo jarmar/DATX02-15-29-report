@@ -16,29 +16,70 @@ said data structure. The code generator makes use of this package by building Co
 \gls{ast}s and then simply invoking the pretty printer on them to  produce Core Erlang.
 
 \subsection{Function applications}
-\todo{Include nice example figure! Liam knows what kind of function will be a good example}
-%Good example: map (add 1) xs
 
 A substantial difference between Haskell and Erlang is how functions are applied to arguments. 
 In Haskell, all functions are of arity 1, and when functions are applied to several arguments, they are curried during runtime. This means that functions can be partially applied, in which case they return a function. This is useful for (among other things) the ability of composing new functions from already defined ones in a terse manner.
 
-In Erlang, a function is identified by its name and its arity, and can only be applied to a number of arguments that is exactly that of its arity. %Anonyma funktioner har fortfarande fixed aritet
-However, the types of the parameters passed are not significant when the function is called (though they may be of significance when the function body is evaluated), and function names can be shared by different functions if they have different arities.
+In Erlang, functions (except for anonymous functions) are identified by its name and its arity, and can only be applied to a number of arguments that is exactly that of its arity. However, the types of the parameters passed are not significant when the function is called (though they may be of significance when the function body is evaluated), and function names can be shared by different functions if they have different arities.
 
-Hopper attempts to preserve Haskell's support for partial application. This, in combination with the fact that the Erlang compiler requires all function definitions to have a determined arity at compile time, results in the translation of functions being one of the non-trivial tasks of the code generator.%Inte en subjektiv bedömning
+Hopper attempts to preserve Haskell's support for partial application. This, in combination with the fact that the Erlang compiler requires all function definitions to have a determined arity at compile time, results in the translation of functions being one of the non-trivial tasks of the code generator.
 
 We solve this by defining and calling an Erlang function curry, which turns all expressions either into functions of arity one or non-function values. The solution Hopper provides is a small Erlang function which adds the ability to curry function during runtime. \todo{explain the curry solution in more detail, add curry.erl fil i appendix}
+
+In figure \ref{lst:hopperFun} and figure \ref{lst:coreFun} a simple Hopper function and the resulting Core Erlang code are shown respectively.
+
+\begin{figure}[!htb]
+\centering
+\begin{minipage}[b]{0.38\linewidth}
+\centering
+\begin{lstlisting}
+bool :: Int -> String
+bool 0 = "False"
+bool 1 = "True"
+\end{lstlisting}
+\end{minipage}
+\caption{Simple Hopper function}
+\label{lst:hopperFun}
+\end{figure}
+
+\begin{figure}[!htb]
+\centering
+\begin{lstlisting}
+'bool'/1 =
+  fun(X@1) ->
+    case {X@1} of
+      {P_arg1} when 'true' ->
+        case {P_arg1} of
+          {0} when 'true' ->
+            "False"
+          {1} when 'true' ->
+            "True"
+          ({_cor1} when 'true' ->
+             primop 'match_fail'({'case_clause', _cor1})
+           -| ['compiler_generated'])
+        end
+      ({_cor1} when 'true' ->
+         primop 'match_fail'({'case_clause', _cor1})
+       -| ['compiler_generated'])
+    end
+'__bool'/0 =
+  fun() ->
+    apply call 'erlang':'make_fun'
+               ('Prim', 'curry', 1)('bool'/1)
+\end{lstlisting}
+\caption[Generated Core Erlang translation of function]
+ {Core Erlang translation of the Hopper function seen in figure \ref{lst:hopperFun}}
+\label{lst:coreFun}
+\end{figure}
 
 \subsection{Algebraic data types and constructors}
 
 Another area where Haskell and Erlang differ is the use of \glspl{adt}. These kind of data types do not exist in Erlang in the same way as they do in Haskell, i.e. with their heavy reliance
 on constructors. When using pattern matching in Erlang, an entity called atom is instead used for
-handling specific cases. An atom is a literal constant with a name. Variables can hold atoms, and said variables can be pattern matched over different atoms for identifying different cases. %Håller int med om behövd omformulering
+handling specific cases. An atom is a literal constant with a name. Variables may hold atoms, and said variables can be pattern matched over different atoms for identifying different cases.
 
 In Hopper, \glspl{adt} are implemented and translated to Core Erlang in two specific cases: when they are processed, and when they are declared. Like in Haskell, variables in Erlang can
-hold any value, so the only problem to solve was how the values of \glspl{adt} should be represented in Erlang. The solution drew inspiration from the book \textit{Implementing functional languages: a tutorial} \cite{FunTutorial}, which (among other things) describes an approach to this problem where the values of \glspl{adt} are translated to tuples, holding the constructors (represented by unique integer values) as a tag, and their additional values. %SPJ referensen är bra, det pekar på att vi har observerat en redan etablerad teknik (dessutom etablerad av en såpass erkänd individ), och tagit inspiration av den. Framförallt ska vi inte utelämna att vi har blivit inspirerade, det skulle kunna se ut som vi påstår att vi kommit på det själva då, vilket vi inte har
-\Glspl{adt} in Hopper are translated in the same manner, but translates the constructors to atoms instead, to mimic the conventional structure of data in Erlang. Declared constructors are simply translated to functions, that takes a number of parameters (if any), and returns the value as a tuple representation as described above. %Värt att nämnas igen, första gången beskriver hur det funkar generellt, här poängterar vi att vi gör "likadant"
-
+hold any value, so the only problem to solve was how the values of \glspl{adt} should be represented in Erlang. The solution drew inspiration from the book \textit{Implementing functional languages: a tutorial} \cite{FunTutorial}, which (among other things) describes an approach to this problem where the values of \glspl{adt} are translated to tuples, holding the constructors (represented by unique integer values) as a tag, and their additional values. \Glspl{adt} in Hopper are translated in the same manner, but translates the constructors to atoms instead, to mimic the conventional structure of data in Erlang. Declared constructors are simply translated to functions, that takes a number of parameters (if any), and returns the value as a tuple representation as described above. Figures \ref{lst:hopperAdt}, \ref{coreAdt} and \ref{coreCon} displays how \glspl{adt} values and constructors 
 
 \begin{figure}[!htb]
 \centering
@@ -65,7 +106,38 @@ Tree 5 (Tree 3 (Tree 1 Empty Empty)
 \label{lst:coreAdt}
 \end{figure}
 
-\todo{Include example figure of constructors. Caption should tie in with fun app sub section}
+\begin{figure}[!htb]
+\centering
+\begin{lstlisting}
+'Empty'/0 =
+  fun() ->
+    case {} of
+      {} when 'true' ->
+        'empty'
+      ({_cor1} when 'true' ->
+         primop 'match_fail'({'case_clause', _cor1})
+       -| ['compiler_generated'])
+    end
+'__Empty'/0 =
+  fun() ->
+    apply call 'erlang':'make_fun' ('Prim', 'curry', 1)('Empty'/0)
+'Tree'/3 =
+  fun(X@1, X@2, X@3) ->
+    case {X@1, X@2, X@3} of
+      {Px1, Px2, Px3} when 'true' ->
+        {'tree', Px1, Px2, Px3}
+      ({_cor1} when 'true' ->
+         primop 'match_fail'({'case_clause', _cor1})
+       -| ['compiler_generated'])
+    end
+'__Tree'/0 =
+  fun() ->
+    apply call 'erlang':'make_fun' ('Prim', 'curry', 1)('Tree'/3)
+\end{lstlisting}
+\caption[Generated Core Erlang translation of constructor]
+ {Core Erlang translation of the Hopper constructor seen in figure \ref{lst:hopperAdt}}
+\label{lst:coreCon}
+\end{figure}
 
 \subsection{Emulating the erlang compiler}
 
@@ -73,4 +145,4 @@ One downside to the choice of compiling to Core Erlang and then invoking the erl
 (bibliography link here) is the loss of the additions and optimizations the erlc
 compiler makes when it compiles Erlang to Core Erlang in its pipeline. To deal with this
 the code generator has been given additional functionality to emulate the pre Core Erlang
-behaviour of the erlc compiler. \todo{Mention the non matching case exception}
+behaviour of the erlc compiler. The currently implemented behaviour is the generation of module info functions that return information about the module when invoked, and an additional case to all case clauses which catches any unmatched case and throws a run time exception.

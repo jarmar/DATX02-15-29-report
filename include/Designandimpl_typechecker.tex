@@ -1,71 +1,61 @@
 \section{Type checker}
-
 \todo{Assigned to Liam}
 
-\todo{Introductory text}
+A major difference between programming on the BEAM VM using Hopper compared to Erlang is the type system. Like Haskell, Hopper possesses a can-do attitude that'll be sure to put a smile on your face. Also polymorphic data types 
 
-\subsection{The type system}
-Rough draft:
-\
+%What do we do in TC/Convert?\
 
-\todo{please fix layout in generated pdf, the pdf is barely readable right now}
-\todo{remove any old type checker stuff that is not used! if anything is kept it should be worked on to fit with the rest}
+%•	Implement constructors (thus allowing codegen to have no knowledge of types)
+%•	Give some functions implicit type arguments : abused syntax to achieve this. In some ways more powerful than Haskell’s class system (because it is done at runtime in normal Hopper), but more boilerplatey and performance intensive. Allowing values to vary based on their type (i.e. ad-hoc-polymorphism, where polymorphic values are more than just a black box, see Theorems for Free [reference?]) is essential for implementing typesafe message passing, because type information must be sent in messages at runtime to distinguish between values with same runtime representation but different types (e.g. an empty list of Booleans and an empty list of numbers).
+%•	Implemented receive: abused syntax using case receive of ... -> ...
+%•	A module that Converts to/from AST.AST. This is bad and is purely technical debt. Why it was created and maintained (two different ASTs, inertia, poor coordination) can be elaborated on in Discussion.
+%•	Prim.apply\
 
-What do we do in TC/Convert?\
+%What can we do with the type system?\
 
-•	Implement constructors (thus allowing codegen to have no knowledge of types)
-•	Give some functions implicit type arguments : abused syntax to achieve this. In some ways more powerful than Haskell’s class system (because it is done at runtime in normal Hopper), but more boilerplatey and performance intensive. Allowing values to vary based on their type (i.e. ad-hoc-polymorphism, where polymorphic values are more than just a black box, see Theorems for Free [reference?]) is essential for implementing typesafe message passing, because type information must be sent in messages at runtime to distinguish between values with same runtime representation but different types (e.g. an empty list of Booleans and an empty list of numbers).
-•	Implemented receive: abused syntax using case receive of ... -> ...
-•	A module that Converts to/from AST.AST. This is bad and is purely technical debt. Why it was created and maintained (two different ASTs, inertia, poor coordination) can be elaborated on in Discussion.
-•	Prim.apply\
-
-What can we do with the type system?\
-
-•	Higher order functions, a lot of that Haskelly goodness.
-•	IO, other types which describe processes and the connections between them. Because the BEAM is a high level VM designed for a dynamic programming language, coercing between types in Hopper does not have the same catastrophic consequences as in Haskell (which compiles to native machine code: coercing something on the heap can lead to a fatal crash e.g. because you treat a number as a pointer). That means it is rather comfortable to treat the same value as several different types in Hopper: for example a Number may be both a Natural and a Prime. We do not yet know where that leads, but it seems exciting. 
-\
-(Here ends the draft I added tonight)
-\
+%•	Higher order functions, a lot of that Haskelly goodness.
+%•	IO, other types which describe processes and the connections between them. Because the BEAM is a high level VM designed for a dynamic programming language, coercing between types in Hopper does not have the same catastrophic consequences as in Haskell (which compiles to native machine code: coercing something on the heap can lead to a fatal crash e.g. because you treat a number as a pointer). That means it is rather comfortable to treat the same value as several different types in Hopper: for example a Number may be both a Natural and a Prime. We do not yet know where that leads, but it seems exciting. 
 
 
-Hopper uses the Damas-Hindley-Milner (HM) type system for the lambda calculus. HM has parametric polymorphism enabling (wording, what do I mean and what does this say???) type inference of type schemes - types with generic, quantified type variables. Further HM has the Algorithm W which not only infers the most general type for expressions but also has existing soundess and completeness proofs. These proofs means that for our well formed expressions we will always find a type and that it will be the correct type.
 
-\subsection{Preprocessing}
+%Hopper uses the Damas-Hindley-Milner (HM) type system for the lambda calculus. HM has parametric polymorphism enabling (wording, what do I mean and what does this say???) type inference of type schemes - types with generic, quantified type variables. Further HM has the Algorithm W which not only infers the most general type for expressions but also has existing soundess and completeness proofs. These proofs means that for our well formed expressions we will always find a type and that it will be the correct type.
 
-Damas-Hindley-Milner is a type system for the lambda calculus and the parsed Hopper code has a different representation. The parsed code is transformed into an AST and the expressions written in Hopper is turned into semantically equivalent expressions in the lambda calculus. Hopper type inference is done on a simple language which is lambda calculus extended with let expressions and the fixpoint combinator. Lambda calculus in itself is Church-Turing complete and could thus represent these added constructs but they simplify ... (add stuff here)
+%\subsection{Preprocessing}
 
-\begin{description}
-\item[The simple language] \hfill
-\begin{description}
-  \item[Variables] \hfill \\
-    A variable is an expression.\\
-    Ex. x is a valid expression.
-   \item[Abstraction] \hfill \\
-    An abstraction of a variable over some expression. (wording?)\\
-    Ex. (\textbackslash x . x) is a valid expression.
-   \item[Application] \hfill \\
-    An application of an expression to another expression is an expression.\\
-    Ex. (f x) is a valid expression.
-   \item[Extensions] \hfill
-\begin{description}
-    \item[Let] \hfill \\
-      A let expression, defining a variable within the scope\\
-      of an expression, is an expression.\\
-      Ex. (let x = n in (f x)) is a valid expression. 
-    \item[Fix] \hfill \\
-      The fixpoint combinator enables recursive expressions.\\
-      A fixpoint combinator y satisfies y f = f (y f).
-\end{description}
-\end{description}
-\end{description}
+%Damas-Hindley-Milner is a type system for the lambda calculus and the parsed Hopper code has a different representation. The parsed code is transformed into an AST and the expressions written in Hopper is turned into semantically equivalent expressions in the lambda calculus. Hopper type inference is done on a simple language which is lambda calculus extended with let expressions and the fixpoint combinator. Lambda calculus in itself is Church-Turing complete and could thus represent these added constructs but they simplify ... (add stuff here)
 
-\subsection{Type inference with Algorithm W}
+%\begin{description}
+%\item[The simple language] \hfill
+%\begin{description}
+%  \item[Variables] \hfill \\
+%    A variable is an expression.\\
+%    Ex. x is a valid expression.
+%   \item[Abstraction] \hfill \\
+%    An abstraction of a variable over some expression. (wording?)\\
+%    Ex. (\textbackslash x . x) is a valid expression.
+%   \item[Application] \hfill \\
+%    An application of an expression to another expression is an expression.\\
+%    Ex. (f x) is a valid expression.
+%   \item[Extensions] \hfill
+%\begin{description}
+%    \item[Let] \hfill \\
+%      A let expression, defining a variable within the scope\\
+%      of an expression, is an expression.\\
+%      Ex. (let x = n in (f x)) is a valid expression. 
+%    \item[Fix] \hfill \\
+%      The fixpoint combinator enables recursive expressions.\\
+%      A fixpoint combinator y satisfies y f = f (y f).
+%\end{description}
+%\end{description}
+%\end{description}
 
-Where the original Algorithm W uses a top-down approach we have chosen to implement it using a bottom-up approach (sometimes called Algorithm M REF: generalizing hindley-milner type inference algorithms, Heeren,Hage,Swierstra ). The bottom-up approach generates constraints on the types in a first pass and then solves these constraints producing the most general type for each expression.
+%\subsection{Type inference with Algorithm W}
 
-\begin{description}
-  \item[Generating constraints by inference rules] \hfill \\
-A first pass generates constraints on the types by a set of inference rules (see appendix). \todo{FILL OUT}
-  \item[Solving constraints by solving rules] \hfill \\
-Secondly we solve the inferred types using the accumulated constraints to produce the most general type for each expression. \todo{FILL OUT}
-\end{description}
+%Where the original Algorithm W uses a top-down approach we have chosen to implement it using a bottom-up approach (sometimes called Algorithm M REF: generalizing hindley-milner type inference algorithms, Heeren,Hage,Swierstra ). The bottom-up approach generates constraints on the types in a first pass and then solves these constraints producing the most general type for each expression.
+
+%\begin{description}
+%  \item[Generating constraints by inference rules] \hfill \\
+%A first pass generates constraints on the types by a set of inference rules (see appendix). \todo{FILL OUT}
+%  \item[Solving constraints by solving rules] \hfill \\
+%Secondly we solve the inferred types using the accumulated constraints to produce the most general type for each expression. \todo{FILL OUT}
+%\end{description}
