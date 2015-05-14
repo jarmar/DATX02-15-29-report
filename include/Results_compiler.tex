@@ -1,12 +1,28 @@
 \section{The Compiler}
 
-% Talk about the compiler as a program
-\todo{different output from compiler}
-% * Debugging info: parse tree, ast, typed ast, core
+The Hopper compiler comes with a selection of command line options for producing different kinds of helpful output. Optional command line arguments and explanations of their functionality can be seen in table \ref{tab:flags}.
+
+\begin{table}[!htb]
+\centering
+\begin{tabular}{| l | l | l |}
+\hline
+Shorthand flag & Full flag   & Functionality\\
+\hline
+-v             & --verbose   & Prints info about compilation progress\\
+-p             & --parse     & Writes the parse tree to a .parse.hpr file\\
+-a             & --ast       & Writes the abstract syntax tree to a .ast.hs file\\
+-t             & --typecheck & Writes the type checked tree to a .typed.hs file\\
+-c             & --core      & Writes the generated Core Erlang code to a .core file\\
+-b             & --nobeam    & Skip writing the target .beam file\\
+\hline
+\end{tabular}
+\caption[Hopper compiler optional arguments]{Hopper compiler optional arguments}
+\label{tab:flags}
+\end{table}
 
 \subsection{Supported language constructs}
 The compiler is capable of producing runnable Erlang Code on the same level as the expressiveness of the grammar. It can compile simple functions and \glspl{adt}, lambda expressions, control constructs like \texttt{if} and \texttt{case} expressions, pattern matching over arguments, and the use of tuples.
 
 \subsection{Unsupported language constructs}
-% Point out that it was designed
+
 Some features that were discussed and planned but not implemented in the compiler were a generic solution for accessing Erlangs \glspl{bif}, receive clauses and sequencing. However, some of these features, like accessing \glspl{bif} and emulating the receive clauses, are already provided by the compiler in some sense, but the idea was to build wrapping solutions for them in order to make Hopper as user friendly as possible.

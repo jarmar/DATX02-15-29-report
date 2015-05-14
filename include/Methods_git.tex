@@ -1,24 +1,9 @@
 \section{Code revision control}
 
-\todo{Assigned Johan L}
-
-
-\todo{reference Git}
-
 When developing the Hopper language, and implementing its compiler, Git\cite{git} was used for code revision control.
 Revision control systems enable development using several simultaneous contributors.
 A central repository is used to host the latest version of the code with group members
 being able to add features locally and push any changes to the central repository when done.  
 Furthermore Git, as most revision control systems, offers branching.
 
-\todo{Explain our branching approaches}
-
-%Branching is a method of realizing a non-linear development history and can be used for 
-%testing different solutions in parallel without disturbing other contributors work.
-%This means that the group can have several versions of the code and always have a
-%%latest working version while simultaneously working on different new features
-%to be added. Merging, putting the different versions of the code together, is often
-%quite simple when using Git and the overall work flow is improved compared to
-%multiple users working on the same piece of code. 
-%Due to the project's experimental nature, Git was the chosen revision control system 
-%for its branching functionality.
+To enable a flexible and parallel development process, different components and features in the project was implemented using branches. When said components and features were believed to be in a usable state, the containing branch was merged into a shared development branch.

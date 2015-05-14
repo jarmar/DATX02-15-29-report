@@ -1,22 +1,22 @@
 \chapter{Introduction}
 
-There is a trend toward more type checking, more concurrency, and more parallellism in modern programming languages as seen in Swift\cite{swift} and Rust\cite{rust}. Type checking to manage correctness in ever more complex systems, concurrency to manage large distributed systems and parallellism to utilize the growing number of cores available in computers. There currently exist eminent languages in each of these categories.
+There is a trend toward more type checking, more concurrency and more parallelism in modern programming languages. Type checking to manage correctness in ever more complex systems, concurrency to manage large distributed systems and parallelism to utilize the growing number of cores available in computers. Two examples following this trend are the Swift\cite{swift} and Rust\cite{rust} languages.
 
 \section{Problem}
 
-Each of these concerns have spawned viable solutions, notably Haskell\cite{haskell} for type systems and Erlang\cite{erlang} for concurrency and parallellism. But as far as the group knows there has been few successful attempts at combining these solutions in a language which offer the benefits of an strong type system togheter with the benefits of native concurrent and parallell features. We will take on the challenge of combining the merits of these fields in a new programming language called Hopper endowed with an expressive type system and with native facilities for concurrent and parallell programming. The question that the project aims to answer is whether a prototype for this new language can be implemented in such a way that it is powerful, containing the desired features, and usable.
+Each of these concerns have spawned viable solutions, notably Haskell\cite{haskell} for type systems and Erlang\cite{erlang} for concurrency and parallelism. But as far as the group knows there have been few successful attempts at combining these solutions into a language which offers the benefits from a strong type system together with the benefits of native concurrent and parallel features. The group will take on the challenge of combining the merits of these fields in a new programming language called Hopper, endowed with an expressive type system as well as native facilities for concurrent and parallel programming. The question that the project aims to answer is whether a prototype for this new language can be implemented in such a way that it is powerful, containing the desired features, and user friendly.
 
 \section{Purpose}
 
-We hope this report will give some insight into problems that arise in the melding of type systems with concurrent and parallell capabilities as well as provide som guidance in how they could be solved or in worst case how they should not be solved. This report might interest the programming language community and serve as a springboard into a more exhaustive attempt at integrating type systems with concurrent and parallell capabillities.
+The purpose of this report is to give some insights into problems that arise in the melding of type systems with concurrent and parallel capabilities. Further, it should also provide some guidance in how these problems could be solved, or in worst case how they should not be solved. This report might interest the programming language community and serve as a springboard into a more exhaustive attempt at combining an expressive type system with concurrent and parallel primitives.
 
 \section{Scope}
 
-As programming language design and implementation is an complex field of study we will need to limit the ambition of the project to fit the format of a bachelors thesis. Our aim is to create a prototype of the finished language. This give us some room to prioritize design at the expense of implementation details.  
+As programming language design and implementation is a complex field of study, the group will need to limit the ambition of the project to fit the format of a bachelor's thesis. The aim is to create a prototype of the target language. This will give some room to prioritize design at the expense of implementation details.
 
 \section{Report overview}
 
-In the following chapters we want to take the reader through some preliminaries to the design and implementation of the language to finally end up in discussion of the results and methodology.\\
+In the following chapters the reader will be guided through some preliminaries, to the design and implementation of the language, to finally end up in discussion of the results and methodology.\\[0.5cm]
 Chapter 2 details a short history and background of the technological frameworks. \\
 Chapter 3 explains the methodology used by the group and describes some project management tools. \\
 Chapter 4 explains the algorithms and implementation decisions made developing the prototype. \\

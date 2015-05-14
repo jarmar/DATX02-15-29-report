@@ -1,9 +1,5 @@
 \section{Code generator}
 
-\todo{Assignee Liam}
-
-\todo{consider use of commas and parentheses in this section}
-
 Generally the last step of a compiler is the code generation step. The code generator
 component should take an \gls{ast} much like one of the target language and translate it
 to actual code strings of the target language. Additionally, this component may also
@@ -20,13 +16,13 @@ said data structure. The code generator makes use of this package by building Co
 \subsection{Function applications}
 
 A substantial difference between Haskell and Erlang is how functions are applied to arguments. 
-In Haskell, all functions are of arity 1, and when functions are applied to several arguments, they are curried during runtime. This means that functions can be partially applied, in which case they return a function. This is useful for (among other things) the ability of composing new functions from already defined ones in a terse manner.
+In Haskell, all functions are of arity 1, and when functions are applied to several arguments, they are curried during runtime. This means that functions can be partially applied, in which case they return a function. This is useful when for example there is a need for composing new functions from already defined ones in a terse manner.
 
-In Erlang, functions (except for anonymous functions) are identified by its name and its arity, and can only be applied to a number of arguments that is exactly that of its arity. However, the types of the parameters passed are not significant when the function is called (though they may be of significance when the function body is evaluated), and function names can be shared by different functions if they have different arities.
+In Erlang, functions (except for anonymous functions) are identified by their names and arities, and can only be applied to a number of arguments that is exactly that of their arities. However, the types of the parameters passed are not significant when the function is called (though they may be of significance when the function body is evaluated), and function names can be shared by different functions if they have different arities.
 
 Hopper attempts to preserve Haskell's support for partial application. This, in combination with the fact that the Erlang compiler requires all function definitions to have a determined arity at compile time, results in the translation of functions being one of the non-trivial tasks of the code generator.
 
-We solve this by defining and calling an Erlang function curry, which turns all expressions either into functions of arity one or non-function values. The solution Hopper provides is a small Erlang function which adds the ability to curry functions during runtime. \todo{explain the curry solution in more detail, add curry.erl fil i appendix}
+This problem was solved by defining Erlang function curry, which turns all expressions either into functions of arity one or non-function values. The Core Erlang code produced by Hopper will contain calls to this function, resulting in functions being curried during runtime.
 
 In figure \ref{lst:hopperFun} and figure \ref{lst:coreFun} a simple Hopper function and the resulting Core Erlang code are shown respectively.
 
@@ -76,8 +72,7 @@ bool 1 = "True"
 
 \subsection{Algebraic data types and constructors}
 
-Another area where Haskell and Erlang differ is the use of \glspl{adt}. These kind  % these kinds or this kind?
-of data types do not exist in Erlang in the same way as they do in Haskell, i.e. with their heavy reliance
+Another area where Haskell and Erlang differ is the use of \glspl{adt}. These kinds of data types do not exist in Erlang in the same way as they do in Haskell, i.e. with their heavy reliance
 on constructors. When using pattern matching in Erlang, an entity called atom is instead used for
 handling specific cases. An atom is a literal constant with a name. Variables may hold atoms, and said variables can be pattern matched over different atoms for identifying different cases.
 

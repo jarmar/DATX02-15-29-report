@@ -1,6 +1,6 @@
-\section{General compiler}
-% möjlig ref till drakboken
-New languages are often developed to allow for a higher level of abstraction and a higher level of reasoning about algorithms. To be able to run these new languages compilers are built to convert the high level code down to machine code, to run directly on hardware, or to a lower level language to make use of that language's compiler. 
+\section{Compilers in general}
+
+New programming languages are often developed to allow for a higher level of abstraction and a higher level of reasoning about algorithms. To be able to run these new languages, compilers are built to convert the high level code either down to machine code, to run directly on hardware, or to an intermediate language to make use of already existing compilers.
 
 \begin{figure}[!ht]
   \centering
@@ -9,17 +9,10 @@ New languages are often developed to allow for a higher level of abstraction and
   \label{fig:generalpipeline}
 \end{figure}
 
-The structure of a compiler can be likened to a pipe where text flows through. 
-The text flowing through the pipe is transformed between different representations and is in
-the end output as runnable code to either run on the computer itself or on a virtual machine
-that emulates a computer. 
+The structure of a compiler can be likened to a pipe where text flows through. The text flowing through the pipe is transformed between different representations, and is in the end output as runnable code to either run on the computer itself or on a virtual machine that emulates a computer. 
 
-\todo{Read and improve!}
-To ensure that the compiled program is correct and does not do anything nonsencical \todo{change nonsensical? what do we mean? nonsensical might need a context for the reader if we keep it}, analysis is done on the code. This could be a call graph \todo{is call graph a too difficult example? will the reader understand?} to remove dead code or making sure that a variable is defined before use. Hopper, and Haskell somewhat famously, performs type checking, which is showing correctness by proving types.
+To ensure that the compiled program is correct and does what it is intended to do, analysis is performed upon the code. An example of such analysis is building a call graph to identify unreachable code and to make sure that variables are defined before use. Another example is type checking, where type correctness is proved, which is used heavily in Haskell.
 
-In figure ~\ref{fig:generalpipeline} you can see the flow handling the source code.
-It should be noted that the semantic analysis is optional for a language, it can
-fully rely on the grammar to expose errors. This will lead to a more expressive, 
-or less restricted, language but increases the risk of runtime crashes due to type errors.
+Figure~\ref{fig:generalpipeline} shows the flow handling of the source code. It should be noted that semantic analysis is optional: languages may rely entirely on the grammar as their only way to expose errors. This will lead to a more expressive, or less restricted, language, but increases the risk of runtime crashes due to type errors.
 
-We start by describing the first step of a compiler, the lexer and parser.
+The next section continues by describing the first step of the compilation process, lexing and parsing.

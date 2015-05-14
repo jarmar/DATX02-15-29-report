@@ -1,4 +1,20 @@
 \section{Modules}
 
-\todo{imports/exports, designad, implementerad, men buggig}
+\begin{figure}[!htb]
+\centering
+\begin{lstlisting} 
+module Hop (f, g, h) where
 
+import Control.Applicative
+import Data.Graph
+\end{lstlisting}
+\caption{Export listing and import statements}
+\label{lst:exportimport}
+\end{figure}
+
+%Nog bäst att ha namn på moduler vi implementerat/kan implementera själva där, t.ex. Functor/Applicative-klasser kan vi inte definiera p.g.a att syntaxen inte tillåter den här typsignaturen:
+%(a->b) -> f a -> f b
+%Att göra typen polymorfisk över f där leder till syntax error.
+
+Hopper supports a module system by providing export listings for declaring interfaces and import statements for declaring dependencies. Cyclical dependencies are reported as errors for simplicity and as a way to enforce separation of concerns.
+Information about the modules are stored in dedicated interface files. Type information propagation is however broken in the current version.

@@ -1,11 +1,7 @@
 \section{Parsing source code} \label{sec:bnfc}
 
-\todo{Assigned David}
+A programming language is similar to a natural language in that it is described by a grammar. Programming languages are however different in that they are built from their grammar and are thus unambiguous. The grammar describes ways in which the smaller pieces of the language can be put together to form more complex constructs.
 
+From such a grammar a lexer is produced. The job of the lexer is to match all words in the source code to tokens in the grammar. For example, in English the word "boat" would match a noun token. This list of tokens is combined with a parser to make expressions or sentences. To make the language as expressive as possible bigger expressions are built from smaller expressions. This creates a tree structure that will be easier to work with. 
 
-A programming language is similar to a natural language in that it is described by a grammar. Programming languages are however different in that they are built from their grammar and are thus unambiguous.
-The grammar describes ways in which the smaller pieces of the language can be put together to form bigger ones, often with more meaning. 
-
-From this grammar a lexer is produced. The lexers job is to match all words in the source code to tokens in the grammar. For example in english the word 'boat' would match a noun token. This list of tokens is combined with a parser to make expressions or sentences. To make the language as expressive as possible one build up bigger expressions out of smaller expressions. This will create a tree structure that will be easier to work with. 
-
-To save a lot of work, the lexer and parser can be automatically generated from a grammar written in \gls{bnf} using a tool called the \gls{bnfc} \cite{bnfc}, or BNFC for short. This tool is developed at Chalmers and used in earlier courses, meaning that multiple group members were already familiar with it.
+To save a lot of work, the lexer and parser can be automatically generated from a grammar written in \gls{bnf} using a tool called the \gls{bnfc}\cite{bnfc}, or BNFC for short. This tool is developed at Chalmers.
