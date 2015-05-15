@@ -1,6 +1,6 @@
 \section{The Grammar}
 
-The final grammar for the language supports most of the necessary syntax for a pure functional programming language.  The full grammar is in appendix \ref{app:grammar}, but the main features are:
+The final grammar for the language supports most of the necessary syntax for a pure functional programming language.  The full grammar is in appendix \ref{app:grammar}, but the main supported features are:
 
 % * Indent sensitive
 % * Type signatures 
@@ -20,7 +20,7 @@ The final grammar for the language supports most of the necessary syntax for a p
 % * Tuples
 % * Qualified functions and constructors
 \begin{itemize}
-  \item Indent sensitive
+  \item Indentation sensitivity
   \item Function definitions and type signatures
   \item Polymorphic abstract data types
   \item Lambda and case expressions
@@ -30,5 +30,4 @@ The final grammar for the language supports most of the necessary syntax for a p
   \item Qualification of functions, constructions and type constructors
 \end{itemize}
 
-Additional grammatical features % other word for feature
-were planned and designed but not implemented. Most of those features were syntactic sugar (e.g. for lists and tuples), but also syntax for simplifying repetitive tasks such as \texttt{IO} sequencing, also known in Haskell as \texttt{do}-notation. 
+Additional grammatical features\todo{other word for feature} were planned and designed but not implemented. Most of those features were various kinds of syntactic sugar (e.g. for lists and tuples), but also syntax for simplifying repetitive tasks such as \texttt{IO} sequencing, also known in Haskell as \texttt{do}-notation.\todo{isn't do-notation syntactic sugar?}

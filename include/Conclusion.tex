@@ -1,19 +1,7 @@
 \chapter{Conclusion}
 
-\todo{Point out the important good and bad stuff. Good: it can be done. Bad: We did it poorly}
+We set out to see if it was possible to combine an expressive type system with native facilities for concurrent and parallel programming. As a model for our type system and language syntax we chose Haskell and for the concurrency and parallellism primitives we chose Erlang. Both are very competent languages in their respective area. From the results and discussion chapters it is clear that it is possible to implement a type system for a functional language that run on the Erlang VM. It is however still not clear how to utilize the concurrent and parallel features of Erlang in this typed environment.
 
+It is evident from the discussion that most of the shortcomings of the project originates from administrative errors and a lack of communication coupled with a tight time frame. A lot of time that could have been put into design, experimental work and implementation was instead put into integrating contradicting components, reworking features and converging ideas. The time that was actually spent on feature development and experimentation proved fruitful. 
 
-%% Conclusion from: Results / Discussion
-
-%% Relate to problem statement/purpose
-
-%% We have not shown that it is possible to create the desired amalgamation. But we have not shown that it is not possible either. We have too little interaction with Erlang to make it a proper joining of the two areas of interest.
-
-
-%The initial goal of the project was to find out if a Haskell-like language for the Erlang VM was doable and if so - would it be useful? The conclusion we can draw from our results is that it is a good idea even though the Hopper language still is not a useful product for serious software development. What was produced in the bachelors thesis project can be seen as a prototype, and given time and resources Hopper can be made into a useful programming language.
-
-%Hopper could be used today as the pure part of an application. For example, using Hopper to implement a difficult algorithm but using Erlang as the glue to the rest of the system. However, a compiler should be user friendly in the sense of giving descriptive error messages for faulty code, give warnings about inconvenient code, which Hopper doesn't. 
-
-\todo{fill out and fix after results and introduction/purpose is done}
-
-\todo{potential future here or in discussion}
+The developed product, though somewhat limited, does what it is intended to do rather well. Its syntax is expressive and simple, it has a strong type system, and executing generated code produce the correct result for the examples we have written. There were a number of features designed and planned that did not make it into the final product, for example full support for message passing between processes written in Hopper and rich informative error output from the compiler. This adds to our belief that Hopper has potential. From this, it can be concluded that the future of Hopper is promising. Given time and resources, the programming language Hopper has the potential of growing into a useful alternative when developing applications for the Erlang virtual machine, and maybe even more.

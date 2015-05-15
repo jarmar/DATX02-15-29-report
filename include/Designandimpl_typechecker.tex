@@ -1,91 +1,152 @@
 \section{Type system}
 %Doesn't just check, it infers
 \label{sec:dai_tc}
-\todo{Assigned to Liam}
 
+Hopper's type checker was designed to provide compile-time guarantees about program behavior on Erlang's virtual machine. To do this it uses a variant of the Hindley-Milner\cite{TypeSchemes} type system upon which Haskell's system was initially based. While making Hopper's type system as powerful as Haskell's is today is beyond the scope of this project, Hindley-Milner still allows one to write useful typed programs. For example, one can define polymorphic data types and functions. To illustrate, figure~\ref{lst:tc_map} shows a definition of lists and the mapping function over it. 
 
-Hopper's type checker is designed to provide compile-time guarantees about program behaviour on Erlang's BEAM virtual machine. To do this, it uses a variant of the Hindley-Milner type system upon which Haskell's system was initially based (add source, put in glossary?). While making Hopper's type system as powerful as Haskell's is today is beyond the scope of this project, Hindley-Milner still allows one to write useful typed programs. For example, one can define polymorphic data types and functions as in Haskell. For example, here is a definiton of lists and the Haskell function map :: (a->b) -> [a] -> [b] in Hopper: \\ \\
-%Gör bilden fin plis!
-data List a = Cons a (List a) | Nil \\
-map f (Cons x xs) = Cons (f x) (map f xs) \\
-map \_ \_ = Nil \\ 
+\begin{figure}[!htb]
+\centering
+\begin{minipage}[b]{0.68\linewidth}
+\centering
+\begin{lstlisting}
+data List a = Cons a (List a) | Nil
 
-Just as in Haskell, the type for map is inferred; in general, type signatures do not need to be given to functions.
-%Borde jag skriva om konstruktorer här? De görs ju i TypeChecker-steget för att tillåta CodeGen att inte veta ngt. om typer.
+map f (Cons x xs) = Cons (f x) (map f xs)
+map _  _          = Nil
+\end{lstlisting}
+\end{minipage}
+\caption{Definition of a list data type and the map function}
+\label{lst:tc_map}
+\end{figure}
+
+The type for map is inferred; in general, type signatures do not need to be given to functions.
+
 \subsection{Implementation}
-The type checking module is based on the standard algorithm for Hindley-Milner type checking, Algorithm W (put ref here). It works by taking a list of definitions. Definitions are tuples of a name, a syntax tree that represents the value the name is defined to be, and an optional type signature. The type checker then divides the definitions into those which have type signatures and those that do not. The definitions without are further divided into groups of mutually recursive definitions. Those groups are strongly connected components in the functions' /dependency graph/ (put glossary entry here). For example, given the module: \\ \\
-module Example () where \\
-noTypeSig = 3 \\
-mutual1 = mutual2 \\
-mutual2 = mutual1 \\
-withTypeSig :: String \\
-withTypeSig = "I'm well typed!" \\
 
-noTypeSig will be divided into its own group of mutually recursive values, mutual1 and mutual2 will be in the same and withTypeSig will be treated separately. The next step is to infer the types of the definitions without type signatures. The mutually recursive groups are /topologically sorted/ (glossary entry?) so that any SCCs A which depends on another SCCs B already having been inferred is type checked after B. When a group of definitions (f1 = e1;f2 = e2 ... fn = en) is type checked and inferred, each name (f1 ... fn) is associated with a /type variable/ (glossary entry). Then the type of each expression (e1 ... en) is inferred by following a number of inference rules, which are best explained by example: \\ \\
-Literals are given suitable types\\
-3 :: Number \\
-"String" :: String \\
-Lambdas are of type a -> b, where a is the type of their argument and b the type of their result \\
-f = \textbackslash 42 -> "The answer to life, the universe and everything" :: Number -> String \\
-When an expression f :: a->b is applied to another expression x :: a, then the result has type b. \\
-f 42 :: String\\
-A named value whose type has already been inferred or has a type signature is assumed to have an /instance/ of that type where all type variables have a concrete type. For example, id :: a -> a will have the type a -> a for some /specific/ a. For example, in \\
-foo :: a -> List a -> List a \\
-foo x y = Cons (id x) (id y) \\
-the first use of id has type (a->a) while the second has type (List a -> List a). Note that the type of id is polymorphic in the type of foo!\\
-For the sake of brevity, not all rules have been mentioned. \\
+The type checking module is based on the standard algorithm for Hindley-Milner type checking, \Gls{algow}. It works by taking as input a list of definitions: tuples of a name, a syntax tree that represents the value the name is defined to be and an optional type signature. The type checker then divides the definitions into those which have type signatures and those that do not. Definitions without signatures are further divided into groups of mutually recursive definitions. Those groups are strongly connected components (\todo{glosa SCC})  in the functions' dependency graph \todo{put glossary entry here}. For example, in the module shown in figure~\ref{lst:tc_impl}, \texttt{noTypeSig} will be divided into its own group of mutually recursive values, \texttt{mutual1} and \texttt{mutual2} will be in the same and \texttt{withTypeSig} will be treated separately. 
 
-These rules generate a number of equations on type variables, e.g. \\
-"t = a -> a, List a = List Bool" \\ which are solved via a process called unification (glossary entry here). Unification converts such equations to a /constraint/: a map from type variables to types. In the above example, the solution would be "t = Bool -> Bool, a = Bool". Examples of equations with no solution are "Int = Bool" and "t = List t", which would generate an infinite type.
-When the types of (f1 ... fn) have been inferred to be (t1 ... tn), (f1 ... fn) will be assumed to be of those types during the rest of the type checking process. Once all SCCs have had their types inferred, the types of the definitions with type signatures are checked. If at any point in the type checking process a unification fails the type checker fails with an error message.
+\begin{figure}[!htb]
+\centering
+\begin{minipage}[b]{0.55\linewidth}
+\centering
+\begin{lstlisting}
+module Example where
+noTypeSig = 3
+mutual1 = mutual2
+mutual2 = mutual1
+withTypeSig :: String
+withTypeSig = "I'm well typed!"
+\end{lstlisting}
+\end{minipage}
+\caption{Example module with mutually recursive components}
+\label{lst:tc_impl}
+\end{figure}
 
-\subsection{Additional features}
-\subsubsection{Constructor definition}
-It is worth mentioning in passing that the definition of constructors is done by the type checker. The arity of a constructor depends on its type: for example, Cons :: a -> List a -> List a has arity 2. Creating the definition in the type checker simplifies the code generation step by allowing it to know nothing about the types of expressions. For further information on constructors, read section 4.6.
-\subsubsection{Prim.apply}
-To access Erlang bifs, a special function Prim.apply :: String -> String -> Number -> a has had its type hardcoded into the type checker. Prim.apply is defined in the Erlang module Prim.erl and takes a module name, a function name and an arity and returns the requisite function. For example, addition can be defined by: \\
-add :: Number -> Number -> Number
-add = Prim.apply "erlang" "+" 2 
+Once the definitions have been grouped, the next step is to infer the types of the definitions without type signatures. The mutually recursive groups are topologically sorted by dependency. Therefore any SCC \texttt{A} which depends on another SCC \texttt{B} already having been inferred is type checked after \texttt{B}. When a group of definitions \texttt{(f1 = e1;f2 = e2 ... fn = en)} is type checked and inferred, each name \texttt{(f1 ... fn)} is associated with a \gls{typevar}. Then the type of each expression \texttt{(e1 ... en)} is inferred by following a number of inference rules. For example, literals such as numbers and strings are given suitable types, and lambdas are of type \texttt{a -> b},  where \texttt{a} is the type of their argument and \texttt{b} the type of their result.
 
-\subsection{Experimental features}
+These rules generate a number of equations on type variables, for example \texttt{t = a -> a, List a = List Bool} which are solved via a process called \gls{unification}. This process converts such equations to a \gls{constraint}. In the previous example, the solution would be \texttt{t = Bool -> Bool, a = Bool}. Examples of equations with no solution are \texttt{Int = Bool} and \texttt{t = List t}, which would generate an infinite type.
+When the types of \texttt{(f1 ... fn)} have been inferred to be of types \texttt{(t1 ... tn)}, the named values \texttt{(f1 ... fn)} will be assumed to be of those types during the rest of the type checking process. Once all SCCs \todo{glosa} have had their types inferred, the definitions with type signatures have their types inferred and unified with their signatures. If at any point in the type checking process a unification fails, the type checker fails with an error message.
 
-The following features were added at the last minute and are not officially part of Hopper. Their syntax and semantics are not representative of production-ready Hopper should such a product ever see the light of day; indeed, their design was largely decided by circumstance. However, the power they add to the language justifies their inclusion in this report.
-\subsubsection{Implicit type arguments}
-The Hindley-Milner type system allows for a certain kind of polymorphism, namely qualified polymorphism. That allows one to define functions such as "reverse :: List a -> List a" and "id :: a -> a" and have them work for any type "a". The actual runtime value of id or reverse doesn't vary based on the type. However, there is another kind of polymorphism that Haskell provides: ad-hoc polymorphism. The Haskell function "sum :: Num a => [a] -> a" is an example of an ad-hoc-polymorphic value. It implicitly takes a dict (a data structure containing numeric operations for the type a) and uses it to add up all the elements. The value of that dict varies based on the type sum is applied to. Hopper does things slightly differently: instead of passing a dict, it allows functions to take an implicit type argument. For example, the function \\
-typeOf :: Implicit t -> t -> Type \\
-typeOf t \_ = t \\
-returns the type of its argument.
-Ad-hoc polymorphism is essential for typesafe message passing: for a Hopper process to be able to distinguish between receiving two values of different type but with the same runtime representation (e.g. Nil :: List Number and Nil :: List Bool), the type of the value needs to be included in the message at runtime. Defining Hopper's send function to take the type of the message as an implicit type argument makes that possible. \\
-Where to put this figure? \\
-data T2 t m = T2 t m \\
---the type, message pair that receive expects \\
-send :: Implicit t -> Pid -> t -> IO t \\
-send typ pid x = mkIO (\textbackslash \_ -> Prim.apply "erlang" "!" 2 pid (T2 typ x)) \\
+\subsection{Implicit type arguments}
 
-    
+The Hindley-Milner type system supports qualified polymorphism, which allows one to define functions such as \texttt{reverse :: List a -> List a} and \texttt{id :: a -> a} and have them work for any type \texttt{a}. The actual runtime value of \texttt{id} or \texttt{reverse} doesn't vary based on the type. However, there is another kind of polymorphism that Haskell provides: ad-hoc polymorphism. 
+%The Haskell function \texttt{sum :: Num a => [a] -> a} is an example of an ad-hoc-polymorphic value. It implicitly takes a method dictionary (a data structure containing numeric operations for the type \texttt{a}) as an argument and uses it to add up all the elements in the list. 
+Ad-hoc polymorphism allows functions to vary at runtime depending on the specific type they are given. Hopper does this by passing implicit type argument. Such a function could have the typ signa
 
-\subsubsection{Receive clauses}
-A central part of Erlang is the sending and receiving of messages. Erlang has primitive support for a so-called receive clause, which pattern matches on a process' mailbox until a specified waiting period has passed or until it finds a match. For example, \\
-receive true -> io:format("Received true!"); \\
-        \{X,Y\} -> io:format("Received a pair!")\\
-        after 3000 -> error(got\_nothing) end\\
-waits for three seconds to receive either 'true' or a pair before crashing. The ability to pattern match on incoming messages is a powerful feature; without it, message handling becomes much more verbose. Since there is no support for receive clauses in the parser, (how to write this? passive tone?) I transformed \\ \\
-case receive of \\
-    pattern1 -> expr \\
-    pattern1 -> expr2 \\
-    ... \\
-    After timeOut -> exprTimeOut \\ \\
-into a receive clause in the typechecker. Typesafe receive expects values to be sent in a pair along with their type. For interoperability with Erlang, non-typesafe receive is also available with the syntax \\ \\
-case unsafeReceive of \\
-    pattern1 -> expr \\
-    ... \\
-    After timeOut -> exprTimeOut \\
 
-To reflect the fact that they are impure, both forms of receive are of the type IO a, where a is the type of expr on the right-hand side of the case clauses.
+For example, the function in figure ~\ref{lst:tc_implicit} returns the type of its argument.
 
-\subsection{In short...}
+\begin{figure}[!htb]
+\centering
+\begin{minipage}[b]{0.55\linewidth}
+\centering
+\begin{lstlisting}
+typeOf :: Implicit t -> t -> Type
+typeOf t _ = t
+\end{lstlisting}
+\end{minipage}
+\caption{\todo{Caption here}}
+\label{lst:tc_implicit}
+\end{figure}
 
-Hopper's type system allows for polymorphic data types such as List and IO and polymorphic functions on them, typesafe message passing through send and receive, as well as a form of typeclasses. %Jag borde kunna skriva dessa exempel, beror på hur många buggar som poppar upp
+
+
+
+%Ad-hoc polymorphism is essential for typesafe message passing: for a Hopper process to be able to %distinguish between receiving two values of different type but with the same runtime representation (e.g. Nil :: List Number and Nil :: List Bool), the type of the value needs to be included in the message at runtime. Defining a send function to take the type of the message as an implicit type argument makes that possible. \\
+
+%Where to put this figure? \\
+%data T2 t m = T2 t m \\
+%--the type, message pair that receive expects \\
+%send :: Implicit t -> Pid -> t -> IO t \\
+%send typ pid x = mkIO (\textbackslash \_ -> Prim.apply "erlang" "!" 2 pid (T2 typ x)) \\
+
+\subsection{Algebraic data types and constructors}
+
+The arity of a constructor depends on its type: for example, Cons :: a -> List a -> List a has arity 2. That means that a constructor's runtime representation is dependent on its type.
+To simplify the code generation step the definition of constructors is done by the type checker. This means that the code generator does not have to handle \glspl{adt}. 
+
+\Glspl{adt} do not exist in Erlang in the same way as they do in Haskell, i.e. with their heavy reliance on constructors. When using pattern matching in Erlang, an entity called atom is instead used for handling specific cases. An atom is a literal constant with a name. Variables may hold atoms, and said variables can be pattern matched over different atoms for identifying different cases.
+
+In Hopper, \glspl{adt} are implemented and translated to Core Erlang in two specific cases: when they are processed, and when they are declared. Like in Haskell, variables in Erlang can
+hold any value, so the only problem to solve was how the values of \glspl{adt} should be represented in Erlang. The solution drew inspiration from the book \textit{Implementing functional languages: a tutorial} \cite{FunTutorial}, which (among other things) describes an approach to this problem where the values of \glspl{adt} are translated to tuples, holding the constructors (represented by unique integer values) as a tag, and their additional values. \Glspl{adt} in Hopper are translated in the same manner, but translates the constructors to atoms instead, to mimic the conventional structure of data in Erlang. Declared constructors are simply translated to functions, that takes a number of parameters (if any), and returns the value as a tuple representation as described above. Figures \ref{lst:hopperAdt} and \ref{lst:coreAdt} displays how \glspl{adt} values and constructors are translated from Hopper to Core Erlang.
+
+\begin{figure}[!htb]
+\centering
+\begin{lstlisting} 
+data Tree = Tree Number Tree Tree | Empty
+
+Tree 5 (Tree 3 (Tree 1 Empty Empty) 
+               (Tree 4 Empty Empty)) 
+       (Tree 7 Empty Empty)
+\end{lstlisting}
+\caption{Hopper ADT with example value}
+\label{lst:hopperAdt}
+\end{figure}
+
+\begin{figure}[!htb]
+\centering
+\begin{lstlisting} 
+{'tree', 5, {'tree', 3, {'tree', 1, 'empty', 'empty'},
+                        {'tree', 4, 'empty', 'empty'}},
+            {'tree', 7, 'empty', 'empty'}}
+\end{lstlisting}
+\caption[Core Erlang translation of constructor and example value]
+ {Core Erlang translation of the Hopper constructor and example value seen in figure \ref{lst:hopperAdt}}
+\label{lst:coreAdt}
+\end{figure}
+
+%\section{Prim.apply} : Experimental feature
+
+%To access Erlang bifs, a special function Prim.apply :: String -> String -> Number -> a has had its type hardcoded into the type checker. Prim.apply is defined in the Erlang module Prim.erl and takes a module name, a function name and an arity and returns the requisite function. For example, addition can be defined by: \\
+%add :: Number -> Number -> Number
+%add = Prim.apply "erlang" "+" 2 
+
+
+%The following features were added at the last minute and are not officially part of Hopper. Their %syntax and semantics are not representative of production-ready Hopper should such a product ever %see the light of day; indeed, their design was largely decided by circumstance. However, the power %they add to the language justifies their inclusion in this report.
+
+%subsubsection{Receive clauses} : Has been experimented with and there are signs of a positive future for this feature
+
+%A central part of Erlang is the sending and receiving of messages. Erlang has primitive support for a so-called receive clause, which pattern matches on a process' mailbox until a specified waiting period has passed or until it finds a match. For example, \\
+%receive true -> io:format("Received true!"); \\
+%        \{X,Y\} -> io:format("Received a pair!")\\
+%        after 3000 -> error(got\_nothing) end\\
+%waits for three seconds to receive either 'true' or a pair before crashing. The ability to pattern match on incoming messages is a powerful feature; without it, message handling becomes much more verbose. Since there is no support for receive clauses in the parser, (how to write this? passive tone?) I transformed \\ \\
+%case receive of \\
+%    pattern1 -> expr \\
+%    pattern1 -> expr2 \\
+%    ... \\
+%    After timeOut -> exprTimeOut \\ \\
+%into a receive clause in the typechecker. Typesafe receive expects values to be sent in a pair along with their type. For interoperability with Erlang, non-typesafe receive is also available with the syntax \\ \\
+%case unsafeReceive of \\
+%    pattern1 -> expr \\
+%    ... \\
+%    After timeOut -> exprTimeOut \\
+
+%To reflect the fact that they are impure, both forms of receive are of the type IO a, where a is the type of expr on the right-hand side of the case clauses.
+
+%\subsection{In short...}
+
+%Hopper's type system allows for polymorphic data types such as List and IO and polymorphic functions on them, typesafe message passing through send and receive, as well as a form of typeclasses. %Jag borde kunna skriva dessa exempel, beror på hur många buggar som poppar upp
 
 %What do we do in TC/Convert?\
 

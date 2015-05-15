@@ -1,9 +1,7 @@
 \section{Programming language}
 
-\todo{Assigned Jakob}
+The main implementation language chosen was Haskell. Since the aim of the project was to implement a Haskell-like language on the Erlang VM, Haskell and Erlang were prime candidates, as those choices would allow us to make use of their similarities to Hopper.
 
-We chose to use Haskell as the main programming language. There were several reasons for this choice. Since the aim of the project was to implement a Haskell-like language on the BEAM VM, Haskell and Erlang were prime candidates, as those choices would allow us to make use of their similarities to Hopper.
-
-Haskell has the advantage of being syntactically closer to what we wanted Hopper to be and being good for describing high level abstractions. Haskell also has well-used tools for compiler writing, such as \texttt{alex} and \texttt{happy} (Haskell's versions of the standard tools \texttt{lex}\cite{lex} and \texttt{yacc}\cite{yacc})), as well as the \gls{bnfc}. Erlang, on the other hand, is closer to what would be sent to the Erlang VM, but has less used tooling for writing compilers, and the group members were less experienced with Erlang.
+Haskell has the advantage of being syntactically closer to what we wanted Hopper to be and being good for describing high level abstractions. Haskell also has well-used tools for compiler writing, such as Alex\cite{alex} and Happy\cite{happy} (Haskell's versions of the standard tools Lex\cite{lex} and Yacc\cite{yacc}), as well as the \gls{bnfc}. Erlang, on the other hand, is closer to what would be sent to the Erlang VM but has less used tooling for writing compilers. Also, the group members were less experienced with Erlang.
 
 Sketching out the project there were plans of possibly moving from a Hopper compiler written in Haskell to a Hopper compiler written in Hopper. This is sometimes called a self-hosting compiler since it would then compile itself. However, this was quickly considered to be out of scope for the project.

@@ -41,6 +41,7 @@ Since the type checking was also a heavy theoretical subject there were many spr
 \subsection{Lack of mocking}
 
 The different parts of the compiler are strongly dependent on each other being present and functioning. As mentioned above, there were many sprint cycles before the type checker was functional. The effect of this on the development of the rest of the compiler could have been reduced by implementing a ``mock'' type checker which assumes all programs are fully and correctly typed, and does nothing. This would have allowed developing the other parts of the compiler independent of the progress on the type checker.
+\todo{Hade vi inte det?}
 
 \subsection{Responsibility rotation}
 

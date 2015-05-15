@@ -23,6 +23,12 @@
 
 % Type inference category
 
+\newglossaryentry{arity}
+{ name={arity},
+  description={The arity of a function is the number of arguments it accepts},
+  plural={arities}
+}
+
 \newglossaryentry{algow}
 { name={algorithm W},
   description={Algorithm W is an algorithm which infer the type of expressions in the Hindley-Milner type system}
@@ -55,6 +61,11 @@ Example $\forall a . a \to a$ has the type variable a bound by the universal qua
 \newglossaryentry{context}
 { name={context},
   description={See environment}
+}
+
+\newglossaryentry{currying}
+{ name={currying},
+  description={Translation the evaluation of a function that takes multiple arguments into evaluating a sequence of functions that take a single argument and return a new function}
 }
 
 \newglossaryentry{damas}
@@ -210,7 +221,7 @@ See recursion}
 
 \newglossaryentry{soundness}
 { name={soundness},
-  description={A property of formal systems. A system is sound if the inference rules only produce valid conclusions from valid premisses}
+  description={A property of formal systems. A system is sound if the inference rules only produce valid conclusions from valid premises}
 } % (look up reference, FOL?)}
 
 \newglossaryentry{subst}
