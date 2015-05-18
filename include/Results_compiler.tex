@@ -1,32 +1,52 @@
 \section{The Compiler}
 
-\todo{It's slightly weird to have this in the middle of the results part, since the compiler is the main result. It should go first or last (I think first).}
-
-\todo{Maybe the main usage should be mentioned, i.e. that the compiler takes a top-level module as argument and compiles it and all its dependencies?}
-
-The Hopper compiler comes with a selection of command line options for producing different kinds of helpful output. Optional command line arguments and explanations of their functionality can be seen in table \ref{tab:flags}.
+The Hopper compiler takes a list of \texttt{.hpr} files and compiles them, and the modules they depend on if needed. Apart from this, it may also take a selection of command line options for producing different kinds of helpful output. Optional command line arguments and explanations of their functionality can be seen in table \ref{tab:flags}.
 
 \begin{table}[!htb]
 \centering
 \begin{tabular}{| l | l | l |}
 \hline
-Shorthand flag & Full flag   & Functionality\\
+Shorthand flag & Full flag            & Functionality\\
 \hline
--v             & --verbose   & Prints info about compilation progress\\
--p             & --parse     & Writes the parse tree to a .parse.hpr file\\
--a             & --ast       & Writes the abstract syntax tree to a .ast.hs file\\
--t             & --typecheck & Writes the type checked tree to a .typed.hs file\\
--c             & --core      & Writes the generated Core Erlang code to a .core file\\
--b             & --nobeam    & Skip writing the target .beam file\\
+\texttt{-v}    & \texttt{--verbose}   & Print info about compilation progress\\
+\texttt{-p}    & \texttt{--parse}     & Write the parse tree to a \texttt{.parse.hpr} file\\
+\texttt{-a}    & \texttt{--ast}       & Write the abstract syntax tree to a \texttt{.ast.hs} file\\
+\texttt{-t}    & \texttt{--typecheck} & Write the type checked tree to a \texttt{.typed.hs} file\\
+\texttt{-c}    & \texttt{--core}      & Write the generated Core Erlang code to a \texttt{.core} file\\
+\texttt{-b}    & \texttt{--nobeam}    & Skip writing the target \texttt{.beam} file\\
 \hline
 \end{tabular}
-\caption[Hopper compiler optional arguments]{Hopper compiler optional arguments}
+\caption[Optional arguments for the Hopper compiler]{Optional arguments for the Hopper compiler}
 \label{tab:flags}
 \end{table}
 
-\subsection{Supported language constructs}
-The compiler is capable of producing runnable Erlang Code on the same level as the expressiveness of the grammar. It can compile simple functions and \glspl{adt}, lambda expressions, control constructs like \texttt{if} and \texttt{case} expressions, pattern matching over arguments, and the use of tuples.
 
-\subsection{Unsupported language constructs}
 
-Some features that were discussed and planned but not implemented in the compiler were a generic solution for accessing Erlangs \glspl{bif}, receive clauses and sequencing. However, some of these features, like accessing \glspl{bif} and emulating the receive clauses, are already provided by the compiler in some sense, but the idea was to build wrapping solutions for them in order to make Hopper as user friendly as possible.
+\subsection{Modules}
+
+\begin{figure}[!htb]
+\centering
+\begin{minipage}[b]{0.43\linewidth}
+\centering
+\begin{lstlisting}
+module Hop (f, g, h) where
+
+import Tree.BinaryTree
+import MyModel
+
+...
+\end{lstlisting}
+\end{minipage}
+\caption{Export listing and import statements}
+\label{lst:exportimport}
+\end{figure}
+
+Hopper supports a module system by providing export listings for declaring interfaces and import statements for declaring dependencies. Cyclical dependencies are reported as errors for simplicity and as a way to enforce separation of concerns.
+Information about the modules are stored in dedicated interface files. Type information propagation is however broken in the current version. In figure \ref{lst:exportimport} the syntax of exports and imports are shown, where \texttt{f}, \texttt{g} and \texttt{h} are exported functions.
+
+The fact that the Hopper compiler generates \gls{beam} modules allows for a degree of interoperability: Hopper modules may be integrated in applications written in Erlang in a transparent way. Some parts of the compiler are prepared for enabling Hopper code to make use of modules written using Erlang.
+
+\subsection{Type checker}
+
+The type checker is able to diagnose and report type errors in Hopper code as well as infer the types of definitions.
+It provides support for polymorphic \glspl{adt} such as lists and \texttt{Maybe} and polymorphic functions such as \texttt{map} and \texttt{fold}. %In addition, it supports type safe receive clauses and ad-hoc polymorphism in an experimental form.

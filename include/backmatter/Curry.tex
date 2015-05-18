@@ -1,0 +1,19 @@
+\chapter{\texttt{curry} implementation} \label{app:curry}
+
+
+\lstset{basicstyle=\ttfamily\scriptsize}
+
+
+\begin{figure}[!htb]
+\centering
+\begin{lstlisting} 
+
+curry(F) when is_function(F) ->
+	 {arity,N} = erlang:fun_info(F,arity),
+	 curry(F,N,[]);
+curry(X) -> X.
+curry(F,0,Args)->curry(apply(F,lists:reverse(Args)));
+curry(F,N,Args)->fun(X)->curry(F,N-1,[X|Args]) end.
+
+\end{lstlisting}
+\end{figure}

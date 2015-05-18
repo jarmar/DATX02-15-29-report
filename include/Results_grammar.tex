@@ -1,6 +1,6 @@
 \section{The Grammar}
 
-The final grammar for the language supports most of the necessary syntax for a pure functional programming language.  The full grammar is in appendix \ref{app:grammar}, but the main supported features are:
+The final grammar for the language supports most of the necessary syntax for a pure functional programming language.  The full grammar can be found in appendix \ref{app:grammar}. The main supported features are:
 
 % * Indent sensitive
 % * Type signatures 
@@ -24,10 +24,12 @@ The final grammar for the language supports most of the necessary syntax for a p
   \item Function definitions and type signatures
   \item Polymorphic abstract data types
   \item Lambda and case expressions
-  \item Operators
+  \item Primitive operators
   \item Pattern matching of primitives, tuples, constructors and variables
   \item Module definitions with imports and exports
   \item Qualification of functions, constructions and type constructors
 \end{itemize}
 
-Additional grammatical features\todo{other word for feature} were planned and designed but not implemented. Most of those features were various kinds of syntactic sugar (e.g. for lists and tuples), but also syntax for simplifying repetitive tasks such as \texttt{IO} sequencing, also known in Haskell as \texttt{do}-notation.\todo{isn't do-notation syntactic sugar?}
+Additional grammatical constructs were planned and designed but not implemented. Most of those features were various kinds of syntactic sugar, for example lists and tuples, but also syntax for simplifying repetitive tasks such as \texttt{IO} sequencing.
+
+Some primitive operators, such as arithmetic and relative, were hard coded into the product. There were plans for implementing a more generic solution for this where users would be able to import any Erlang \glspl{bif} and functions as desired in a type safe manner.

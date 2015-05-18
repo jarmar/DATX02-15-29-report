@@ -1,36 +1,30 @@
 \section{Code generator}
 
 Generally, the last step of a compiler is the code generation step. The code generator
-component should take a collection of \glspl{ast} much like those of the target language and translate it to actual code strings\todo{"the text representation"?} of the target language. Additionally, this component may also \todo{additionally ... also}
-perform some optimizations on the generated code before returning it \todo{"it finishes"?}.
+component should take a collection of \glspl{ast} and translate them to the target language. Additionally, this component may perform some optimizations on the generated code before it finishes.
 
 \subsection{Implementation}
 
-The code generator is implemented using the Language.CoreErlang \todo{formatting for package name, italic or texttt?} \cite{CoreErlang} package from Hackage\todo{maybe also bibliography link, or glossary}. % remove 'package from Hackage'?
-This package contains a Core Erlang parser, a data structure \todo{"set of data types"?} used for representing Core Erlang \glspl{ast} and a pretty printer for said data structure\todo{as above}. The code generator makes use of this package by building Core Erlang \glspl{ast} and then simply invoking the pretty printer on them to produce Core Erlang source code.
+The code generator is implemented using the \texttt{Language.CoreErlang}\cite{CoreErlang} package. It contains a Core Erlang parser, a set of data types used for representing Core Erlang \glspl{ast} and a pretty printer for said data types. The code generator makes use of this package by building Core Erlang \glspl{ast} and then invoking the pretty printer on them to produce Core Erlang source code.
 
 \subsection{Function applications}
 
-\todo{move the first two paragraphs to some other place? it's background rather than implementation details, though moving it to background would require redoing sections there.}
+A substantial difference between Haskell and Erlang is how functions are applied to arguments. In Haskell, all functions are of \gls{arity} 1, and when functions are applied to several arguments, they are \glslink{currying}{curried} during runtime. This means that functions can be partially applied, in which case they return a function. This is useful when for example there is a need for composing new functions from already defined ones in a terse manner.
 
-A substantial difference between Haskell and Erlang is how functions are applied to arguments. In Haskell, all functions are of \gls{arity} 1\todo{"arity 1" or "arity one"? the latter is used below}, and when functions are applied to several arguments, they are \glslink{currying}{curried} during runtime. This means that functions can be partially applied, in which case they return a function. This is useful when for example there is a need for composing new functions from already defined ones in a terse manner.
+Hopper attempts to mimic Haskell's support for partial application. This, in combination with the fact that the Erlang compiler requires all function definitions to have a determined \gls{arity} at compile time, results in the translation of functions being one of the non-trivial tasks of the code generator.
 
-In Erlang, functions (except for anonymous functions) are identified by their names and \glspl{arity}\todo{add an example like \texttt{max/2}?}, and can only be applied to the number of arguments that is exactly that of their \glspl{arity}\todo{singular?}. However, the types of the parameters passed are not significant when the function is called (though they may be of significance when the function body is evaluated)\todo{rewrite in terms of type checking rather than significance?}, and function names may be shared by different functions if they have different \glspl{arity}.
+This problem was solved by defining an Erlang function named \texttt{curry}, which turns all expressions either into functions of \gls{arity} 1 or into values. The Core Erlang code produced by Hopper will contain calls to this function, resulting in functions being curried during runtime. The implementation of the curry function can be seen in Appendix~\ref{app:curry}.
 
-Hopper attempts to preserve\todo{some other word? in swedish "efterlikna" would be nice but i don't know an english word without negative connotations..} Haskell's support for partial application. This, in combination with the fact that the Erlang compiler requires all function definitions to have a determined \gls{arity} at compile time, results in the translation of functions being one of the non-trivial tasks of the code generator.
-
-This problem was solved by defining an Erlang function named \texttt{curry}, which turns all expressions either into functions of \gls{arity} one or non-function values. The Core Erlang code produced by Hopper will contain calls to this function, resulting in functions being curried during runtime.
-
-In figure \ref{lst:hopperFun} and figure \ref{lst:coreFun} a simple Hopper function and the resulting Core Erlang code are shown respectively.\todo{maybe we should explain to the reader *why* it is necessary for the core erlang code to become so much longer}
+In figure \ref{lst:hopperFun} and figure \ref{lst:coreFun} a simple Hopper function and the resulting Core Erlang code are shown respectively.
 
 \begin{figure}[!htb]
 \centering
 \begin{minipage}[b]{0.38\linewidth}
 \centering
 \begin{lstlisting}
-bool :: Int -> String
-bool 0 = "False"
-bool 1 = "True"
+f :: Int -> String
+f 0 = "False"
+f 1 = "True"
 \end{lstlisting}
 \end{minipage}
 \caption{Simple Hopper function}
@@ -40,7 +34,7 @@ bool 1 = "True"
 \begin{figure}[!htb]
 \centering
 \begin{lstlisting}
-'bool'/1 =
+'f'/1 =
   fun(X@1) ->
     case {X@1} of
       {P_arg1} when 'true' ->
@@ -57,22 +51,18 @@ bool 1 = "True"
          primop 'match_fail'({'case_clause', _cor1})
        -| ['compiler_generated'])
     end
-'__bool'/0 =
+'__f'/0 =
   fun() ->
     apply call 'erlang':'make_fun'
-               ('Prim', 'curry', 1)('bool'/1)
+               ('Prim', 'curry', 1)('f'/1)
 \end{lstlisting}
 \caption[Generated Core Erlang translation of function]
  {Core Erlang translation of the Hopper function seen in figure \ref{lst:hopperFun}}
 \label{lst:coreFun}
 \end{figure}
 
-\subsection{Emulating the erlang compiler}
+\subsection{Emulating the Erlang compiler}
 
-\todo{is "emulating" the best available word here?}
+One downside to the choice of compiling to Core Erlang and then invoking the Erlang compiler \todo{bibliography link here} is the loss of additions and optimizations. To deal with this the code generator has been given additional functionality to emulate the behavior of the Erlang compiler prior to generating Core Erlang. 
 
-One downside to the choice of compiling to Core Erlang and then invoking the erlc\todo{"the erlc" => "erlc"? while "the" makes sense if you expand the name, you probably wouldn't say e.g. "the gcc"}
-(bibliography link here) is the loss of the additions and optimizations the erlc
-compiler makes when it compiles Erlang to Core Erlang in its pipeline. To deal with this
-the code generator has been given additional functionality to emulate the pre Core Erlang
-behaviour of the erlc compiler. The currently implemented behaviour is the generation of module info functions that return information about the module when invoked, and an additional case to all case clauses which catches any unmatched case and throws a run time exception.
+The currently implemented behavior is the generation of \texttt{module\_info} functions that return information about the module when invoked, and an additional case to all case expressions which catches any unmatched case and throws a run time exception.

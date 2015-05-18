@@ -17,7 +17,7 @@
 \input{include/frontmatter/Titlepage}
 
 % ABSTRACT
-\newpage
+\newpage                 
 \input{include/frontmatter/Abstract}
 
 % ACKNOWLEDGEMENTS
@@ -29,7 +29,7 @@
 \tableofcontents
 
 % GLOSSARY
-\glsaddall
+% "\glsaddallunused" at the bottom adds in unused glossaries and avoids putting "ix" on all entries which \glsaddall causes
 \printglossaries
 
 % OTHER FRONTMATTER
@@ -84,8 +84,11 @@
 
 \input{include/backmatter/Grammar}
 %\input{include/backmatter/Inference}
+\input{include/backmatter/Curry}
 \input{include/backmatter/Code_example_hopper}
 \input{include/backmatter/Code_example_core}
 \end{appendices}
 
+%\glsaddallunused
+%\glsaddall
 \end{document}

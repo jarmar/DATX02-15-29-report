@@ -2,7 +2,7 @@
 %Doesn't just check, it infers
 \label{sec:dai_tc}
 
-Hopper's type checker was designed to provide compile-time guarantees about program behavior on Erlang's virtual machine. To do this it uses a variant of the Hindley-Milner\cite{TypeSchemes} type system upon which Haskell's system was initially based. While making Hopper's type system as powerful as Haskell's is today is beyond the scope of this project, Hindley-Milner still allows one to write useful typed programs. For example, one can define polymorphic data types and functions. To illustrate, figure~\ref{lst:tc_map} shows a definition of lists and the mapping function over it. 
+Hopper's type checker was designed to provide compile-time guarantees about program behavior on Erlang's virtual machine. To do this it uses a variant of the Hindley-Milner\cite{TypeSchemes} \gls{typesystem} upon which Haskell's system was initially based. While making Hopper's type system as powerful as Haskell's is today is beyond the scope of this project, Hindley-Milner still allows one to write useful typed programs. For example, one can define \glslink{polymorph}{polymorphic data types} and functions. To illustrate, figure~\ref{lst:tc_map} shows a definition of lists and the mapping function over it. 
 
 \begin{figure}[!htb]
 \centering
@@ -23,7 +23,7 @@ The type for map is inferred; in general, type signatures do not need to be give
 
 \subsection{Implementation}
 
-The type checking module is based on the standard algorithm for Hindley-Milner type checking, \Gls{algow}. It works by taking as input a list of definitions: tuples of a name, a syntax tree that represents the value the name is defined to be and an optional type signature. The type checker then divides the definitions into those which have type signatures and those that do not. Definitions without signatures are further divided into groups of mutually recursive definitions. Those groups are strongly connected components (\todo{glosa SCC})  in the functions' dependency graph \todo{put glossary entry here}. For example, in the module shown in figure~\ref{lst:tc_impl}, \texttt{noTypeSig} will be divided into its own group of mutually recursive values, \texttt{mutual1} and \texttt{mutual2} will be in the same and \texttt{withTypeSig} will be treated separately. 
+The type checking module is based on the standard algorithm for \glslink{hmtypesystem}{Hindley-Milner type checking}, \Gls{algow}. It works by taking as input a list of definitions: tuples of a name, a syntax tree that represents the value the name is defined to be and an optional type signature. The type checker then divides the definitions into those which have type signatures and those that do not. Definitions without signatures are further divided into groups of mutually recursive definitions. Those groups are \glspl{scc} in the functions' \gls{depgraph}. For example, in the module shown in figure~\ref{lst:tc_impl}, \texttt{noTypeSig} will be divided into its own group of mutually recursive values, \texttt{mutual1} and \texttt{mutual2} will be in the same and \texttt{withTypeSig} will be treated separately. 
 
 \begin{figure}[!htb]
 \centering
@@ -42,34 +42,16 @@ withTypeSig = "I'm well typed!"
 \label{lst:tc_impl}
 \end{figure}
 
-Once the definitions have been grouped, the next step is to infer the types of the definitions without type signatures. The mutually recursive groups are topologically sorted by dependency. Therefore any SCC \texttt{A} which depends on another SCC \texttt{B} already having been inferred is type checked after \texttt{B}. When a group of definitions \texttt{(f1 = e1;f2 = e2 ... fn = en)} is type checked and inferred, each name \texttt{(f1 ... fn)} is associated with a \gls{typevar}. Then the type of each expression \texttt{(e1 ... en)} is inferred by following a number of inference rules. For example, literals such as numbers and strings are given suitable types, and lambdas are of type \texttt{a -> b},  where \texttt{a} is the type of their argument and \texttt{b} the type of their result.
+Once the definitions have been grouped, the next step is to infer the types of the definitions without type signatures. The mutually recursive groups are \glslink{topsort}{topologically sorted} by dependency. Therefore any \gls{scc} \texttt{A} which depends on another \gls{scc} \texttt{B} already having been inferred is type checked after \texttt{B}. When a group of definitions \texttt{(f1 = e1;f2 = e2 ... fn = en)} is type checked and inferred, each name \texttt{(f1 ... fn)} is associated with a \gls{typevar}. Then the type of each expression \texttt{(e1 ... en)} is inferred by following a number of inference rules. For example, literals such as numbers and strings are given suitable types, and lambdas are of type \texttt{a -> b},  where \texttt{a} is the type of their argument and \texttt{b} the type of their result.
 
 These rules generate a number of equations on type variables, for example \texttt{t = a -> a, List a = List Bool} which are solved via a process called \gls{unification}. This process converts such equations to a \gls{constraint}. In the previous example, the solution would be \texttt{t = Bool -> Bool, a = Bool}. Examples of equations with no solution are \texttt{Int = Bool} and \texttt{t = List t}, which would generate an infinite type.
-When the types of \texttt{(f1 ... fn)} have been inferred to be of types \texttt{(t1 ... tn)}, the named values \texttt{(f1 ... fn)} will be assumed to be of those types during the rest of the type checking process. Once all SCCs \todo{glosa} have had their types inferred, the definitions with type signatures have their types inferred and unified with their signatures. If at any point in the type checking process a unification fails, the type checker fails with an error message.
+When the types of \texttt{(f1 ... fn)} have been inferred to be of types \texttt{(t1 ... tn)}, the named values \texttt{(f1 ... fn)} will be assumed to be of those types during the rest of the type checking process. Once all \glspl{scc} have had their types inferred, the definitions with type signatures have their types inferred and unified with their signatures. If at any point in the type checking process a \gls{unification} fails, the type checker fails with an error message.
 
 \subsection{Implicit type arguments}
 
-The Hindley-Milner type system supports qualified polymorphism, which allows one to define functions such as \texttt{reverse :: List a -> List a} and \texttt{id :: a -> a} and have them work for any type \texttt{a}. The actual runtime value of \texttt{id} or \texttt{reverse} doesn't vary based on the type. However, there is another kind of polymorphism that Haskell provides: ad-hoc polymorphism. 
+The \gls{hmtypesystem} supports qualified \gls{polymorph}, which allows one to define functions such as \texttt{reverse :: List a -> List a} and \texttt{id :: a -> a} and have them work for any type \texttt{a}. The actual runtime value of \texttt{id} or \texttt{reverse} doesn't vary based on the type. However, there is another kind of polymorphism called ad-hoc \gls{polymorph} that allows functions to vary at runtime depending on the specific type they are given. Hopper does this by implicitly passing type arguments.
+
 %The Haskell function \texttt{sum :: Num a => [a] -> a} is an example of an ad-hoc-polymorphic value. It implicitly takes a method dictionary (a data structure containing numeric operations for the type \texttt{a}) as an argument and uses it to add up all the elements in the list. 
-Ad-hoc polymorphism allows functions to vary at runtime depending on the specific type they are given. Hopper does this by passing implicit type argument. Such a function could have the typ signa
-
-
-For example, the function in figure ~\ref{lst:tc_implicit} returns the type of its argument.
-
-\begin{figure}[!htb]
-\centering
-\begin{minipage}[b]{0.55\linewidth}
-\centering
-\begin{lstlisting}
-typeOf :: Implicit t -> t -> Type
-typeOf t _ = t
-\end{lstlisting}
-\end{minipage}
-\caption{\todo{Caption here}}
-\label{lst:tc_implicit}
-\end{figure}
-
-
 
 
 %Ad-hoc polymorphism is essential for typesafe message passing: for a Hopper process to be able to %distinguish between receiving two values of different type but with the same runtime representation (e.g. Nil :: List Number and Nil :: List Bool), the type of the value needs to be included in the message at runtime. Defining a send function to take the type of the message as an implicit type argument makes that possible. \\
@@ -82,13 +64,10 @@ typeOf t _ = t
 
 \subsection{Algebraic data types and constructors}
 
-The arity of a constructor depends on its type: for example, Cons :: a -> List a -> List a has arity 2. That means that a constructor's runtime representation is dependent on its type.
-To simplify the code generation step the definition of constructors is done by the type checker. This means that the code generator does not have to handle \glspl{adt}. 
+The arity of a constructor depends on its type. For example, \texttt{Cons :: a -> List a -> List a} has arity 2. That means that a constructor's runtime representation is dependent on its type.
+To simplify the code generation step the conversion from type signature to function definition is done by the type checker. This means that the code generator does not have to handle \glspl{adt}. 
 
-\Glspl{adt} do not exist in Erlang in the same way as they do in Haskell, i.e. with their heavy reliance on constructors. When using pattern matching in Erlang, an entity called atom is instead used for handling specific cases. An atom is a literal constant with a name. Variables may hold atoms, and said variables can be pattern matched over different atoms for identifying different cases.
-
-In Hopper, \glspl{adt} are implemented and translated to Core Erlang in two specific cases: when they are processed, and when they are declared. Like in Haskell, variables in Erlang can
-hold any value, so the only problem to solve was how the values of \glspl{adt} should be represented in Erlang. The solution drew inspiration from the book \textit{Implementing functional languages: a tutorial} \cite{FunTutorial}, which (among other things) describes an approach to this problem where the values of \glspl{adt} are translated to tuples, holding the constructors (represented by unique integer values) as a tag, and their additional values. \Glspl{adt} in Hopper are translated in the same manner, but translates the constructors to atoms instead, to mimic the conventional structure of data in Erlang. Declared constructors are simply translated to functions, that takes a number of parameters (if any), and returns the value as a tuple representation as described above. Figures \ref{lst:hopperAdt} and \ref{lst:coreAdt} displays how \glspl{adt} values and constructors are translated from Hopper to Core Erlang.
+In Hopper, \glspl{adt} are implemented and translated to Core Erlang in two primary cases: when they are used, and when they are declared. The implementation drew inspiration from the book \textit{Implementing functional languages: a tutorial} \cite{FunTutorial}, which describes an approach to this problem where the values of \glspl{adt} are translated to tuples, holding the constructors (represented by unique integer values) as a tag, and their additional values. \Glspl{adt} in Hopper are translated in the same manner, but translates the constructors to atoms instead to mimic the conventional structure of data in Erlang. Declared constructors are translated to functions that take a number of parameters and returns a tuple containing the constructor name and the arguments. Figures \ref{lst:hopperAdt} and \ref{lst:coreAdt} displays how \glspl{adt} values are translated from Hopper to Core Erlang.
 
 \begin{figure}[!htb]
 \centering
@@ -110,8 +89,8 @@ Tree 5 (Tree 3 (Tree 1 Empty Empty)
                         {'tree', 4, 'empty', 'empty'}},
             {'tree', 7, 'empty', 'empty'}}
 \end{lstlisting}
-\caption[Core Erlang translation of constructor and example value]
- {Core Erlang translation of the Hopper constructor and example value seen in figure \ref{lst:hopperAdt}}
+\caption[Runtime representation of an \gls{adt} value]
+ {Runtime representation of the Hopper \gls{adt} seen in figure \ref{lst:hopperAdt}}
 \label{lst:coreAdt}
 \end{figure}
 

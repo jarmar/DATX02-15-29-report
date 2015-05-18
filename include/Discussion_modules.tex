@@ -1,18 +1,16 @@
 \section{Modules}
 
-Several of the choices made while designing and implementing the module system were made with the goal of easy implementation, rather than being as useful as possible to the end user. However, those choices were made with consideration to whether it would be difficult to add in such features at a later date.
+Several of the choices made while designing and implementing the module system were made with the goal of easy implementation, rather than the Hopper language being as useful as possible to the end user. However, those choices were made with consideration as to whether it would be difficult to add in such features at a later stage.
 
-\todo{does text about possible further work fit in as below?}
-
-Only qualified imports, in the Haskell sense of the word, are available since this meant we did not have to worry about handling name conflicts which could occur if identifiers by the same name \todo{usage of "identifier" might be bad here..} were imported from different modules. However, since \todo{is this mentioned?} the renamer already has a step where module-internal names are converted into their qualified form, this step could be modified to use a lookup table of imported identifiers.
+Only qualified imports, in the Haskell sense of the word, are available since this meant the group did not have to worry about handling name conflicts which could occur if identifiers by the same name were imported from different modules. However, since there already is a step in the compiler where module-internal names are converted into their qualified form, this step could be modified to use a lookup table of imported identifiers.
 
 The restriction to a single source tree is somewhat more grave, as it makes the concept of Hopper libraries very impractical. However, this restriction is reasonable given the scope of the project.
 
-Another shortcoming in the module system is the fact that projects are always recompiled in entirety. A possible future improvement would be to make the compiler recompile only those that depend on changed modules.
+Another shortcoming in the module system is the fact that programs implemented using Hopper are always recompiled in their entirety. A possible future improvement would be to make the compiler recompile only those that depend on changed modules.
 
-Despite these shortcomings, the basic module system as implemented is, with the exception of some bugs \todo{remove this?}, well functioning and successfully allows for projects consisting of multiple modules without too much inconvenience for the programmer.
+Despite these shortcomings the basic module system as implemented is, with the exception of some bugs, well functioning. It successfully allows for projects consisting of multiple modules without too much inconvenience for the programmer.
 
-Another consideration when implementing the module system was whether or not to use interface files. As the compiler currently does not support partial recompilation, the interface files are recreated entirely each time the project is compiled. In theory, the information contained in the interface files could instead be propagated internally in the compiler process. However, the usage of interface files allowed for very simple implementation of dependency compilation. The main \texttt{compile} function is literally two rows long: first generating a compile order and then compiling each file in order, as shown in Figure~\ref{lst:compile}. Further, a solution without interface files would have to be changed if partial recompilation was added in.
+Another consideration when implementing the module system was whether or not to use interface files. As the compiler currently does not support partial recompilation, the interface files are recreated entirely each time the project is compiled. In theory, the information contained in the interface files could instead be propagated internally in the compiler process. However, the usage of interface files allowed for very simple implementation of dependency compilation. The main \texttt{compile} function is literally two lines of code: first generating a compile order and then compiling each file in order, as shown in figure~\ref{lst:compile}. Further, a solution without interface files would have to be changed if partial recompilation was added in.
 
 \begin{figure}[!ht]
 \centering

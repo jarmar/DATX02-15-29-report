@@ -2,18 +2,16 @@
 
 \subsection{Documentation}
 
-A general consensus between group members to keep the code base well documented were not followed up or enforced by the group. This led to parts of the code being very well documented and others being less readable and understandable than preferred. This is something that could be fixed and should be if the Hopper language project is continued.
+A general consensus between group members to keep the code base well documented was not followed up or enforced by the group. This led to parts of the code being very well documented and others being less readable and understandable than preferred. This is something that could be fixed and should be if the Hopper language project is continued.
 
 \subsection{Testing}
 
-Plans for a thorough test suite were fulfilled and kept for a while but with the incremental changes made to the compiler pipeline maintaining the test code proved a challenge as tests became outdated. When a more stable pipeline is up this could once again be a priority.
+Plans for a thorough test suite were followed initially. However, large changes made to the compiler pipeline made maintaining the test code a challenge as tests quickly became outdated. A stronger focus on testing and maintenance could have led to more reliable code. When a more stable pipeline is up this could once again be a priority.
 
 \subsection{Usability}
 
-The intent was for the language and compiler to be user friendly with an easy to use syntax, descriptive error messages and adequate warnings for optimizable code.
-
-For the resulting prototype of the project, and the features it contains, the goal of an easy to use syntax is mostly fulfilled. The resemblance between Hopper code and Haskell code is evident and should make Hopper accessible to many functional programmers. % too vague? -> mostly fufilled
-
+The intent was for the language and compiler to be user friendly with an easy to use syntax and descriptive error messages.
+For the resulting prototype of the project and the features it contains, the goal of an easy to use syntax is mostly fulfilled. The resemblance between Hopper code and Haskell code is evident and should make Hopper accessible to many functional programmers. % too vague? -> mostly fulfilled
 Error messages and warnings were designed but not implemented. The project focused on getting the compiler working for correct code to begin with and did not reach a point where these additions could be made.
 
 % designed but not implemented, we focused on the compiler working for correct code to begin with, no meta information being passed on in the compiler pipeline yet
@@ -21,3 +19,9 @@ Error messages and warnings were designed but not implemented. The project focus
 % Could be used as the pure part in an application. For example using Hopper to implement an difficult algorithm but using Erlang as the glue to the rest of the system. 
 
 %% Something like: Furthermore, a compiler should be user friendly in the sense of giving descriptive error messages for faulty code, give warnings about inconvenient code, etc.
+
+\subsection{Interoperability}
+
+%\todo{it would be nice to mention somewhere that interoperability with type safety would require some way to declare the type of an imported erlang function, i.e. some kind of FFI declaration}
+
+The fact that the Hopper compiler generates BEAM modules allows for a degree of interoperability: Hopper modules may be integrated in applications written in Erlang. Some parts of the compiler are prepared for enabling Hopper code to make use of modules written using Erlang. This would enable Hopper written code to access the already established Erlang library, and opens up for a future where Hopper written libraries may be accessed in Erlang written applications.
