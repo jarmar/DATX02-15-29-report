@@ -34,8 +34,67 @@ f = case a of
 \label{lst:renamer1}
 \end{figure}
 
-The Renamer has a few more tasks to take care of. First it transforms the \glspl{adt} and gathers functions defined with pattern matching and merges them. When the renamer encounters an \gls{adt} definition it converts each constructor to a function with just a type. With this the type checker can verify that it is used correctly and leaving it fully to the code generation to implement it without any dependencies.
+The Renamer has a few more tasks to take care of. First it transforms the \glspl{adt} and gathers functions defined with pattern matching and merges them. When the renamer encounters an \gls{adt} definition it converts each constructor to a function with just a type. With this the type checker can verify that it is used correctly and leaving it fully to the code generation to implement it without any dependencies. This transformation can be seen in figure~\ref{lst:renamer2}.
+
+\begin{figure}[ht]
+\centering
+\lstset{mathescape=true,literate={=>}{$\Rightarrow{}$}{1}}%,frame=lrtb}
+\begin{minipage}[t]{0.30\linewidth}
+    \centering
+    \begin{lstlisting}
+data Maybe a =
+  Just a  | 
+  Nothing
+    \end{lstlisting}
+\end{minipage}
+\begin{minipage}[t]{0.09\linewidth}
+    \centering
+    \begin{lstlisting}
+
+=>
+    \end{lstlisting}
+\end{minipage}
+\begin{minipage}[t]{0.30\linewidth}
+    \centering
+    \begin{lstlisting}
+Just :: a -> Maybe a
+Nothing :: Maybe a
+    \end{lstlisting}
+\end{minipage}
+\caption{Transforming an ADT to two function types}
+\label{lst:renamer2}
+\end{figure}
 
 Second it annotates all the identifiers, except variables bound in a pattern matching scope, with the module name. This removes the ambiguity between functions that have the same name but are defined in different modules. Lastly it checks a list of \glspl{bif} to switch them out for calls to the virtual machine instead of regular user defined function calls.
 
-While implementing the renamer much consideration was taken as to what later stages of the compilation needed. For example, while Erlang allows pattern matching in functions Core Erlang does not. This is the reason for merging function definitions to a single definition with a case expression and each previous function as a clause. For the same reason the type representation was changed to fit better with the type checker.
+While implementing the renamer much consideration was taken as to what later stages of the compilation needed. For example, while Erlang allows pattern matching in functions Core Erlang does not. This, as shown in figure~\ref{lst:renamer3}, is the reason for merging function definitions to a single definition with a case expression and each previous function as a clause. For the same reason the type representation was changed to fit better with the type checker.
+
+\begin{figure}[ht]
+\centering
+\lstset{mathescape=true,literate={=>}{$\Rightarrow{}$}{1}}%,frame=lrtb}
+\begin{minipage}[t]{0.30\linewidth}
+    \centering
+    \begin{lstlisting}
+f 0 = 0
+f n = n * f (n-1)
+    \end{lstlisting}
+\end{minipage}
+\begin{minipage}[t]{0.09\linewidth}
+    \centering
+    \begin{lstlisting}
+
+=>
+    \end{lstlisting}
+\end{minipage}
+\begin{minipage}[t]{0.30\linewidth}
+    \centering
+    \begin{lstlisting}
+f = \ a -> case a of
+        0 -> 0
+        n -> n * f (n-1)
+      
+    \end{lstlisting}
+\end{minipage}
+\caption{Transforming a pattern matching function to a case expression}
+\label{lst:renamer3}
+\end{figure}

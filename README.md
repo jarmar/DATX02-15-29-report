@@ -2,17 +2,10 @@
 Final report for the Haskerl bachelors thesis
 
 ## Things to do this afternoon
- - Go through glossary
- - Look through texts for potential glossary words
- - isn't -> is not...
- - Language review
- - Use of commas. (some of these can be skipped sometimes)
-   1. The first, second, and third element of a list. (listing, use Oxford comma?)  
-   2. Hopper is cool, and the compiler is nice. (with conjunction)  
-   3. As a prototype, Hopper is successful. (introductory part)  
-   4. Designing Hopper, and its compiler, was super duper fun. (parenthetical part)  
-      (taken from http://grammar.ccc.commnet.edu/grammar/commas.htm)
- - 
+### Björns comments
+ - glossary entry for type system to detailed
+ - glossary entry for type varaible self explanatory? like dependency graph
+ - 2.3: and are thus unambiguous -> and are unambiguous ? 
  
 ## Build instructions
 TODO: work in progress

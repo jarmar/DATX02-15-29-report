@@ -1,0 +1,7 @@
+\section{Related work}
+%nytt
+Previous attempts to combine the features of Erlang and Haskell have been made, illustrating the demand for a combination of the languages' features.
+
+Attempts to port Erlang features to Haskell include Cloud Haskell \cite{cloudhaskell}, which is ``Erlang in a library'', essentially implementing Erlang's runtime system in Haskell. However, a lack of syntactic support for message passing in Haskell make shipping expressions between nodes more verbose than in Erlang.
+
+Efforts have also been made to port Haskell features to Erlang. One example is the Haskell to Erlang transpiler backend to YHC \cite{yhc}, which preserves laziness. A similar project is Haskerl \cite{haskerl}, which compiles a subset of Haskell to the \gls{beam}. However, we did not find projects which also attempted to integrate \gls{beam}'s concurrency capabilities on a language level, which is one of Hopper's goals.

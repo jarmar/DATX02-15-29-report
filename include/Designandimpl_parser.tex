@@ -1,10 +1,8 @@
 \section{Parser}
 
-The parser is implemented by writing a \gls{bnf} grammar and feeding it to the BNFC\cite{bnfc} tool. BNFC, as described in the background, is the BNF Converter developed at Chalmers which the group used to automatically generate a lexer and a parser.
+The parser is implemented by writing a \gls{bnf} grammar and feeding it to the BNFC \cite{bnfc} tool. BNFC, as described in the background, is the BNF Converter developed at Chalmers which the group used to automatically generate a lexer and a parser.
 
-At the start of the project there were discussions in the group on whether or not to use BNFC to generate the lexer and parser. Choosing to get an easy start with the generated lexer and parser was accompanied by the notion that the group might want to switch to using Alex\cite{alex} and Happy\cite{happy} directly at a later stage. This did not come to happen during the project but might still be something to consider for the future. Implementing the groups own lexer and parser would mean greater control over the process.
-
-To have as clean syntax as Haskell, the grammar should then be indentation sensitive instead of depending on braces and semicolons as in C-like languages. Parsing code with braces and semicolons is easier because one does not need to keep track of which indentation context the code is in. BNFC can help with this by converting an indentation sensitive language to a brace dependent one. It does this in the lexer by inserting tokens around expressions, making it easy to match against these in the parser.
+To have as clean syntax as Haskell, the grammar should be indentation sensitive instead of depending on braces and semicolons as in C-like languages. Parsing code with braces and semicolons is easier because one does not need to keep track of which indentation context the code is in. BNFC can help with this by converting an indentation sensitive language to a brace dependent one. It does this in the lexer by inserting tokens around expressions, making it easy to match against these in the parser.
 
 \subsection{The grammar}
 

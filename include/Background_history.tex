@@ -1,9 +1,9 @@
+
+
 \section{History}
 
-The Erlang virtual machine is appreciated for its excellent support for concurrency, distribution and error handling, allowing soft real-time systems with high uptimes, famously demonstrated by the 99.9999999\% uptime of Ericsson’s AXD301 telecommunication switch from 1998\cite{ninenines}.
+The Erlang virtual machine is appreciated for its excellent support for concurrency, distribution and error handling, allowing soft real-time systems with high uptimes, famously demonstrated by the 99.9999999\% uptime of Ericsson’s AXD301 telecommunication switch from 1998 \cite{ninenines}.
 
-Haskell is known for its terse and elegant syntax, in addition to a powerful type system that prevents many programming errors and makes it easier to reason about code. Erlang developers already use code analysis tools to write typed code, but these tools don’t interact well with message passing where the type received can be hard to predict. 
+Haskell is known for its terse syntax, in addition to an expressive type system that prevents many programming errors and makes it easier to reason about code. Erlang developers already use code analysis tools to write typed code, but these tools don’t interact well with message passing where the type received can be hard to predict.
 
-Attempts to port Erlang features to Haskell been made, illustrating the demand for a combination of the languages' features. Cloud Haskell\cite{cloudhaskell} is ``Erlang in a library'', but differences in the Erlang and Haskell runtime systems make shipping expressions between nodes far more verbose than in Erlang.
-
-The features of the \gls{beam}, \glsdesc{beam}, are not tied to Erlang itself. \Gls{beam} hosts a variety of languages, so it is possible to enjoy the benefits of the runtime system with a different syntax and semantics. Previous efforts in creating alternatives to Erlang as a front-end language include Elixir\cite{elixir}, a language with Ruby-like syntax; Lisp flavoured Erlang\cite{lfe} and a Haskell to Erlang transpiler backend to YHC\cite{yhc}, which preserves laziness.
+The features of the \gls{beam}, \glsdesc{beam}, are not tied to Erlang itself. \Gls{beam} hosts a variety of languages, so it is possible to enjoy the benefits of the runtime system with a different syntax and semantics. Previous efforts in creating alternatives to Erlang as a front-end language include Elixir\cite{elixir}, a language with Ruby-like syntax, and Lisp flavoured Erlang \cite{lfe}.

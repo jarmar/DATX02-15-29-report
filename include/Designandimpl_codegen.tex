@@ -5,7 +5,7 @@ component should take a collection of \glspl{ast} and translate them to the targ
 
 \subsection{Implementation}
 
-The code generator is implemented using the \texttt{Language.CoreErlang}\cite{CoreErlang} package. It contains a Core Erlang parser, a set of data types used for representing Core Erlang \glspl{ast} and a pretty printer for said data types. The code generator makes use of this package by building Core Erlang \glspl{ast} and then invoking the pretty printer on them to produce Core Erlang source code.
+The code generator is implemented using the \texttt{Language.CoreErlang} \cite{CoreErlang} package. It contains a Core Erlang parser, a set of data types used for representing Core Erlang \glspl{ast} and a pretty printer for said data types. The code generator makes use of this package by building Core Erlang \glspl{ast} and then invoking the pretty printer on them to produce Core Erlang source code.
 
 \subsection{Function applications}
 
@@ -63,6 +63,6 @@ f 1 = "True"
 
 \subsection{Emulating the Erlang compiler}
 
-One downside to the choice of compiling to Core Erlang and then invoking the Erlang compiler \todo{bibliography link here} is the loss of additions and optimizations. To deal with this the code generator has been given additional functionality to emulate the behavior of the Erlang compiler prior to generating Core Erlang. 
+One downside to the choice of compiling to Core Erlang and then invoking the Erlang compiler is the loss of additions and optimizations. To deal with this the code generator has been given additional functionality to emulate the behavior of the Erlang compiler prior to generating Core Erlang. 
 
 The currently implemented behavior is the generation of \texttt{module\_info} functions that return information about the module when invoked, and an additional case to all case expressions which catches any unmatched case and throws a run time exception.

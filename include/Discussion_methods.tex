@@ -1,5 +1,7 @@
 \section{Methods discussion}
 
+This section discusses the methods used while developing the Hopper language and its compiler. A lack of initial structure would become apparent later in the project but the chosen path still proved to be productive. Going in to the project the group had limited knowledge of the problem area and of the capabilities of the group which made initial planning difficult.
+
 \subsection{Agile development - sprint length}
 
 Sprint lengths were initially short and had small incremental goals. This worked well for parts of the compiler where the structure was relatively flat and new content could be added without affecting old content to any greater extent. 
@@ -8,13 +10,15 @@ One notable exception was the type checker where implementing a small subset pro
 
 \subsection{Lack of daily communication}
 
-Not having continuous follow-ups might have prolonged the difficulties in getting the full pipeline working. The weekly meetings had the long term plans running but not much insights into the detailed problems discovered in each part. Workshops were held to emphasize group work and communication channels were set up to have group members help each other but some problems were discovered a bit later than they might have been with more frequent face to face meetings.
+Not having continuous follow-ups might have prolonged the difficulties in getting the full pipeline working. The weekly meetings had the long term plans running but not much insights into the detailed problems discovered in each part. Workshops were held to emphasize group work and communication channels were set up to have group members help each other between meetings. This all proved very helpful but some problems were still discovered a bit later than they might have been with more frequent face to face meetings. In hindsight there could not have been much done about the number of meetings with the six group members having different schedules. Better communication through the supplied channels might have been a good middle ground.
 
 \subsection{Lack of a project leader}
 
 No one person had the responsibility to catch on to potential problems or coordinate development. Most sections of the compiler were worked on by only a couple of team members, making it difficult for others to make modifications or understand the code. This led to considerable latencies any time a change across several different modules was required. Had a project leader coordinated the development of new features across the pipeline, that slowdown might have been avoided.
 
 Further, appointing a technical lead responsible for specifying the interfaces between components (i.e. the data types representing the program and the type signatures of exported functions) could have made it easier for members to use code they had not themselves written.
+
+Sharing the responsibility as a group felt natural going in to the project and not knowing each other made choosing a leader difficult. Having the group leader responsibility rotate between group members might have been a solution. Another could have been to hold off on assigning a leader until the group got to know the problem, and each other, better.
 
 \subsection{Lack of a hard specification}
 
@@ -24,7 +28,7 @@ The incremental development approach that then followed, beginning with a small 
 
 \subsection{Revision control system}
 
-The use of Git as our revision control system was successful. The ease of branching, working locally and merging was a good fit for the group dynamic employed. 
+The use of Git \cite{git} as our revision control system was successful. The ease of branching, working locally and merging was a good fit for the group dynamic employed. 
 
 There were times during the project when the number of branches rose a bit high. With six group members there should often not be a need for eight or nine simultaneous versions of the code. Efforts were made to merge branches and keep the number low with one branch hosting the main development version and separate branches for new features being developed.
 

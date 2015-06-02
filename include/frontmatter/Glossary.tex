@@ -20,7 +20,7 @@
 \newacronym{bif}{BIF}{built in function}
 \newacronym{bnf}{BNF}{Backus-Naur form}
 \newacronym{dag}{DAG}{directed acyclic graph}
-\newacronym{scc}{SCC}{strongly connected component}
+\newacronym[description={Strongly connected component. A subset of a directed graph in which there is a path from any vertex to all others}]{scc}{SCC}{strongly connected component}
 
 % Type inference category
 
@@ -54,13 +54,7 @@
 
 \newglossaryentry{currying}
 { name={currying},
-  description={Translating the evaluation of a function that takes multiple arguments into evaluating a sequence of functions that take a single argument and return a new function}
-}
-%The process of transforming a function which takes a tuple of \texttt{n} arguments into one which takes one argument at a time.
-
-\newglossaryentry{depgraph}
-{ name={dependency graph},
-  description={\todo{fyll}}
+  description={The process of transforming a function which takes a tuple of \texttt{n} arguments into one which takes one argument at a time. When the curried version of \texttt{f} has been applied to \texttt{n} arguments, it returns the result of passing a tuple containing those arguments to \texttt{f}}
 }
 
 \newglossaryentry{hmtypesystem}
@@ -85,19 +79,12 @@
 
 \newglossaryentry{typechecking}
 { name={type checking},
-  description={The process of finding a type of an expression}
+  description={The process of proving types of an expressions}
 }
 
 \longnewglossaryentry{typesystem}
 { name={type system} }
-{A type system is a formal system wherein types of expressions can be infered. Infering a type amounts to proving the type using the inference rules of the formal system.
-
-Type systems are used to prove certain tractable properties of the code. For example that arithmetic operators are only applied to numeric values. Properties like termination and total function definitions are often left out of type systems since those problems are undecidable (intractable).
-}
-
-\newglossaryentry{typevar}
-{ name={type variable},
-  description={A variable representing some type}
+{A type system is a formal system wherein types of expressions can be inferred. Inferring a type amounts to proving the type using the inference rules of the formal system.
 }
 
 \longnewglossaryentry{unification}

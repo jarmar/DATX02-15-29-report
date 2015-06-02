@@ -8,10 +8,9 @@ Type systems can be used to help in rejecting invalid programs. They group value
 
 There are two main kinds of type systems: dynamic and static. The most noticeable difference between dynamically and statically typed programming languages is whether type errors are discovered at run time or compile time.
 
-Static type systems automatically detect type incorrect code at compile time, such as a program treating a Boolean as a list of Booleans. This allows the programmer to diagnose errors during the implementation phase. In contrast, dynamic type systems evaluate types during runtime, allowing the programmer to manipulate data in a more free manner.
+Static type systems automatically detect type incorrect code at compile time, such as a program treating a Boolean as a list of Booleans. This allows the programmer to diagnose errors during the implementation phase. In contrast, dynamic type systems handle types during runtime, allowing the programmer to manipulate data in a more free manner.
 
-An additional benefit of type systems is that they can be used as a means of specifying and documenting properties of a program in a concise way. Typically, a function may be annotated with a type signature which states the types of its arguments and its return type. 
-\todo{Check this part again}
+An additional benefit of type systems is that they can be used as a means of specifying and documenting properties of a program in a concise way. Typically, a function may be annotated with a type signature which states the types of its arguments and its return type.
 
 %For example, in Haskell a program which might have some side effects and returns a Boolean can be distinguished by its type (\texttt{IO Bool}) from a function which simply calculates a value of a pure mathematical proposition, which would be of type \texttt{Bool}.
 

@@ -1,6 +1,6 @@
 \section{The Grammar}
 
-The final grammar for the language supports most of the necessary syntax for a pure functional programming language.  The full grammar can be found in appendix \ref{app:grammar}. The main supported features are:
+The final grammar for the language supports most of the necessary syntax for a pure functional programming language.  The full grammar can be found in Appendix \ref{app:grammar}. The main supported features are:
 
 % * Indent sensitive
 % * Type signatures 
@@ -33,3 +33,5 @@ The final grammar for the language supports most of the necessary syntax for a p
 Additional grammatical constructs were planned and designed but not implemented. Most of those features were various kinds of syntactic sugar, for example lists and tuples, but also syntax for simplifying repetitive tasks such as \texttt{IO} sequencing.
 
 Some primitive operators, such as arithmetic and relative, were hard coded into the product. There were plans for implementing a more generic solution for this where users would be able to import any Erlang \glspl{bif} and functions as desired in a type safe manner.
+
+A code example displaying some of the available features is available in Appendix~\ref{app:hopperEx}.

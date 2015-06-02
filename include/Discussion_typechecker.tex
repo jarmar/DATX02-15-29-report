@@ -1,6 +1,6 @@
 \section{Type checker}
 
-Since Hopper was designed to be similar to Haskell in terms of its syntax and type system and Haskell's system is based on the \Gls{hmtypesystem}, it was the obvious choice. The existence of good material on implementing such a type checker eased development considerably (\todo{referens till SPJ:s textbok här}). 
+Since Hopper was designed to be similar to Haskell in terms of its syntax and type system and Haskell's system is based on the \Gls{hmtypesystem}, it was the obvious choice. The existence of relevant material~\cite{implfun} on implementing such a type checker eased development considerably. 
 
 In addition to implementing Hindley-Milner, the type system contains a number of interesting ideas. It implements a function which provides access to arbitrary Erlang functions given their name and arity as an argument. In a production version of Hopper, this functionality would be wrapped and provided with a user friendly syntax. It also gives access to type safe and non type safe message passing in an experimental form, allowing for processes written in Hopper to both communicate in a type safe way with each other and with processes written in Erlang in a non type safe way. Hopper's experimental form of ad-hoc polymorphism allows for type safe sending of messages, but is less powerful than Haskell's and would likely be replaced in production Hopper.
 

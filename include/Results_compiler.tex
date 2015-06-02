@@ -1,6 +1,6 @@
 \section{The Compiler}
 
-The Hopper compiler takes a list of \texttt{.hpr} files and compiles them, and the modules they depend on if needed. Apart from this, it may also take a selection of command line options for producing different kinds of helpful output. Optional command line arguments and explanations of their functionality can be seen in table \ref{tab:flags}.
+The Hopper compiler takes one or more \texttt{.hpr} files and compiles them one by one, and the modules they depend on if needed. Apart from this, it may also take a selection of command line options for producing different kinds of helpful output. Optional command line arguments and explanations of their functionality can be seen in table \ref{tab:flags}.
 
 \begin{table}[!htb]
 \centering
@@ -8,12 +8,12 @@ The Hopper compiler takes a list of \texttt{.hpr} files and compiles them, and t
 \hline
 Shorthand flag & Full flag            & Functionality\\
 \hline
-\texttt{-v}    & \texttt{--verbose}   & Print info about compilation progress\\
-\texttt{-p}    & \texttt{--parse}     & Write the parse tree to a \texttt{.parse.hpr} file\\
-\texttt{-a}    & \texttt{--ast}       & Write the abstract syntax tree to a \texttt{.ast.hs} file\\
-\texttt{-t}    & \texttt{--typecheck} & Write the type checked tree to a \texttt{.typed.hs} file\\
-\texttt{-c}    & \texttt{--core}      & Write the generated Core Erlang code to a \texttt{.core} file\\
-\texttt{-b}    & \texttt{--nobeam}    & Skip writing the target \texttt{.beam} file\\
+\texttt{-v}    & \texttt{-{}-verbose}   & Print info about compilation progress\\
+\texttt{-p}    & \texttt{-{}-parse}     & Write the parse tree to a \texttt{.parse.hpr} file\\
+\texttt{-a}    & \texttt{-{}-ast}       & Write the abstract syntax tree to a \texttt{.ast.hs} file\\
+\texttt{-t}    & \texttt{-{}-typecheck} & Write the type checked tree to a \texttt{.typed.hs} file\\
+\texttt{-c}    & \texttt{-{}-core}      & Write the generated Core Erlang code to a \texttt{.core} file\\
+\texttt{-b}    & \texttt{-{}-nobeam}    & Skip writing the target \texttt{.beam} file\\
 \hline
 \end{tabular}
 \caption[Optional arguments for the Hopper compiler]{Optional arguments for the Hopper compiler}

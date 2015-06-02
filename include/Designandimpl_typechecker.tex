@@ -2,7 +2,9 @@
 %Doesn't just check, it infers
 \label{sec:dai_tc}
 
-Hopper's type checker was designed to provide compile-time guarantees about program behavior on Erlang's virtual machine. To do this it uses a variant of the Hindley-Milner\cite{TypeSchemes} \gls{typesystem} upon which Haskell's system was initially based. While making Hopper's type system as powerful as Haskell's is today is beyond the scope of this project, Hindley-Milner still allows one to write useful typed programs. For example, one can define \glslink{polymorph}{polymorphic data types} and functions. To illustrate, figure~\ref{lst:tc_map} shows a definition of lists and the mapping function over it. 
+
+
+Hopper's type checker was designed to provide compile-time guarantees about program behavior on Erlang's virtual machine. To do this it uses a variant of the Hindley-Milner \cite{TypeSchemes} \gls{typesystem} upon which Haskell's system was initially based. While making Hopper's type system as powerful as Haskell's is today is beyond the scope of this project, Hindley-Milner still allows one to write useful typed programs. For example, one can define \glslink{polymorph}{polymorphic data types} and functions. To illustrate, figure~\ref{lst:tc_map} shows a definition of lists and the mapping function over it. 
 
 \begin{figure}[!htb]
 \centering
@@ -23,7 +25,9 @@ The type for map is inferred; in general, type signatures do not need to be give
 
 \subsection{Implementation}
 
-The type checking module is based on the standard algorithm for \glslink{hmtypesystem}{Hindley-Milner type checking}, \Gls{algow}. It works by taking as input a list of definitions: tuples of a name, a syntax tree that represents the value the name is defined to be and an optional type signature. The type checker then divides the definitions into those which have type signatures and those that do not. Definitions without signatures are further divided into groups of mutually recursive definitions. Those groups are \glspl{scc} in the functions' \gls{depgraph}. For example, in the module shown in figure~\ref{lst:tc_impl}, \texttt{noTypeSig} will be divided into its own group of mutually recursive values, \texttt{mutual1} and \texttt{mutual2} will be in the same and \texttt{withTypeSig} will be treated separately. 
+\todo{Describe type checker main program!}
+
+The type checking module is based on the standard algorithm for \glslink{hmtypesystem}{Hindley-Milner type checking}, \Gls{algow}. It works by taking a list of definitions as input: tuples of a name, a syntax tree that represents the value the name is defined to be and an optional type signature. The type checker then divides the definitions into those which have type signatures and those that do not. Definitions without signatures are further divided into groups of mutually recursive definitions. Those groups are \glspl{scc} in the functions' dependency graph. A dependency graph is a directed graph with names as nodes; if the definition of a value \texttt{n1} refers to \texttt{n2} then there is an edge from \texttt{n1} to \texttt{n2} in the graph. For example, in the module shown in figure~\ref{lst:tc_impl}, \texttt{noTypeSig} will be divided into its own group of mutually recursive values, \texttt{mutual1} and \texttt{mutual2} will be in the same and \texttt{withTypeSig} will be treated separately. 
 
 \begin{figure}[!htb]
 \centering
@@ -42,14 +46,33 @@ withTypeSig = "I'm well typed!"
 \label{lst:tc_impl}
 \end{figure}
 
-Once the definitions have been grouped, the next step is to infer the types of the definitions without type signatures. The mutually recursive groups are \glslink{topsort}{topologically sorted} by dependency. Therefore any \gls{scc} \texttt{A} which depends on another \gls{scc} \texttt{B} already having been inferred is type checked after \texttt{B}. When a group of definitions \texttt{(f1 = e1;f2 = e2 ... fn = en)} is type checked and inferred, each name \texttt{(f1 ... fn)} is associated with a \gls{typevar}. Then the type of each expression \texttt{(e1 ... en)} is inferred by following a number of inference rules. For example, literals such as numbers and strings are given suitable types, and lambdas are of type \texttt{a -> b},  where \texttt{a} is the type of their argument and \texttt{b} the type of their result.
+Once the definitions have been grouped, the next step is to infer the types of the definitions without type signatures. The mutually recursive groups are \glslink{topsort}{topologically sorted} by dependency. Therefore any \gls{scc} \texttt{A} which depends on another \gls{scc} \texttt{B} already having been inferred is type checked after \texttt{B}. 
 
-These rules generate a number of equations on type variables, for example \texttt{t = a -> a, List a = List Bool} which are solved via a process called \gls{unification}. This process converts such equations to a \gls{constraint}. In the previous example, the solution would be \texttt{t = Bool -> Bool, a = Bool}. Examples of equations with no solution are \texttt{Int = Bool} and \texttt{t = List t}, which would generate an infinite type.
+%Until this point all the program has done is simple list manipulation - grouping definitions according to their dependency. In order to type check syntax trees a map between names and types and a map between type variables and types are needed. 
+When a group of definitions \texttt{(f1 = e1;f2 = e2 ... fn = en)} is type checked and inferred, each name \texttt{(f1 ... fn)} is associated with a type variable. The type of each expression \texttt{(e1 ... en)} is inferred by following a number of inference rules. In Figure~\ref{eq:app} such a rule is displayed. The example shows the mathematical notation for when a lambda expression of type \texttt{$\tau \rightarrow \tau'$} is applied to a value of type \texttt{$\tau$}. This yields a new value of type \texttt{$\tau'$}.
+
+\begin{figure}[!h]
+\[
+ \displaystyle\frac{\Gamma \vdash e_0:\tau \rightarrow \tau' \quad\quad \Gamma \vdash e_1 : \tau }{\Gamma \vdash e_0\ e_1 : \tau'}
+\]
+\caption{The application inference rule}
+\label{eq:app}
+\end{figure}
+
+These rules generate a number of equations on type variables, for example \texttt{t = a -> a, List a = List Bool} which are solved via a process called \gls{unification}. This process converts such systems to a \gls{constraint}. A constraint is a system of equations where every left-hand side is a type variable. Unification of two types is done by traversing both values and applying a rule for each form the type takes. For example, when unifying two type constructors (such as \texttt{Bool} and \texttt{List}) they are checked for equality. If they are not equal, unification fails. When unifying a type variable \texttt{t} with another type \texttt{$\tau$}, the algorithm checks whether \texttt{$\tau$} mentions \texttt{t}. If it does (and the type isn't just \texttt{t}) then \texttt{t} is an infinite type, which is not acceptable in Hindley-Milner. Otherwise, then the equation \texttt{t = $\tau$} is added to the constraint and the right hand side of every equation is expanded as far as possible. When unifying \texttt{($\tau_1$ $\tau_2$)} and \texttt{($\tau_3$ $\tau_4$)}, then \texttt{($\tau_1$,$\tau_3$)} and \texttt{($\tau_2$, $\tau_4$)} are recursively unified.  In the previous example, the solution would be \texttt{t = Bool -> Bool, a = Bool}. Examples of equations with no solution are \texttt{Int = Bool} and \texttt{t = List t}, which would generate an infinite type. 
+
+The type checker remembers the constraint and successively adds more information to it with every unification.
 When the types of \texttt{(f1 ... fn)} have been inferred to be of types \texttt{(t1 ... tn)}, the named values \texttt{(f1 ... fn)} will be assumed to be of those types during the rest of the type checking process. Once all \glspl{scc} have had their types inferred, the definitions with type signatures have their types inferred and unified with their signatures. If at any point in the type checking process a \gls{unification} fails, the type checker fails with an error message.
 
-\subsection{Implicit type arguments}
+%\subsection{Implicit type arguments}
 
-The \gls{hmtypesystem} supports qualified \gls{polymorph}, which allows one to define functions such as \texttt{reverse :: List a -> List a} and \texttt{id :: a -> a} and have them work for any type \texttt{a}. The actual runtime value of \texttt{id} or \texttt{reverse} doesn't vary based on the type. However, there is another kind of polymorphism called ad-hoc \gls{polymorph} that allows functions to vary at runtime depending on the specific type they are given. Hopper does this by implicitly passing type arguments.
+%\todo{Describe how this is done!}
+
+%The \gls{hmtypesystem} supports qualified \gls{polymorph}, which allows one to define functions such as \texttt{reverse :: List a -> List a} and \texttt{id :: a -> a} and have them work for any type \texttt{a}. The actual runtime value of \texttt{id} or \texttt{reverse} doesn't vary based on the type. However, there is another kind of polymorphism called ad-hoc \gls{polymorph} that allows functions to vary at runtime depending on the specific type they are given. Hopper does this by implicitly passing type arguments.
+
+%Behöver förklara vad det betyder!
+%If a polymorphic Hopper function is given a type signature \texttt{Implict <type A> -> <type B>} (e.g. \texttt{Implicit a -> (a -> a -> a)}) then when it is used with a monomorphic type (e.g. type B = \texttt{Int -> Int -> Int}, leading to the constraint \texttt{a = Int}) then a data structure representing type A  = \texttt{Int} is automatically passed to the function. This makes it possible to write functions that inspect their own type at runtime. An example is \texttt{typeOf :: Implicit t -> t -> Type; typeOf t \_ = t} which returns the type of its argument.
+
 
 %The Haskell function \texttt{sum :: Num a => [a] -> a} is an example of an ad-hoc-polymorphic value. It implicitly takes a method dictionary (a data structure containing numeric operations for the type \texttt{a}) as an argument and uses it to add up all the elements in the list. 
 
@@ -93,6 +116,9 @@ Tree 5 (Tree 3 (Tree 1 Empty Empty)
  {Runtime representation of the Hopper \gls{adt} seen in figure \ref{lst:hopperAdt}}
 \label{lst:coreAdt}
 \end{figure}
+
+%\todo{Add description of receive (which oppositionsgrupp wanted)}
+%\todo{Maybe mention Prim.apply in passing}
 
 %\section{Prim.apply} : Experimental feature
 
